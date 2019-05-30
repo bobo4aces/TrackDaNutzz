@@ -1,11 +1,18 @@
-﻿using JetBrains.Annotations;
-using Microsoft.EntityFrameworkCore;
-using System;
-
-namespace TrackDaNutzz.Data
+﻿namespace TrackDaNutzz.Data
 {
+    using Microsoft.EntityFrameworkCore;
+    using TrackDaNutzz.Data.EntityConfigurations;
+    using TrackDaNutzz.Data.Models;
+
     public class TrackDaNutzzDbContext : DbContext
     {
+        //TODO: Add more DbSets. Check Protected Set
+        public DbSet<TrackDaNutzz.Data.Models.Action> Action { get; protected set; }
+        public DbSet<Board> Boards { get; protected set; }
+        public DbSet<Hand> Hands { get; protected set; }
+        public DbSet<Player> Players { get; protected set; }
+        public DbSet<Seat> Seats { get; protected set; }
+        public DbSet<Table> Tables { get; protected set; }
         public TrackDaNutzzDbContext(DbContextOptions options) 
             : base(options)
         {
@@ -20,8 +27,15 @@ namespace TrackDaNutzz.Data
             base.OnConfiguring(optionsBuilder);
         }
 
+        //TODO: Add more configurations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ActionEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new BoardEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new HandEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new PlayerEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new SeatEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TableEntityTypeConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
