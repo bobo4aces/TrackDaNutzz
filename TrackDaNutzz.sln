@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackDaNutzz", "TrackDaNutzz\TrackDaNutzz.csproj", "{3121C150-A0A7-4C35-8523-293285945E80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackDaNutzz", "TrackDaNutzz\TrackDaNutzz.csproj", "{3121C150-A0A7-4C35-8523-293285945E80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackDaNutzz.Data", "TrackDaNutzz.Data\TrackDaNutzz.Data.csproj", "{FBDEF88D-30A2-4C25-92A2-45A5CB5F1435}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3121C150-A0A7-4C35-8523-293285945E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3121C150-A0A7-4C35-8523-293285945E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3121C150-A0A7-4C35-8523-293285945E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBDEF88D-30A2-4C25-92A2-45A5CB5F1435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBDEF88D-30A2-4C25-92A2-45A5CB5F1435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBDEF88D-30A2-4C25-92A2-45A5CB5F1435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBDEF88D-30A2-4C25-92A2-45A5CB5F1435}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
