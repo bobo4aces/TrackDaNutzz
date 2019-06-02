@@ -47,6 +47,21 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasColumnName("TableId")
                 .HasColumnType("INT")
                 .IsRequired(true);
+
+            builder.Property(h => h.BoardId)
+                .HasColumnName("BoardId")
+                .HasColumnType("BIGINT")
+                .IsRequired(true);
+
+            builder
+                .HasOne(h => h.Table)
+                .WithMany(h => h.Hands)
+                .HasForeignKey(h => h.TableId);
+
+            builder
+                .HasMany(h => h.Seats)
+                .WithOne(h => h.Hand)
+                .HasForeignKey(h => h.HandId);
         }
     }
 }

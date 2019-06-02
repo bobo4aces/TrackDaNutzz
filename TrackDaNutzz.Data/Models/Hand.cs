@@ -1,6 +1,7 @@
 namespace TrackDaNutzz.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Hand
@@ -21,6 +22,13 @@ namespace TrackDaNutzz.Data.Models
         public int TableId { get; protected set; }
 
         public Table Table { get; protected set; }
+
+        public long BoardId { get; protected set; }
+
+        public Board Board { get; protected set; }
+
+        public ICollection<HandPlayer> HandPlayers { get; protected set; }
+        public ICollection<Seat> Seats { get; protected set; }
     }
 }
 	

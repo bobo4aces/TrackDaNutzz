@@ -54,6 +54,11 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasColumnName("HandId")
                 .HasColumnType("BIGINT")
                 .IsRequired(true);
+
+            builder
+                .HasOne(s => s.Hand)
+                .WithMany(s => s.Seats)
+                .HasForeignKey(s => s.Hand);
         }
     }
 }

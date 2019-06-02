@@ -51,8 +51,6 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasColumnName("HandId")
                 .HasColumnType("BIGINT")
                 .IsRequired(true);
-
-            //TODO: Check Relations
         }
     }
 }

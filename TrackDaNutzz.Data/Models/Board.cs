@@ -2,7 +2,7 @@ namespace TrackDaNutzz.Data.Models
 {
     public class Board
     {
-        public int Id { get; protected set; }
+        public long Id { get; protected set; }
 
         public string Flop { get; protected set; }
 
