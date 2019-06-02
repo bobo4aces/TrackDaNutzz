@@ -16,10 +16,6 @@ namespace TrackDaNutzz.Data.EntityConfigurations
 
         public string River { get; protected set; }
 
-        public long HandId { get; protected set; }
-
-        public Hand Hand { get; protected set; }
-
         public void Configure(EntityTypeBuilder<Board> builder)
         {
             builder.ToTable("Boards");
@@ -27,7 +23,7 @@ namespace TrackDaNutzz.Data.EntityConfigurations
 
             builder.Property(b => b.Id)
                 .HasColumnName("Id")
-                .HasColumnType("INT")
+                .HasColumnType("BIGINT")
                 .ValueGeneratedOnAdd()
                 .IsRequired(true);
 
@@ -51,11 +47,6 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasMaxLength(3)
                 .IsUnicode(false)
                 .IsRequired(false);
-
-            builder.Property(b => b.HandId)
-                .HasColumnName("HandId")
-                .HasColumnType("BIGINT")
-                .IsRequired(true);
         }
     }
 }

@@ -10,11 +10,16 @@
         public DbSet<TrackDaNutzz.Data.Models.Action> Action { get; protected set; }
         public DbSet<Board> Boards { get; protected set; }
         public DbSet<Hand> Hands { get; protected set; }
+        public DbSet<HandPlayer> HandPlayers { get; protected set; }
         public DbSet<Player> Players { get; protected set; }
         public DbSet<Seat> Seats { get; protected set; }
         public DbSet<Table> Tables { get; protected set; }
-        public TrackDaNutzzDbContext(DbContextOptions options) 
+        public TrackDaNutzzDbContext(DbContextOptions<TrackDaNutzzDbContext> options) 
             : base(options)
+        {
+        }
+
+        public TrackDaNutzzDbContext()
         {
         }
 
@@ -22,7 +27,7 @@
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(DatabaseConfiguration.ConfigurationString);
+                optionsBuilder.UseSqlServer(DatabaseConfiguration.ConnectionString);
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -33,6 +38,7 @@
             modelBuilder.ApplyConfiguration(new ActionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new BoardEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new HandEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new HandPlayerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PlayerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SeatEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new TableEntityTypeConfiguration());

@@ -28,7 +28,6 @@ namespace TrackDaNutzz.Data.Models
         public Board Board { get; protected set; }
 
         public ICollection<HandPlayer> HandPlayers { get; protected set; }
-        public ICollection<Seat> Seats { get; protected set; }
     }
 }
 	

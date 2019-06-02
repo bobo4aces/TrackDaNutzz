@@ -57,11 +57,6 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasOne(h => h.Table)
                 .WithMany(h => h.Hands)
                 .HasForeignKey(h => h.TableId);
-
-            builder
-                .HasMany(h => h.Seats)
-                .WithOne(h => h.Hand)
-                .HasForeignKey(h => h.HandId);
         }
     }
 }

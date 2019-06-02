@@ -35,6 +35,8 @@ namespace TrackDaNutzz
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<TrackDaNutzzDbContext>(options =>
+                options.UseSqlServer(DatabaseConfiguration.ConnectionString));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

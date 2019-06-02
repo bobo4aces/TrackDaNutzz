@@ -1,7 +1,7 @@
 ﻿namespace TrackDaNutzz.Data
 {
-    internal class DatabaseConfiguration
+    public class DatabaseConfiguration
     {
-        internal const string ConfigurationString = "Server=.,Database=TrackDaNutzzDB;Integrated Security=True;";
+        public const string ConnectionString = @"Server=.;Database=TrackDaNutzzDB;Integrated Security=True;Trusted_Connection=True;";
     }
 }

@@ -4,6 +4,78 @@
     "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj": {}
   },
   "projects": {
+    "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
+        "projectName": "TrackDaNutzz.Data",
+        "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
+        "packagesPath": "C:\\Users\\Boris\\.nuget\\packages\\",
+        "outputPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Boris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
     "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -31,7 +103,11 @@
         },
         "frameworks": {
           "netcoreapp2.2": {
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+                "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

@@ -9,9 +9,5 @@ namespace TrackDaNutzz.Data.Models
         public string Turn { get; protected set; }
 
         public string River { get; protected set; }
-
-        public long HandId { get; protected set; }
-
-        public Hand Hand { get; protected set; }
     }
 }
