@@ -10,7 +10,7 @@ using TrackDaNutzz.Data;
 namespace TrackDaNutzz.Data.Migrations
 {
     [DbContext(typeof(TrackDaNutzzDbContext))]
-    [Migration("20190602190728_InitialMigration")]
+    [Migration("20190602194237_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,6 +158,72 @@ namespace TrackDaNutzz.Data.Migrations
                     b.HasIndex("PlayerId");
 
                     b.ToTable("HandPlayers");
+                });
+
+            modelBuilder.Entity("TrackDaNutzz.Data.Models.HandStatistics", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("BIGINT")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("AggresionFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("AggresionFactor")
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false);
+
+                    b.Property<decimal>("BigBlindsWon")
+                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 38, scale: 17)))
+                        .HasColumnName("BigBlindsWon")
+                        .HasColumnType("DECIMAL(15,2)");
+
+                    b.Property<bool>("ContinuationBet")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ContinuationBet")
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false);
+
+                    b.Property<decimal>("DollarsWon")
+                        .HasColumnName("DollarsWon")
+                        .HasColumnType("MONEY");
+
+                    b.Property<bool>("FourBet")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("FourBet")
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false);
+
+                    b.Property<long>("HandId");
+
+                    b.Property<int>("PlayerId");
+
+                    b.Property<bool>("PreFlopRaise")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("PreFlopRaise")
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("ThreeBet")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("ThreeBet")
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("VoluntaryPutInPot")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("VoluntaryPutInPot")
+                        .HasColumnType("BIT")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HandId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("HandStatistics");
                 });
 
             modelBuilder.Entity("TrackDaNutzz.Data.Models.Player", b =>
@@ -329,6 +395,19 @@ namespace TrackDaNutzz.Data.Migrations
 
                     b.HasOne("TrackDaNutzz.Data.Models.Player", "Player")
                         .WithMany("HandPlayers")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TrackDaNutzz.Data.Models.HandStatistics", b =>
+                {
+                    b.HasOne("TrackDaNutzz.Data.Models.Hand", "Hand")
+                        .WithMany()
+                        .HasForeignKey("HandId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TrackDaNutzz.Data.Models.Player", "Player")
+                        .WithMany()
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

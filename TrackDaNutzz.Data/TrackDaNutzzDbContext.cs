@@ -11,6 +11,7 @@
         public DbSet<Board> Boards { get; protected set; }
         public DbSet<Hand> Hands { get; protected set; }
         public DbSet<HandPlayer> HandPlayers { get; protected set; }
+        public DbSet<HandStatistics> HandStatistics { get; protected set; }
         public DbSet<Player> Players { get; protected set; }
         public DbSet<Seat> Seats { get; protected set; }
         public DbSet<Table> Tables { get; protected set; }
@@ -39,6 +40,7 @@
             modelBuilder.ApplyConfiguration(new BoardEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new HandEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new HandPlayerEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new HandStatisticsEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PlayerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SeatEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new TableEntityTypeConfiguration());

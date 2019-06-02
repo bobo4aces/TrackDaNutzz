@@ -142,6 +142,40 @@ namespace TrackDaNutzz.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HandStatistics",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "BIGINT", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    VoluntaryPutInPot = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
+                    PreFlopRaise = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
+                    ThreeBet = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
+                    FourBet = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
+                    AggresionFactor = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
+                    ContinuationBet = table.Column<bool>(type: "BIT", nullable: false, defaultValue: false),
+                    BigBlindsWon = table.Column<decimal>(type: "DECIMAL(15,2)", nullable: false),
+                    DollarsWon = table.Column<decimal>(type: "MONEY", nullable: false),
+                    PlayerId = table.Column<int>(nullable: false),
+                    HandId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HandStatistics", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HandStatistics_Hands_HandId",
+                        column: x => x.HandId,
+                        principalTable: "Hands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HandStatistics_Players_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "Players",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Seats",
                 columns: table => new
                 {
@@ -198,6 +232,16 @@ namespace TrackDaNutzz.Data.Migrations
                 column: "TableId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HandStatistics_HandId",
+                table: "HandStatistics",
+                column: "HandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HandStatistics_PlayerId",
+                table: "HandStatistics",
+                column: "PlayerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Seats_HandId",
                 table: "Seats",
                 column: "HandId");
@@ -215,6 +259,9 @@ namespace TrackDaNutzz.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "HandPlayers");
+
+            migrationBuilder.DropTable(
+                name: "HandStatistics");
 
             migrationBuilder.DropTable(
                 name: "Seats");

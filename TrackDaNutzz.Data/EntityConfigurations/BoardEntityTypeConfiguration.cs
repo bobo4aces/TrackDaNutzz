@@ -1,20 +1,11 @@
 namespace TrackDaNutzz.Data.EntityConfigurations
 {
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using TrackDaNutzz.Data.Models;
 
     internal class BoardEntityTypeConfiguration : IEntityTypeConfiguration<Board>
     {
-
-        public int Id { get; protected set; }
-
-        public string Flop { get; protected set; }
-
-        public string Turn { get; protected set; }
-
-        public string River { get; protected set; }
 
         public void Configure(EntityTypeBuilder<Board> builder)
         {
