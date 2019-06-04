@@ -23,7 +23,7 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasColumnType("VARCHAR(11)")
                 .HasMaxLength(11)
                 .IsUnicode(false)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(b => b.Turn)
                 .HasColumnName("Turn")

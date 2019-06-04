@@ -51,7 +51,7 @@ namespace TrackDaNutzz.Data.EntityConfigurations
             builder.Property(h => h.BoardId)
                 .HasColumnName("BoardId")
                 .HasColumnType("BIGINT")
-                .IsRequired(true);
+                .IsRequired(false);
 
             builder
                 .HasOne(h => h.Table)
