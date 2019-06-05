@@ -18,10 +18,10 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .ValueGeneratedOnAdd()
                 .IsRequired(true);
 
-            builder.Property(a => a.Street)
-                .HasColumnName("Street")
-                .HasColumnType("VARCHAR(7)")
-                .HasMaxLength(7)
+            builder.Property(a => a.Round)
+                .HasColumnName("Round")
+                .HasColumnType("VARCHAR(10)")
+                .HasMaxLength(10)
                 .IsUnicode(false)
                 .IsRequired(true);
 
@@ -33,8 +33,8 @@ namespace TrackDaNutzz.Data.EntityConfigurations
 
             builder.Property(b => b.Name)
                 .HasColumnName("Name")
-                .HasColumnType("VARCHAR(16)")
-                .HasMaxLength(16)
+                .HasColumnType("VARCHAR(20)")
+                .HasMaxLength(20)
                 .IsUnicode(false)
                 .IsRequired(true);
 
@@ -42,6 +42,8 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasColumnName("Value")
                 .HasColumnType("MONEY")
                 .IsRequired(false);
+
+            //TODO: Add relations
         }
     }
 }

@@ -33,8 +33,8 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasColumnType("TINYINT")
                 .IsRequired(true);
 
-            builder.Property(h => h.TotalPot)
-                .HasColumnName("TotalPot")
+            builder.Property(h => h.Pot)
+                .HasColumnName("Pot")
                 .HasColumnType("MONEY")
                 .IsRequired(true);
 

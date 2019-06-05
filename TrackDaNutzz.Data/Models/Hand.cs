@@ -15,7 +15,7 @@ namespace TrackDaNutzz.Data.Models
         [Range(1, 10)]
         public int Button { get; protected set; }
 
-        public decimal TotalPot { get; protected set; }
+        public decimal Pot { get; protected set; }
 
         public decimal Rake { get; protected set; }
 
@@ -23,7 +23,7 @@ namespace TrackDaNutzz.Data.Models
 
         public Table Table { get; protected set; }
 
-        public long BoardId { get; protected set; }
+        public long? BoardId { get; protected set; }
 
         public Board Board { get; protected set; }
 

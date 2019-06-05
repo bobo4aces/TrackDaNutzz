@@ -4,11 +4,11 @@ namespace TrackDaNutzz.Data.EntityConfigurations
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using TrackDaNutzz.Data.Models;
 
-    internal class PlayerEntityTypeConfiguration : IEntityTypeConfiguration<Player>
+    internal class PositionEntityTypeConfiguration : IEntityTypeConfiguration<Position>
     {
-        public void Configure(EntityTypeBuilder<Player> builder)
+        public void Configure(EntityTypeBuilder<Position> builder)
         {
-            builder.ToTable("Players");
+            builder.ToTable("Positions");
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Id)
@@ -19,21 +19,22 @@ namespace TrackDaNutzz.Data.EntityConfigurations
 
             builder.Property(p => p.Name)
                 .HasColumnName("Name")
-                .HasColumnType("VARCHAR(30)")
-                .HasMaxLength(30)
+                .HasColumnType("VARCHAR(10)")
+                .HasMaxLength(10)
                 .IsUnicode(false)
                 .IsRequired(true);
 
-            builder.Property(p => p.IsActive)
-                .HasColumnName("IsActive")
-                .HasColumnType("BIT")
-                .HasDefaultValue(0)
+            builder.Property(p => p.Type)
+                .HasColumnName("Type")
+                .HasColumnType("VARCHAR(20)")
+                .HasMaxLength(20)
+                .IsUnicode(false)
                 .IsRequired(true);
 
             builder
                 .HasMany(p => p.HandPlayers)
-                .WithOne(p => p.Player)
-                .HasForeignKey(p => p.PlayerId);
+                .WithOne(p => p.Position)
+                .HasForeignKey(p => p.PositionId);
         }
     }
 }

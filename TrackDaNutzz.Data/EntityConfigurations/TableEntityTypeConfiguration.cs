@@ -18,13 +18,6 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .ValueGeneratedOnAdd()
                 .IsRequired(true);
 
-            builder.Property(t => t.Client)
-                .HasColumnName("Client")
-                .HasColumnType("VARCHAR(20)")
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsRequired(true);
-
             builder.Property(t => t.Name)
                 .HasColumnName("Name")
                 .HasColumnType("VARCHAR(20)")
@@ -32,11 +25,14 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .IsUnicode(false)
                 .IsRequired(true);
 
+            builder.Property(t => t.ClientId)
+                .HasColumnName("ClientId")
+                .HasColumnType("INT")
+                .IsRequired(true);
+
             builder.Property(t => t.Size)
                 .HasColumnName("Size")
-                .HasColumnType("VARCHAR(6)")
-                .HasMaxLength(6)
-                .IsUnicode(false)
+                .HasColumnType("TINYINT")
                 .IsRequired(true);
 
             builder.Property(t => t.Currency)
@@ -46,33 +42,19 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .IsUnicode(false)
                 .IsRequired(true);
 
-            builder.Property(t => t.Format)
-                .HasColumnName("Format")
-                .HasColumnType("VARCHAR(7)")
-                .HasMaxLength(7)
-                .IsUnicode(false)
+            builder.Property(t => t.VariantId)
+                .HasColumnName("VariantId")
+                .HasColumnType("INT")
                 .IsRequired(true);
 
-            builder.Property(t => t.Limit)
-                .HasColumnName("Limit")
-                .HasColumnType("VARCHAR(10)")
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsRequired(true);
-
-            builder.Property(t => t.SmallBlind)
-                .HasColumnName("SmallBlind")
-                .HasColumnType("MONEY")
-                .IsRequired(true);
-
-            builder.Property(t => t.BigBlind)
-                .HasColumnName("BigBlind")
-                .HasColumnType("MONEY")
+            builder.Property(t => t.StakeId)
+                .HasColumnName("StakeId")
+                .HasColumnType("INT")
                 .IsRequired(true);
 
             builder
-                .HasMany(t=>t.Hands)
-                .WithOne(t=>t.Table)
+                .HasMany(t => t.Hands)
+                .WithOne(t => t.Table)
                 .HasForeignKey(t => t.TableId);
         }
     }

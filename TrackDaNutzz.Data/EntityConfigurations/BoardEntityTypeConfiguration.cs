@@ -38,6 +38,11 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .HasMaxLength(3)
                 .IsUnicode(false)
                 .IsRequired(false);
+
+            builder
+                .HasMany(b => b.Hands)
+                .WithOne(b => b.Board)
+                .HasForeignKey(b => b.BoardId);
         }
     }
 }
