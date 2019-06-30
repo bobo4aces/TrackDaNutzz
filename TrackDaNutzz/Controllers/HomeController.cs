@@ -12,6 +12,15 @@ namespace TrackDaNutzz.Controllers
     {
         public IActionResult Index()
         {
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return Redirect("/Home/Welcome");
+            }
+            return View();
+        }
+
+        public IActionResult Welcome()
+        {
             return View();
         }
 

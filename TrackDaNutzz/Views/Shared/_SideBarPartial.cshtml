@@ -8,92 +8,94 @@
         </div>
         <div class="sidebar-brand-text mx-3">TrackDaNutzz</div>
     </a>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="/Home/Index">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="/Home/Index">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-        </a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+        <!-- Divider -->
+        <hr class="sidebar-divider">
 
 
-    <!-- Nav Item - Settings -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-tools"></i>
-            <span>Settings</span>
-        </a>
-    </li>
+        <!-- Nav Item - Settings -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-tools"></i>
+                <span>Settings</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Import Hand History -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-file-import"></i>
-            <span>Import Hand History</span>
-        </a>
-    </li>
+        <!-- Nav Item - Import Hand History -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-file-import"></i>
+                <span>Import Hand History</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Export Hand History -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-file-export"></i>
-            <span>Export Hand History</span>
-        </a>
-    </li>
+        <!-- Nav Item - Export Hand History -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-file-export"></i>
+                <span>Export Hand History</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Players -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-male"></i>
-            <span>Players</span>
-        </a>
-    </li>
+        <!-- Nav Item - Players -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-male"></i>
+                <span>Players</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Stakes -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-dollar-sign"></i>
-            <span>Stakes</span>
-        </a>
-    </li>
+        <!-- Nav Item - Stakes -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-dollar-sign"></i>
+                <span>Stakes</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Hand Details -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-search-plus"></i>
-            <span>Hand Details</span>
-        </a>
-    </li>
+        <!-- Nav Item - Hand Details -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-search-plus"></i>
+                <span>Hand Details</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Hand Notes -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-sticky-note"></i>
-            <span>Hand Notes</span>
-        </a>
-    </li>
+        <!-- Nav Item - Hand Notes -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-sticky-note"></i>
+                <span>Hand Notes</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Player Notes -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-person-booth"></i>
-            <span>Player Notes</span>
-        </a>
-    </li>
+        <!-- Nav Item - Player Notes -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-person-booth"></i>
+                <span>Player Notes</span>
+            </a>
+        </li>
 
-    <!-- Nav Item - Hand Breakdown -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Hand Breakdown</span>
-        </a>
-    </li>
+        <!-- Nav Item - Hand Breakdown -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Hand Breakdown</span>
+            </a>
+        </li>
+    }
 </ul>
 <!-- End of Sidebar -->
