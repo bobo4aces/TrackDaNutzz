@@ -4,12 +4,12 @@ namespace TrackDaNutzz.Data.Models
 
     public class Position
     {
-        public int Id { get; protected set; }
+        public int Id { get; set; }
         //UTG +3, UTG +2, UTG +1, MP +3, MP +2, MP +1, CO, BU, SB, BB
-        public string Name { get; protected set; }
+        public string Name { get; set; }
         //Early, Middle, Late
-        public string Type { get; protected set; }
+        public string Type { get; set; }
 
-        public ICollection<HandPlayer> HandPlayers { get; protected set; }
+        public ICollection<HandPlayer> HandPlayers { get; set; }
     }
 }

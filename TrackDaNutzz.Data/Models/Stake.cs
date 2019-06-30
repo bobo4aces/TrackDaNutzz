@@ -4,12 +4,12 @@ namespace TrackDaNutzz.Data.Models
 
     public class Stake
     {
-        public int Id { get; protected set; }
+        public int Id { get; set; }
 
-        public decimal SmallBlind { get; protected set; }
+        public decimal SmallBlind { get; set; }
 
-        public decimal BigBlind { get; protected set; }
+        public decimal BigBlind { get; set; }
 
-        public ICollection<Table> Tables { get; protected set; }
+        public ICollection<Table> Tables { get; set; }
     }
 }

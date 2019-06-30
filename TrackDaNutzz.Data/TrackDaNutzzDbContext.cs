@@ -1,24 +1,25 @@
 ﻿namespace TrackDaNutzz.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using TrackDaNutzz.Data.EntityConfigurations;
     using TrackDaNutzz.Data.Models;
 
-    public class TrackDaNutzzDbContext : DbContext
+    public class TrackDaNutzzDbContext : IdentityDbContext<TrackDaNutzzUser, TrackDaNutzzRole, string>
     {
-        //TODO: Add more DbSets. Check Protected Set
-        public DbSet<BettingAction> BettingActions { get; protected set; }
-        public DbSet<Board> Boards { get; protected set; }
-        public DbSet<Client> Clients { get; protected set; }
-        public DbSet<Hand> Hands { get; protected set; }
-        public DbSet<HandPlayer> HandPlayers { get; protected set; }
-        public DbSet<Player> Players { get; protected set; }
-        public DbSet<Position> Positions { get; protected set; }
-        public DbSet<Stake> Stakes { get; protected set; }
-        public DbSet<Statistic> Statistics { get; protected set; }
-        public DbSet<Table> Tables { get; protected set; }
-        public DbSet<User> Users { get; protected set; }
-        public DbSet<Variant> Variants { get; protected set; }
+        public DbSet<TrackDaNutzzUser> TrackDaNutzzUsers { get; set; }
+        public DbSet<TrackDaNutzzRole> TrackDaNutzzRoles { get; set; }
+        public DbSet<BettingAction> BettingActions { get; set; }
+        public DbSet<Board> Boards { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Hand> Hands { get; set; }
+        public DbSet<HandPlayer> HandPlayers { get; set; }
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<Stake> Stakes { get; set; }
+        public DbSet<Statistic> Statistics { get; set; }
+        public DbSet<Table> Tables { get; set; }
+        public DbSet<Variant> Variants { get; set; }
 
         public TrackDaNutzzDbContext(DbContextOptions<TrackDaNutzzDbContext> options) 
             : base(options)
@@ -51,7 +52,7 @@
             modelBuilder.ApplyConfiguration(new StakeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new StatisticEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new TableEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TrackDaNutzzUserEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new VariantEntityTypeConfiguration());
             base.OnModelCreating(modelBuilder);
         }

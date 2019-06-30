@@ -6,28 +6,28 @@ namespace TrackDaNutzz.Data.Models
 
     public class Hand
     {
-        public long Id { get; protected set; }
+        public long Id { get; set; }
 
-        public long Number { get; protected set; }
+        public long Number { get; set; }
 
-        public DateTime Time { get; protected set; }
+        public DateTime Time { get; set; }
 
         [Range(1, 10)]
-        public int Button { get; protected set; }
+        public int Button { get; set; }
 
-        public decimal Pot { get; protected set; }
+        public decimal Pot { get; set; }
 
-        public decimal Rake { get; protected set; }
+        public decimal Rake { get; set; }
 
-        public int TableId { get; protected set; }
+        public int TableId { get; set; }
 
-        public Table Table { get; protected set; }
+        public Table Table { get; set; }
 
-        public long? BoardId { get; protected set; }
+        public long? BoardId { get; set; }
 
-        public Board Board { get; protected set; }
+        public Board Board { get; set; }
 
-        public ICollection<HandPlayer> HandPlayers { get; protected set; }
+        public ICollection<HandPlayer> HandPlayers { get; set; }
     }
 }
 	

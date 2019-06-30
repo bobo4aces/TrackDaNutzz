@@ -1,19 +1,21 @@
 namespace TrackDaNutzz.Data.EntityConfigurations
 {
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using TrackDaNutzz.Data.Models;
 
-    internal class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
+    internal class TrackDaNutzzUserEntityTypeConfiguration : IEntityTypeConfiguration<TrackDaNutzzUser>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<TrackDaNutzzUser> builder)
         {
             builder.ToTable("Users");
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Id)
                 .HasColumnName("Id")
-                .HasColumnType("INT")
+                .HasColumnType("VARCHAR(36)")
+                .HasMaxLength(36)
                 .ValueGeneratedOnAdd()
                 .IsRequired(true);
 

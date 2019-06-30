@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using TrackDaNutzz.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TrackDaNutzz.Data.Models;
 
 namespace TrackDaNutzz
 {
@@ -36,13 +37,9 @@ namespace TrackDaNutzz
             });
 
             services.AddDbContext<TrackDaNutzzDbContext>(options =>
-                options.UseSqlServer(DatabaseConfiguration.ConnectionString));
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<TrackDaNutzzUser, TrackDaNutzzRole>()
+                .AddEntityFrameworkStores<TrackDaNutzzDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -50,6 +47,15 @@ namespace TrackDaNutzz
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (TrackDaNutzzDbContext context = new TrackDaNutzzDbContext())
+            {
+                context.Database.EnsureCreated();
+                if (context.Roles.Count() == 0)
+                {
+                    context.Roles.Add(new TrackDaNutzzRole() { Name = "Admin", NormalizedName = "ADMIN" });
+                    context.SaveChanges();
+                }
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

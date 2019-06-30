@@ -4,12 +4,12 @@ namespace TrackDaNutzz.Data.Models
 
     public class Player
     {
-        public int Id { get; protected set; }
+        public int Id { get; set; }
 
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
-        public bool IsActive { get; protected set; }
+        public bool IsActive { get; set; }
 
-        public ICollection<HandPlayer> HandPlayers { get; protected set; }
+        public ICollection<HandPlayer> HandPlayers { get; set; }
     }
 }
