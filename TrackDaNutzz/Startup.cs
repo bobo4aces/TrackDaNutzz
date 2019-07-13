@@ -14,6 +14,11 @@ using TrackDaNutzz.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Readers;
+using TrackDaNutzz.Services;
+using TrackDaNutzz.Parsers;
+using AutoMapper;
+using TrackDaNutzz.BindingModels;
 
 namespace TrackDaNutzz
 {
@@ -40,7 +45,9 @@ namespace TrackDaNutzz
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<TrackDaNutzzUser, TrackDaNutzzRole>()
                 .AddEntityFrameworkStores<TrackDaNutzzDbContext>();
-
+            services.AddAutoMapper(cfg => cfg.AddProfile<HandProfile>(),AppDomain.CurrentDomain.GetAssemblies());
+            services.AddTransient<IHandHistoryReader, HandHistoryReader>();
+            services.AddTransient<IParser, PokerStarsParser>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
