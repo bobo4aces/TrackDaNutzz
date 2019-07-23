@@ -4,6 +4,10 @@ namespace TrackDaNutzz.Data.Models
 
     public class Stake
     {
+        public Stake()
+        {
+            this.Tables = new List<Table>();
+        }
         public int Id { get; set; }
 
         public decimal SmallBlind { get; set; }

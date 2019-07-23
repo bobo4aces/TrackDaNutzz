@@ -19,6 +19,7 @@ using TrackDaNutzz.Services;
 using TrackDaNutzz.Parsers;
 using AutoMapper;
 using TrackDaNutzz.BindingModels;
+using TrackDaNutzz.Services.Import;
 
 namespace TrackDaNutzz
 {
@@ -48,6 +49,7 @@ namespace TrackDaNutzz
             services.AddAutoMapper(cfg => cfg.AddProfile<HandProfile>(),AppDomain.CurrentDomain.GetAssemblies());
             services.AddTransient<IHandHistoryReader, HandHistoryReader>();
             services.AddTransient<IParser, PokerStarsParser>();
+            services.AddTransient<IImportService, ImportService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -62,6 +64,19 @@ namespace TrackDaNutzz
                     context.Roles.Add(new TrackDaNutzzRole() { Name = "Admin", NormalizedName = "ADMIN" });
                     context.SaveChanges();
                 }
+                //if (context.Positions.Count() == 0)
+                //{
+                //    context.Positions.Add(new Position() { Name = "UTG +3", Type = "Early" });
+                //    context.Positions.Add(new Position() { Name = "UTG +2", Type = "Early" });
+                //    context.Positions.Add(new Position() { Name = "UTG +1", Type = "Early" });
+                //    context.Positions.Add(new Position() { Name = "MP +3", Type = "Middle" });
+                //    context.Positions.Add(new Position() { Name = "MP +2", Type = "Middle" });
+                //    context.Positions.Add(new Position() { Name = "MP +1", Type = "Middle" });
+                //    context.Positions.Add(new Position() { Name = "CO", Type = "Late" });
+                //    context.Positions.Add(new Position() { Name = "BU", Type = "Late" });
+                //    context.Positions.Add(new Position() { Name = "SB", Type = "Early" });
+                //    context.Positions.Add(new Position() { Name = "BB", Type = "Early" });
+                //}
             }
             if (env.IsDevelopment())
             {

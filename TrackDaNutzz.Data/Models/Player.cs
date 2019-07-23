@@ -4,6 +4,10 @@ namespace TrackDaNutzz.Data.Models
 
     public class Player
     {
+        public Player()
+        {
+            this.HandPlayers = new List<HandPlayer>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }

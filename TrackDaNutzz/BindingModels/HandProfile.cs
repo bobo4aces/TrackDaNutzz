@@ -4,6 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TrackDaNutzz.BindingModels.Summary;
+using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Services.Dtos.BettingActions;
+using TrackDaNutzz.Services.Dtos.CollectMoney;
+using TrackDaNutzz.Services.Dtos.DealtCards;
+using TrackDaNutzz.Services.Dtos.Hands;
+using TrackDaNutzz.Services.Dtos.Import;
+using TrackDaNutzz.Services.Dtos.MuckHands;
+using TrackDaNutzz.Services.Dtos.Rounds;
+using TrackDaNutzz.Services.Dtos.Seats;
+using TrackDaNutzz.Services.Dtos.ShowCards;
+using TrackDaNutzz.Services.Dtos.Summary;
+using TrackDaNutzz.Services.Dtos.Tables;
+using TrackDaNutzz.Services.Dtos.UncalledBets;
 
 namespace TrackDaNutzz.BindingModels
 {
@@ -109,11 +122,11 @@ namespace TrackDaNutzz.BindingModels
                .ForMember(x => x.Rake, y => y.MapFrom(z => decimal.Parse(z["Rake"])));
 
             this.CreateMap<Dictionary<string, string>, BoardSummaryBindingModel>()
-              .ForMember(x => x.FifthCard, y => y.MapFrom(z => z["FifthCard"]))
-              .ForMember(x => x.FirstCard, y => y.MapFrom(z => z["FirstCard"]))
-              .ForMember(x => x.FourthCard, y => y.MapFrom(z => z["FourthCard"]))
-              .ForMember(x => x.SecondCard, y => y.MapFrom(z => z["SecondCard"]))
-              .ForMember(x => x.ThirdCard, y => y.MapFrom(z => z["ThirdCard"]));
+              .ForMember(x => x.FifthCard, y => y.MapFrom(z => z["FifthCard"] == "" ? null : z["FifthCard"]))
+              .ForMember(x => x.FirstCard, y => y.MapFrom(z => z["FirstCard"] == "" ? null : z["FirstCard"]))
+              .ForMember(x => x.FourthCard, y => y.MapFrom(z => z["FourthCard"] == "" ? null : z["FourthCard"]))
+              .ForMember(x => x.SecondCard, y => y.MapFrom(z => z["SecondCard"] == "" ? null : z["SecondCard"]))
+              .ForMember(x => x.ThirdCard, y => y.MapFrom(z => z["ThirdCard"] == "" ? null : z["ThirdCard"]));
 
             this.CreateMap<Dictionary<string, string>, FoldSummaryBindingModel>()
              .ForMember(x => x.DidNotBet, y => y.MapFrom(z => z["DidNotBet"] == "" ? true : false))
@@ -158,6 +171,86 @@ namespace TrackDaNutzz.BindingModels
 
             this.CreateMap<List<ShowSummaryBindingModel>, ShowSummaryListBindingModel>()
                .ForMember(x => x.ShowSummaryBindingModels, y => y.MapFrom(z => z));
+
+
+
+            this.CreateMap<BettingActionBindingModel, BettingActionDto>();
+            this.CreateMap<BettingActionsByRoundBindingModel, BettingActionsByRoundDto>()
+                .ForMember(x => x.Round, y => y.MapFrom(z => z.Round))
+                .ForMember(x => x.BettingActionDtos, y => y.MapFrom(z => z.BettingActionBindingModels));
+            this.CreateMap<BettingActionsByRoundListBindingModel, BettingActionsByRoundListDto>()
+                .ForMember(x => x.BettingActionsByRoundDtos, y => y.MapFrom(z => z.BettingActionsByRoundBindingModels));
+            this.CreateMap<BoardSummaryBindingModel, BoardSummaryDto>();
+            this.CreateMap<CollectMoneyBindingModel, CollectMoneyDto>();
+            this.CreateMap<CollectMoneyListBindingModel, CollectMoneyListDto>()
+                .ForMember(x => x.CollectMoneyDtos, y => y.MapFrom(z => z.CollectMoneyBindingModels));
+            this.CreateMap<CollectSummaryBindingModel, CollectSummaryDto>();
+            this.CreateMap<CollectSummaryListBindingModel, CollectSummaryListDto>()
+                .ForMember(x => x.CollectSummaryDtos, y => y.MapFrom(z => z.CollectSummaryBindingModels));
+            this.CreateMap<DealtCardsBindingModel, DealtCardsDto>();
+            this.CreateMap<FoldSummaryBindingModel, FoldSummaryDto>();
+            this.CreateMap<FoldSummaryListBindingModel, FoldSummaryListDto>()
+                .ForMember(x => x.FoldSummaryDtos, y => y.MapFrom(z => z.FoldSummaryBindingModels));
+            this.CreateMap<HandInfoBindingModel, HandInfoDto>();
+            this.CreateMap<MuckHandBindingModel, MuckHandDto>();
+            this.CreateMap<MuckHandListBindingModel, MuckHandListDto>()
+                .ForMember(x => x.MuckHandDtos, y => y.MapFrom(z => z.MuckHandBindingModels));
+            this.CreateMap<MuckSummaryBindingModel, MuckSummaryDto>();
+            this.CreateMap<MuckSummaryListBindingModel, MuckSummaryListDto>()
+                .ForMember(x => x.MuckSummaryDtos, y => y.MapFrom(z => z.MuckSummaryBindingModels));
+            this.CreateMap<PotRakeSummaryBindingModel, PotRakeSummaryDto>();
+            this.CreateMap<RoundBindingModel, RoundDto>();
+            this.CreateMap<RoundListBindingModel, RoundListDto>()
+                .ForMember(x => x.RoundDtos, y => y.MapFrom(z => z.RoundBindingModels));
+            this.CreateMap<SeatInfoBindingModel, SeatInfoDto>();
+            this.CreateMap<SeatInfoListBindingModel, SeatInfoListDto>()
+                .ForMember(x => x.SeatInfoDtos, y => y.MapFrom(z => z.SeatInfoBindingModels));
+            this.CreateMap<ShowCardsBindingModel, ShowCardsDto>();
+            this.CreateMap<ShowCardsListBindingModel, ShowCardsListDto>()
+                .ForMember(x => x.ShowCardsDtos, y => y.MapFrom(z => z.ShowCardsBindingModels));
+            this.CreateMap<ShowSummaryBindingModel, ShowSummaryDto>();
+            this.CreateMap<ShowSummaryListBindingModel, ShowSummaryListDto>()
+                .ForMember(x => x.ShowSummaryDtos, y => y.MapFrom(z => z.ShowSummaryBindingModels));
+            this.CreateMap<TableBindingModel, TableDto>();
+            this.CreateMap<UncalledBetsBindingModel, UncalledBetsDto>();
+            this.CreateMap<UncalledBetsListBindingModel, UncalledBetsListDto>()
+                .ForMember(x => x.UncalledBetsDtos, y => y.MapFrom(z => z.UncalledBetsBindingModels));
+
+            this.CreateMap<HandBindingModel, HandDto>()
+                .ForMember(x => x.BettingActionsByRoundListDto, y => y.MapFrom(z => z.BettingActionsByRoundListBindingModel))
+                .ForMember(x => x.BoardSummaryDto, y => y.MapFrom(z => z.BoardSummaryBindingModel))
+                .ForMember(x => x.CollectMoneyListDto, y => y.MapFrom(z => z.CollectMoneyListBindingModel))
+                .ForMember(x => x.CollectSummaryListDto, y => y.MapFrom(z => z.CollectSummaryListBindingModel))
+                .ForMember(x => x.DealtCardsDto, y => y.MapFrom(z => z.DealtCardsBindingModel))
+                .ForMember(x => x.FoldSummaryListDto, y => y.MapFrom(z => z.FoldSummaryListBindingModel))
+                .ForMember(x => x.HandInfoDto, y => y.MapFrom(z => z.HandInfoBindingModel))
+                .ForMember(x => x.MuckHandListDto, y => y.MapFrom(z => z.MuckHandListBindingModel))
+                .ForMember(x => x.MuckSummaryListDto, y => y.MapFrom(z => z.MuckSummaryListBindingModel))
+                .ForMember(x => x.PotRakeSummaryDto, y => y.MapFrom(z => z.PotRakeSummaryBindingModel))
+                .ForMember(x => x.RoundListDto, y => y.MapFrom(z => z.RoundListBindingModel))
+                .ForMember(x => x.SeatInfoListDto, y => y.MapFrom(z => z.SeatInfoListBindingModel))
+                .ForMember(x => x.ShowCardsListDto, y => y.MapFrom(z => z.ShowCardsListBindingModel))
+                .ForMember(x => x.ShowSummaryListDto, y => y.MapFrom(z => z.ShowSummaryListBindingModel))
+                .ForMember(x => x.TableDto, y => y.MapFrom(z => z.TableBindingModel))
+                .ForMember(x => x.UncalledBetsListDto, y => y.MapFrom(z => z.UncalledBetsListBindingModel));
+
+            //this.CreateMap<BoardSummaryDto, Board>()
+            //    .ForMember(x => x.Flop, y => y.MapFrom(z => $"{z.FirstCard} {z.SecondCard} {z.ThirdCard}"))
+            //    .ForMember(x => x.River, y => y.MapFrom(z => z.FifthCard))
+            //    .ForMember(x => x.Turn, y => y.MapFrom(z => z.FourthCard));
+            //this.CreateMap<HandInfoDto, Client>()
+            //    .ForMember(x => x.Name, y => y.MapFrom(z => z.ClientName));
+            //this.CreateMap<HandInfoDto, Hand>()
+            //    //.ForPath(x => x.Client.Name, y => y.MapFrom(z => z.ClientName))
+            //    .ForMember(x => x.LocalTime, y => y.MapFrom(z => z.LocalTime))
+            //    .ForMember(x => x.LocalTimeZone, y => y.MapFrom(z => z.LocalTimeZone))
+            //    .ForMember(x => x.Number, y => y.MapFrom(z => z.HandNumber))
+            //    //.ForPath(x => x.Stake.BigBlind, y => y.MapFrom(z => z.BigBlind))
+            //    //.ForPath(x => x.Stake.SmallBlind, y => y.MapFrom(z => z.SmallBlind))
+            //    .ForMember(x => x.Time, y => y.MapFrom(z => z.Time))
+            //    .ForMember(x => x.TimeZone, y => y.MapFrom(z => z.TimeZone));
+            //    //.ForPath(x => x.Variant.Limit, y => y.MapFrom(z => z.Limit))
+            //    //.ForPath(x => x.Variant.Name, y => y.MapFrom(z => z.VariantName));
         }
     }
 }

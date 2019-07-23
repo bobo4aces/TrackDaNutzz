@@ -15,7 +15,7 @@
         public DbSet<Hand> Hands { get; set; }
         public DbSet<HandPlayer> HandPlayers { get; set; }
         public DbSet<Player> Players { get; set; }
-        public DbSet<Position> Positions { get; set; }
+        //public DbSet<Position> Positions { get; set; }
         public DbSet<Stake> Stakes { get; set; }
         public DbSet<Statistic> Statistics { get; set; }
         public DbSet<Table> Tables { get; set; }
@@ -42,18 +42,20 @@
         //TODO: Add more configurations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new BettingActionEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new BoardEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ClientEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new HandEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new HandPlayerEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new PlayerEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new PositionEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new StakeEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new StatisticEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new TableEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new TrackDaNutzzUserEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new VariantEntityTypeConfiguration());
+            modelBuilder.Entity<HandPlayer>()
+                .HasKey(x => new { x.HandId, x.PlayerId });
+            //modelBuilder.ApplyConfiguration(new BettingActionEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new BoardEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new ClientEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new HandEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new HandPlayerEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new PlayerEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new PositionEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new StakeEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new StatisticEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new TableEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new TrackDaNutzzUserEntityTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new VariantEntityTypeConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

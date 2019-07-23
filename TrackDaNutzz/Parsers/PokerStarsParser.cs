@@ -11,16 +11,21 @@ using TrackDaNutzz.BindingModels;
 using TrackDaNutzz.BindingModels.Summary;
 using TrackDaNutzz.Common;
 using TrackDaNutzz.Extensions;
+using TrackDaNutzz.Services.Dtos.Hands;
+using TrackDaNutzz.Services.Dtos.Import;
+using TrackDaNutzz.Services.Import;
 
 namespace TrackDaNutzz.Parsers
 {
     public class PokerStarsParser : IParser
     {
         private readonly IMapper mapper;
+        private readonly IImportService importService;
 
-        public PokerStarsParser(IMapper mapper)
+        public PokerStarsParser(IMapper mapper, IImportService importService)
         {
             this.mapper = mapper;
+            this.importService = importService;
         }
         public void ParseHandHistory(IEnumerable<string> handHistory)
         {
@@ -211,6 +216,8 @@ namespace TrackDaNutzz.Parsers
                 TableBindingModel = tableBindingModel,
                 UncalledBetsListBindingModel = uncalledBetsListBindingModel
             };
+            HandDto handDto = this.mapper.Map<HandDto>(handBindingModel);
+            this.importService.Add(handDto);
         }
 
         private int ParseBettingActions(string[] hand, int index, string round, string row, Dictionary<string, List<BettingActionBindingModel>> bettingActionsByRound)

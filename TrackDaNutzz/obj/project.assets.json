@@ -4766,6 +4766,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
+          "AutoMapper": "8.1.1",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
           "TrackDaNutzz.Data": "1.0.0"
         },
         "compile": {
@@ -13045,9 +13047,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.App.csproj",
-      "projectName": "TrackDaNutzz.App",
-      "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.App.csproj",
+      "projectUniqueName": "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
+      "projectName": "TrackDaNutzz",
+      "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
       "packagesPath": "C:\\Users\\Boris\\.nuget\\packages\\",
       "outputPath": "D:\\TrackDaNutzz\\TrackDaNutzz\\obj\\",
       "projectStyle": "PackageReference",

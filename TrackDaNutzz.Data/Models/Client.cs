@@ -4,6 +4,10 @@ namespace TrackDaNutzz.Data.Models
 
     public class Client
     {
+        public Client()
+        {
+            this.Tables = new List<Table>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }
