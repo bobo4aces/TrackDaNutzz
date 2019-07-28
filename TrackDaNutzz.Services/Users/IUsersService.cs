@@ -6,5 +6,7 @@ namespace TrackDaNutzz.Services.Users
     {
         //string Add(UserDto user);
         //string Remove(string id);
+        string GetCurrentlyLoggedUsername();
+        string GetCurrentlyLoggedUserId(string username);
     }
 }

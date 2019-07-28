@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.BindingModels;
 using TrackDaNutzz.Parsers;
 using TrackDaNutzz.Readers;
+using TrackDaNutzz.ViewModels;
 
 namespace TrackDaNutzz.Controllers
 {
@@ -31,12 +32,21 @@ namespace TrackDaNutzz.Controllers
         [HttpPost]
         public async Task<IActionResult> Import(List<IFormFile> files)
         {
+            int filesCount = 0;
+            int handsCount = 0;
             foreach (var file in files)
             {
                 IEnumerable<string> handHistory = await this.handHistoryReader.ReadAsync(file);
-                this.parser.ParseHandHistory(handHistory);
+                handsCount += this.parser.ParseHandHistory(handHistory);
+                filesCount++;
             }
-            return Ok();
+            return Redirect($"/HandHistory/ImportSuccess?filesCount={filesCount}&handsCount={handsCount}");
+        }
+
+        [HttpGet]
+        public IActionResult ImportSuccess(ImportSuccessViewModel importSuccessViewModel)
+        {
+            return View(importSuccessViewModel);
         }
 
         [HttpGet]

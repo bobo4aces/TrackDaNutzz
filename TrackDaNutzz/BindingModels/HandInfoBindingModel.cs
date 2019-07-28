@@ -30,6 +30,8 @@ namespace TrackDaNutzz.BindingModels
         [RegularExpression(GlobalConstants.MoneyPattern)]
         public decimal BigBlind { get; set; }
 
+        [RegularExpression(GlobalConstants.CurrencyPattern)]
+        public string Currency { get; set; }
         [RegularExpression(GlobalConstants.TimePattern)]
         public DateTime Time { get; set; }
 

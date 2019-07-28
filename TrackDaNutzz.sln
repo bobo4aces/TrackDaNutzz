@@ -3,11 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackDaNutzz.App", "TrackDaNutzz\TrackDaNutzz.App.csproj", "{3121C150-A0A7-4C35-8523-293285945E80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackDaNutzz", "TrackDaNutzz\TrackDaNutzz.csproj", "{3121C150-A0A7-4C35-8523-293285945E80}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackDaNutzz.Data", "TrackDaNutzz.Data\TrackDaNutzz.Data.csproj", "{FBDEF88D-30A2-4C25-92A2-45A5CB5F1435}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackDaNutzz.Services", "TrackDaNutzz.Services\TrackDaNutzz.Services.csproj", "{D93B5B47-A8D9-4189-8008-3EA568B3199D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleHands", "SampleHands", "{3CDFD55B-B601-4628-8619-5E195DDE5EB5}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Hatshepsut II - $0.01-$0.02 - USD No Limit Hold'em.txt = ..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Hatshepsut II - $0.01-$0.02 - USD No Limit Hold'em.txt
+		..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Minkar III - $0.02-$0.05 - USD No Limit Hold'em.txt = ..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Minkar III - $0.02-$0.05 - USD No Limit Hold'em.txt
+		..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Nerthus II - $0.01-$0.02 - USD No Limit Hold'em.txt = ..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Nerthus II - $0.01-$0.02 - USD No Limit Hold'em.txt
+		..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Sorga II - $0.01-$0.02 - USD No Limit Hold'em.txt = ..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Sorga II - $0.01-$0.02 - USD No Limit Hold'em.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

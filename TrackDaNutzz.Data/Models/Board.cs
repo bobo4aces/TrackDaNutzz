@@ -4,6 +4,10 @@ namespace TrackDaNutzz.Data.Models
 
     public class Board
     {
+        public Board()
+        {
+            this.Hands = new List<Hand>();
+        }
         public long Id { get; set; }
 
         public string Flop { get; set; }

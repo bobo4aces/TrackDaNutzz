@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj": {}
+    "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj": {}
   },
   "projects": {
-    "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+    "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
+        "projectUniqueName": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
         "projectName": "TrackDaNutzz.Data",
-        "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
-        "packagesPath": "C:\\Users\\Boris\\.nuget\\packages\\",
-        "outputPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\obj\\",
+        "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
+        "packagesPath": "C:\\Users\\bdsr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Boris\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\bdsr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -76,23 +74,21 @@
         }
       }
     },
-    "D:\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
+    "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj",
+        "projectUniqueName": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj",
         "projectName": "TrackDaNutzz.Services",
-        "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj",
-        "packagesPath": "C:\\Users\\Boris\\.nuget\\packages\\",
-        "outputPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Services\\obj\\",
+        "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj",
+        "packagesPath": "C:\\Users\\bdsr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Boris\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\bdsr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -104,8 +100,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
-                "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
+              "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+                "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
               }
             }
           }
@@ -119,6 +115,14 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
@@ -134,23 +138,21 @@
         }
       }
     },
-    "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj": {
+    "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
+        "projectUniqueName": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
         "projectName": "TrackDaNutzz",
-        "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
-        "packagesPath": "C:\\Users\\Boris\\.nuget\\packages\\",
-        "outputPath": "D:\\TrackDaNutzz\\TrackDaNutzz\\obj\\",
+        "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
+        "packagesPath": "C:\\Users\\bdsr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Boris\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\bdsr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -162,11 +164,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
-                "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
+              "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+                "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
               },
-              "D:\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
-                "projectPath": "D:\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj"
+              "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
+                "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj"
               }
             }
           }

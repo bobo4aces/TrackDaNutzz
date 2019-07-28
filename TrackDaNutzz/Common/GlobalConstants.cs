@@ -14,7 +14,7 @@ namespace TrackDaNutzz.Common
         public const string CurrencySymbolPattern = @"\D";
         public const string MoneyPattern = @"[0-9]+\.?[0-9]*";
         public const string CurrencyPattern = "[A-Z]{2,3}";
-        public const string TimePattern = @"[0-9]{4,4}\/[0-9]{2,2}\/[0-9]{2,2} [0-9]{2,2}:[0-9]{2,2}:[0-9]{2,2}";
+        public const string TimePattern = @"[0-9]{4,4}\/[0-9]{2,2}\/[0-9]{2,2} [0-9]{1,2}:[0-9]{2,2}:[0-9]{2,2}";
         public const string TimeZonePattern = @"[A-Z]{2,3}";
         //private static string FirstRowPattern = $@"^({clientNamePattern}) Hand #({handNumberPattern}):\s\s({variantNamePattern}) ({limitPattern}) \(({currencySymbolPattern})?({moneyPattern})\/({currencySymbolPattern})?({moneyPattern}) ?({currencyPattern})?\) - ({timePattern}) \[({timePattern})\]$";
 
@@ -25,7 +25,7 @@ namespace TrackDaNutzz.Common
         //private static string SecondRowPattern = $@"^Table '({tableNamePattern})' ({tableSizePattern}) ?\(?({playMoneyPattern})?\)? Seat #({buttonSeatPattern}) is the button$";
 
         public const string SeatNumberPattern = "[0-9]{1,2}";
-        public const string PlayerNamePattern = @"[A-Za-z0-9\.\-\#]+";
+        public const string PlayerNamePattern = @"[A-Za-z0-9\.\-\# `´_]+";
         //private static string SeatInfoPattern = $@"^Seat ({seatNumberPattern}): ({playerNamePattern}) \(({currencySymbolPattern})?({moneyPattern}) in chips\)$";
 
         //private static string joiningPlayersPattern = $@"^({playerNamePattern}) will be allowed to play after the button$";
@@ -48,7 +48,7 @@ namespace TrackDaNutzz.Common
 
         public const string ShowdownRow = "*** SHOW DOWN ***";
 
-        public const string HandStrengthPattern = "[A-Za-z ,]+";
+        public const string HandStrengthPattern = "[A-Za-z ,-]+";
 
         //private static string ShowCardsPattern = $@"^({playerNamePattern}): shows \[({cardPattern}) ({cardPattern})\] \(({handStrengthPattern})\)$";
 
@@ -79,5 +79,7 @@ namespace TrackDaNutzz.Common
         public const string PlayMoney = "Play Money";
         public const string HeadsUp = "Heads-Up";
         public const string PreflopRound = "PREFLOP";
+
+        
     }
 }

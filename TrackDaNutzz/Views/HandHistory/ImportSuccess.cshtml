@@ -1,0 +1,24 @@
+﻿@model TrackDaNutzz.ViewModels.ImportSuccessViewModel
+
+@{
+    ViewData["Title"] = "ImportSuccess";
+}
+
+<div>
+    <h4>Hand history have been successfully imported</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FilesCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FilesCount)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HandsCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HandsCount)
+        </dd>
+    </dl>
+</div>

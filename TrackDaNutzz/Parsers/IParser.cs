@@ -7,6 +7,6 @@ namespace TrackDaNutzz.Parsers
 {
     public interface IParser
     {
-        void ParseHandHistory(IEnumerable<string> handHistory);
+        int ParseHandHistory(IEnumerable<string> handHistory);
     }
 }

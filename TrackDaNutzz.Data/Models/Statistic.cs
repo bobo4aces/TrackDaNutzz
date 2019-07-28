@@ -4,6 +4,10 @@ namespace TrackDaNutzz.Data.Models
 {
     public class Statistic
     {
+        public Statistic()
+        {
+            this.HandPlayers = new List<HandPlayer>();
+        }
         public long Id { get; set; }
 
         public bool VoluntaryPutMoneyInPot { get; set; }
@@ -14,7 +18,7 @@ namespace TrackDaNutzz.Data.Models
 
         public bool FourBet { get; set; }
 
-        public bool AggressionFactor { get; set; }
+        public decimal AggressionFactor { get; set; }
 
         public bool ContinuationBet { get; set; }
 

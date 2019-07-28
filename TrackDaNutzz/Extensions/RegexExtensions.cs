@@ -14,7 +14,7 @@ namespace TrackDaNutzz.Extensions
             Match match = regex.Match(input);
             if (!match.Success)
             {
-                throw new ArgumentException("Invalid regex pattern");
+                throw new ArgumentException($"Invalid regex pattern - string: \"{input}\" does not match pattern: {pattern}");
             }
             string[] groupNames = regex.GetGroupNames()
                 .Where(n=>n.Length > 1)

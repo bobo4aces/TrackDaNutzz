@@ -5,57 +5,57 @@ namespace TrackDaNutzz.Data.EntityConfigurations
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using TrackDaNutzz.Data.Models;
 
-    internal class TableEntityTypeConfiguration : IEntityTypeConfiguration<Table>
-    {
-        public void Configure(EntityTypeBuilder<Table> builder)
-        {
-            builder.ToTable("Tables");
-            builder.HasKey(t => t.Id);
-
-            builder.Property(t => t.Id)
-                .HasColumnName("Id")
-                .HasColumnType("INT")
-                .ValueGeneratedOnAdd()
-                .IsRequired(true);
-
-            builder.Property(t => t.Name)
-                .HasColumnName("Name")
-                .HasColumnType("VARCHAR(20)")
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsRequired(true);
-
-            builder.Property(t => t.ClientId)
-                .HasColumnName("ClientId")
-                .HasColumnType("INT")
-                .IsRequired(true);
-
-            builder.Property(t => t.Size)
-                .HasColumnName("Size")
-                .HasColumnType("TINYINT")
-                .IsRequired(true);
-
-            builder.Property(t => t.Currency)
-                .HasColumnName("Currency")
-                .HasColumnType("VARCHAR(10)")
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsRequired(true);
-
-            builder.Property(t => t.VariantId)
-                .HasColumnName("VariantId")
-                .HasColumnType("INT")
-                .IsRequired(true);
-
-            builder.Property(t => t.StakeId)
-                .HasColumnName("StakeId")
-                .HasColumnType("INT")
-                .IsRequired(true);
-
-            builder
-                .HasMany(t => t.Hands)
-                .WithOne(t => t.Table)
-                .HasForeignKey(t => t.TableId);
-        }
-    }
+   // internal class TableEntityTypeConfiguration : IEntityTypeConfiguration<Table>
+   // {
+   //     public void Configure(EntityTypeBuilder<Table> builder)
+   //     {
+   //         builder.ToTable("Tables");
+   //         builder.HasKey(t => t.Id);
+   //
+   //         builder.Property(t => t.Id)
+   //             .HasColumnName("Id")
+   //             .HasColumnType("INT")
+   //             .ValueGeneratedOnAdd()
+   //             .IsRequired(true);
+   //
+   //         builder.Property(t => t.Name)
+   //             .HasColumnName("Name")
+   //             .HasColumnType("VARCHAR(20)")
+   //             .HasMaxLength(20)
+   //             .IsUnicode(false)
+   //             .IsRequired(true);
+   //
+   //         builder.Property(t => t.ClientId)
+   //             .HasColumnName("ClientId")
+   //             .HasColumnType("INT")
+   //             .IsRequired(true);
+   //
+   //         builder.Property(t => t.Size)
+   //             .HasColumnName("Size")
+   //             .HasColumnType("TINYINT")
+   //             .IsRequired(true);
+   //
+   //         builder.Property(t => t.Currency)
+   //             .HasColumnName("Currency")
+   //             .HasColumnType("VARCHAR(10)")
+   //             .HasMaxLength(10)
+   //             .IsUnicode(false)
+   //             .IsRequired(true);
+   //
+   //         builder.Property(t => t.VariantId)
+   //             .HasColumnName("VariantId")
+   //             .HasColumnType("INT")
+   //             .IsRequired(true);
+   //
+   //         builder.Property(t => t.StakeId)
+   //             .HasColumnName("StakeId")
+   //             .HasColumnType("INT")
+   //             .IsRequired(true);
+   //
+   //         builder
+   //             .HasMany(t => t.Hands)
+   //             .WithOne(t => t.Table)
+   //             .HasForeignKey(t => t.TableId);
+   //     }
+   // }
 }
