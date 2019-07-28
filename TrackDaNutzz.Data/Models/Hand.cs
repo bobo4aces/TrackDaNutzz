@@ -12,8 +12,8 @@ namespace TrackDaNutzz.Data.Models
         public long Number { get; set; }
         public int VariantId { get; set; }
         public Variant Variant { get; set; }
-        public int StakeId { get; set; }
-        public Stake Stake { get; set; }
+        //public int StakeId { get; set; }
+        //public Stake Stake { get; set; }
         public DateTime Time { get; set; }
         public string TimeZone { get; set; }
         public DateTime LocalTime { get; set; }

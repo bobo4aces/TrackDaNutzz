@@ -9,7 +9,6 @@
     {
         private string bettingActionIdsJoinByPipe;
         private List<long> bettingActionIds;
-        private decimal stackDifference;
         public HandPlayer()
         {
             this.BettingActionIds = new List<long>();

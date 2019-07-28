@@ -212,11 +212,11 @@ namespace TrackDaNutzz.Services.Import
             {
                 throw new ArgumentNullException("Cannot add Hand without a Client");
             }
-            Stake stake = this.context.Stakes.SingleOrDefault(s => s.BigBlind == handDto.HandInfoDto.BigBlind && s.SmallBlind == handDto.HandInfoDto.SmallBlind);
-            if (stake == null)
-            {
-                throw new ArgumentNullException("Cannot add Hand without a Stake");
-            }
+            //Stake stake = this.context.Stakes.SingleOrDefault(s => s.BigBlind == handDto.HandInfoDto.BigBlind && s.SmallBlind == handDto.HandInfoDto.SmallBlind);
+            //if (stake == null)
+            //{
+            //    throw new ArgumentNullException("Cannot add Hand without a Stake");
+            //}
             Variant variant = this.context.Variants.SingleOrDefault(v => v.Name == handDto.HandInfoDto.VariantName && v.Limit == handDto.HandInfoDto.Limit);
             if (variant == null)
             {
@@ -234,8 +234,8 @@ namespace TrackDaNutzz.Services.Import
                 LocalTime = handDto.HandInfoDto.LocalTime,
                 LocalTimeZone = handDto.HandInfoDto.LocalTimeZone,
                 Number = handDto.HandInfoDto.HandNumber,
-                Stake = stake,
-                StakeId = stake.Id,
+                //Stake = stake,
+                //StakeId = stake.Id,
                 Time = handDto.HandInfoDto.Time,
                 TimeZone = handDto.HandInfoDto.TimeZone,
                 Variant = variant,
