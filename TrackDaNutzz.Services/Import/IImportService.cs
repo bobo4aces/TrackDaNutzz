@@ -8,6 +8,6 @@ namespace TrackDaNutzz.Services.Import
 {
     public interface IImportService
     {
-        bool Add(HandDto handDto);
+        void Add(HandDto handDto);
     }
 }

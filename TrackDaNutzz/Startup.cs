@@ -22,6 +22,15 @@ using TrackDaNutzz.BindingModels;
 using TrackDaNutzz.Services.Import;
 using TrackDaNutzz.Services.Statistics;
 using TrackDaNutzz.Services.Users;
+using TrackDaNutzz.Services.BettingActions;
+using TrackDaNutzz.Services.Boards;
+using TrackDaNutzz.Services.Clients;
+using TrackDaNutzz.Services.HandPlayers;
+using TrackDaNutzz.Services.Hands;
+using TrackDaNutzz.Services.Players;
+using TrackDaNutzz.Services.StakesService;
+using TrackDaNutzz.Services.Tables;
+using TrackDaNutzz.Services.Variant;
 
 namespace TrackDaNutzz
 {
@@ -49,11 +58,22 @@ namespace TrackDaNutzz
             services.AddIdentity<TrackDaNutzzUser, TrackDaNutzzRole>()
                 .AddEntityFrameworkStores<TrackDaNutzzDbContext>();
             services.AddAutoMapper(cfg => cfg.AddProfile<HandProfile>(),AppDomain.CurrentDomain.GetAssemblies());
+            #region CustomServices
             services.AddTransient<IHandHistoryReader, HandHistoryReader>();
             services.AddTransient<IParser, PokerStarsParser>();
             services.AddTransient<IImportService, ImportService>();
-            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IBoardsService, BoardsService>();
+            services.AddTransient<IClientsService, ClientsService>();
+            services.AddTransient<IStakesService, StakesService>();
+            services.AddTransient<IVariantsService, VariantsService>();
+            services.AddTransient<ITablesService, TablesService>();
+            services.AddTransient<IHandsService, HandsService>();
+            services.AddTransient<IHandPlayersService, HandPlayersService>();
             services.AddTransient<IStatisticsService, StatisticsService>();
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IPlayersService, PlayersService>();
+            services.AddTransient<IBettingActionsService, BettingActionsService>();
+            #endregion
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
