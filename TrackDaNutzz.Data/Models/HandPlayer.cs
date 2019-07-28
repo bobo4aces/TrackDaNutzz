@@ -31,7 +31,7 @@
 
         public string HoleCards { get; set; }
 
-        //public bool IsInPosition { get; set; }
+        public bool IsInPosition { get; set; }
 
         public bool IsMuckCards { get; set; }
 
