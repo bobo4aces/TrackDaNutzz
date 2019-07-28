@@ -18,8 +18,6 @@ namespace TrackDaNutzz.Data.Models
 
         public int Size { get; set; }
 
-        //public string Currency { get; set; }
-        //
         public int VariantId { get; set; }
         
         public Variant Variant { get; set; }

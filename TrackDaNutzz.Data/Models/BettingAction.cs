@@ -13,7 +13,5 @@ namespace TrackDaNutzz.Data.Models
         public string Name { get; set; }
 
         public decimal? Value { get; set; }
-
-        //public ICollection<HandPlayer> HandPlayers { get; set; }
     }
 }

@@ -12,13 +12,14 @@
         public HandPlayer()
         {
             this.BettingActionIds = new List<long>();
-            //this.BettingActions = new List<BettingAction>();
         }
         public long HandId { get; set; }
-        public Hand Hand { get; set; }
-        public int PlayerId { get; set; }
-        public Player Player { get; set; }
 
+        public Hand Hand { get; set; }
+
+        public int PlayerId { get; set; }
+
+        public Player Player { get; set; }
 
         public decimal StartingStack { get; set; }
 
@@ -63,16 +64,8 @@
             }
         }
 
-        //public int PositionId { get; set; }
-
-        //public Position Position { get; set; }
-
         public long StatisticId { get; set; }
 
         public Statistic Statistic { get; set; }
-
-        //public ICollection<BettingAction> BettingActions { get; set; }
-
-        //TODO: Add Many To Many Relation with Betting Actions
     }
 }

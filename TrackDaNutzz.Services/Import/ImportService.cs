@@ -207,21 +207,21 @@ namespace TrackDaNutzz.Services.Import
             {
                 return hand.Id;
             }
-            Client client = this.context.Clients.SingleOrDefault(c => c.Name == handDto.HandInfoDto.ClientName);
-            if (client == null)
-            {
-                throw new ArgumentNullException("Cannot add Hand without a Client");
-            }
+            //Client client = this.context.Clients.SingleOrDefault(c => c.Name == handDto.HandInfoDto.ClientName);
+            //if (client == null)
+            //{
+            //    throw new ArgumentNullException("Cannot add Hand without a Client");
+            //}
             //Stake stake = this.context.Stakes.SingleOrDefault(s => s.BigBlind == handDto.HandInfoDto.BigBlind && s.SmallBlind == handDto.HandInfoDto.SmallBlind);
             //if (stake == null)
             //{
             //    throw new ArgumentNullException("Cannot add Hand without a Stake");
             //}
-            Variant variant = this.context.Variants.SingleOrDefault(v => v.Name == handDto.HandInfoDto.VariantName && v.Limit == handDto.HandInfoDto.Limit);
-            if (variant == null)
-            {
-                throw new ArgumentNullException("Cannot add Hand without a Variant");
-            }
+            //Variant variant = this.context.Variants.SingleOrDefault(v => v.Name == handDto.HandInfoDto.VariantName && v.Limit == handDto.HandInfoDto.Limit);
+            //if (variant == null)
+            //{
+            //    throw new ArgumentNullException("Cannot add Hand without a Variant");
+            //}
             Table table = this.context.Tables.SingleOrDefault(t => t.Id == tableId);
             if (table == null)
             {
@@ -229,8 +229,8 @@ namespace TrackDaNutzz.Services.Import
             }
             hand = new Hand()
             {
-                Client = client,
-                ClientId = client.Id,
+                //Client = client,
+                //ClientId = client.Id,
                 LocalTime = handDto.HandInfoDto.LocalTime,
                 LocalTimeZone = handDto.HandInfoDto.LocalTimeZone,
                 Number = handDto.HandInfoDto.HandNumber,
@@ -238,8 +238,8 @@ namespace TrackDaNutzz.Services.Import
                 //StakeId = stake.Id,
                 Time = handDto.HandInfoDto.Time,
                 TimeZone = handDto.HandInfoDto.TimeZone,
-                Variant = variant,
-                VariantId = variant.Id,
+                //Variant = variant,
+                //VariantId = variant.Id,
                 BoardId = boardId,
                 Button = handDto.TableDto.ButtonSeat,
                 Pot = handDto.PotRakeSummaryDto.Pot,

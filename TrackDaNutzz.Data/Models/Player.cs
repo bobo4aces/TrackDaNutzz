@@ -12,10 +12,9 @@ namespace TrackDaNutzz.Data.Models
 
         public string Name { get; set; }
 
-        //public bool IsActive { get; set; }
         public string TrackDaNutzzUserId { get; set; }
-        public TrackDaNutzzUser TrackDaNutzzUser { get; set; }
 
+        public TrackDaNutzzUser TrackDaNutzzUser { get; set; }
 
         public ICollection<HandPlayer> HandPlayers { get; set; }
     }
