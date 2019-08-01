@@ -7,6 +7,9 @@ using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Common;
 using TrackDaNutzz.Services.Dtos.BettingActions;
 using TrackDaNutzz.Services.Dtos.Import;
+using TrackDaNutzz.Services.Dtos.Seats;
+using TrackDaNutzz.Services.Dtos.Statistics;
+using TrackDaNutzz.Services.Helpers;
 
 namespace TrackDaNutzz.Services.Statistics
 {
@@ -33,9 +36,9 @@ namespace TrackDaNutzz.Services.Statistics
                     .Where(r => r.Round == RoundNamesConstants.Flop)
                     .SelectMany(b => b.BettingActionDtos)
                     .ToList();
-            foreach (var seatInfoDtos in handDto.SeatInfoListDto.SeatInfoDtos)
+            foreach (var seatInfoDto in handDto.SeatInfoListDto.SeatInfoDtos)
             {
-                string playerName = seatInfoDtos.PlayerName;
+                string playerName = seatInfoDto.PlayerName;
                 List<BettingActionDto> playerPreflopBettingActions = preflopBettingActions
                     .Where(p => p.PlayerName == playerName)
                     .ToList();
@@ -46,7 +49,7 @@ namespace TrackDaNutzz.Services.Statistics
                     .Where(p => p.PlayerName == playerName)
                     .ToList();
 
-                Statistic statistic = this.CreateStatistic(handDto, playerName, playerPreflopBettingActions, playerFlopBettingActions, playerAllBettingActions);
+                Statistic statistic = this.CreateStatistic(handDto, playerName, playerPreflopBettingActions, playerFlopBettingActions, playerAllBettingActions, seatInfoDto);
                 Statistic statisticsFromDb = this.CheckDbForStatistics(statistic);
                 if (statisticsFromDb == null)
                 {
@@ -65,21 +68,29 @@ namespace TrackDaNutzz.Services.Statistics
         private Statistic CheckDbForStatistics(Statistic statistic)
         {
             return this.context.Statistics.SingleOrDefault(s =>
-            s.AggressionFactor == statistic.AggressionFactor && s.BigBlindsWon == statistic.BigBlindsWon &&
             s.ContinuationBet == statistic.ContinuationBet && s.FourBet == statistic.FourBet &&
             s.MoneyWon == statistic.MoneyWon && s.PreFlopRaise == statistic.PreFlopRaise &&
-            s.ThreeBet == statistic.ThreeBet && s.VoluntaryPutMoneyInPot == statistic.VoluntaryPutMoneyInPot);
+            s.ThreeBet == statistic.ThreeBet && s.VoluntaryPutMoneyInPot == statistic.VoluntaryPutMoneyInPot &&
+            s.BigBlindsWon == statistic.BigBlindsWon);
         }
 
-        public Statistic CreateStatistic(HandDto handDto, string playerName, List<BettingActionDto> playerPreflopBettingActions, List<BettingActionDto> playerFlopBettingActions, List<BettingActionDto> playerAllBettingActions)
+        public Statistic CreateStatistic(HandDto handDto, string playerName, List<BettingActionDto> playerPreflopBettingActions, List<BettingActionDto> playerFlopBettingActions, List<BettingActionDto> playerAllBettingActions, SeatInfoDto seatInfoDto)
         {
             bool voluntaryPutMoneyInPot = this.GetVoluntaryPutMoneyInPot(playerPreflopBettingActions);
             bool preflopRaise = this.GetPreFlopRaise(playerPreflopBettingActions);
             bool threeBet = this.GetThreeBet(playerPreflopBettingActions, playerName);
             bool fourBet = this.GetFourBet(playerPreflopBettingActions, playerName);
-            decimal aggressionFactor = this.GetAggressionFactor(playerAllBettingActions);
-            decimal moneyWon = this.GetMoneyWon(playerAllBettingActions);
-            double bigBlindsWon = this.GetBigBlindsWon(moneyWon, handDto.HandInfoDto.BigBlind);
+            int totalRaises = playerAllBettingActions
+                                .Where(a => a.Action == BettingActionNamesConstants.Raise)
+                                .Count();
+            int totalBets = playerAllBettingActions
+                                .Where(a => a.Action == BettingActionNamesConstants.Bet)
+                                .Count();
+            int totalCalls = playerAllBettingActions
+                                .Where(a => a.Action == BettingActionNamesConstants.Call)
+                                .Count();
+            decimal moneyWon = this.GetMoneyWon(handDto,seatInfoDto);
+            decimal bigBlindsWon = this.GetBigBlindsWon(moneyWon, handDto.HandInfoDto.BigBlind);
             bool continuationBet = this.GetContinuationBet(playerPreflopBettingActions, playerFlopBettingActions);
             Statistic statistics = new Statistic()
             {
@@ -87,10 +98,12 @@ namespace TrackDaNutzz.Services.Statistics
                 PreFlopRaise = preflopRaise,
                 ThreeBet = threeBet,
                 FourBet = fourBet,
-                AggressionFactor = aggressionFactor,
                 MoneyWon = moneyWon,
                 BigBlindsWon = bigBlindsWon,
                 ContinuationBet = continuationBet,
+                TotalCalls = totalCalls,
+                TotalBets = totalBets,
+                TotalRaises = totalRaises
             };
             return statistics;
         }
@@ -107,36 +120,26 @@ namespace TrackDaNutzz.Services.Statistics
                     playerFlopBettingActions.First().Action == BettingActionNamesConstants.Raise);
         }
 
-        public double GetBigBlindsWon(decimal moneyWon, decimal bigBlind)
+        public decimal GetBigBlindsWon(decimal moneyWon, decimal bigBlind)
         {
             if (moneyWon == 0)
             {
                 return 0;
             }
-            return (double)(moneyWon / bigBlind);
+            return moneyWon / bigBlind;
         }
 
-        public decimal GetMoneyWon(List<BettingActionDto> playerAllBettingActions)
+        public decimal GetMoneyWon(HandDto handDto, SeatInfoDto seatInfoDto)
         {
-            if (playerAllBettingActions.Count == 0)
-            {
-                return 0;
-            }
-            return playerAllBettingActions.Sum(a => a.Value ?? 0);
+            decimal finalStack = Stack.CalculateFinalStack(handDto, seatInfoDto);
+            decimal startingStack = seatInfoDto.Money;
+            return finalStack - startingStack;
         }
 
-        public decimal GetAggressionFactor(List<BettingActionDto> playerAllBettingActions)
+        public decimal GetAggressionFactor(int totalRaises, int totalBets, int totalCalls)
         {
-            if (playerAllBettingActions.Count == 0)
-            {
-                return 0;
-            }
-            int aggressiveBettingActionsCount = playerAllBettingActions
-                                    .Where(a => a.Action == BettingActionNamesConstants.Bet || a.Action == BettingActionNamesConstants.Raise)
-                                    .Count();
-            int passiveBettingActionsCount = playerAllBettingActions
-                                .Where(a => a.Action == BettingActionNamesConstants.Call)
-                                .Count();
+            int aggressiveBettingActionsCount = totalRaises + totalBets;
+            int passiveBettingActionsCount = totalCalls;
             decimal aggressionFactor = 0;
             if (aggressiveBettingActionsCount != 0 && passiveBettingActionsCount != 0)
             {
@@ -195,5 +198,26 @@ namespace TrackDaNutzz.Services.Statistics
                                  a.Action == BettingActionNamesConstants.Bet ||
                                  a.Action == BettingActionNamesConstants.Raise);
         }
+
+        //public IQueryable<StatisticsAllDto> GetAllStatisticsById(params long[] statisticsIds)
+        //{
+        //    IQueryable<StatisticsAllDto> statisticsAllDtos = this.context.Statistics
+        //        .Where(s => statisticsIds.Contains(s.Id))
+        //        .Select(x=>new StatisticsAllDto()
+        //        {
+        //            AggressionFactor = x.AggressionFactor,
+        //            BigBlindsWon = x.BigBlindsWon,
+        //            ContinuationBet = x.ContinuationBet,
+        //            FourBet = x.FourBet,
+        //            Id = x.Id,
+        //            MoneyWon = x.MoneyWon,
+        //            PreFlopRaise = x.PreFlopRaise,
+        //            ThreeBet = x.ThreeBet,
+        //            VoluntaryPutMoneyInPot = x.VoluntaryPutMoneyInPot,
+        //        });
+        //    return statisticsAllDtos;
+        //}
+
+        
     }
 }

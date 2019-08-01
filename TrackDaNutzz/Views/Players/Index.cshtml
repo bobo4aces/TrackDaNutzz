@@ -1,5 +1,6 @@
-﻿<!-- DataTales Example -->
-<!-- Area Chart -->
+﻿@using TrackDaNutzz.ViewModels
+@using TrackDaNutzz.Helpers
+@model StatisticsAllViewModel
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
@@ -88,18 +89,21 @@
                     </tr>
                 </tfoot>
                 <tbody>
+                    @foreach (var item in Model.StatisticsAllByPlayerNameViewModels)
+                    {
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>100</td>
-                        <td>$2 / $0.20</td>
-                        <td>10 / 0.10</td>
-                        <td>13</td>
-                        <td>3</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>30%</td>
+                        <td>@item.PlayerName</td>
+                        <td>@item.HandsPlayed</td>
+                        <td>$@item.MoneyWon.ToString("0.00") / $@(MathOperations.Divide(item.MoneyWon, item.HandsPlayed).ToString("0.00"))</td>
+                        <td>@item.BigBlindsWon.ToString("0.00") / @(MathOperations.Divide(item.BigBlindsWon, item.HandsPlayed).ToString("0.00"))</td>
+                        <td>@((MathOperations.Divide(item.VoluntaryPutMoneyInPot, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                        <td>@((MathOperations.Divide(item.PreFlopRaise, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                        <td>@((MathOperations.Divide(item.ThreeBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                        <td>@((MathOperations.Divide(item.FourBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                        <td>@(item.AggressionFactor.ToString("0.00"))</td>
+                        <td>@((MathOperations.Divide(item.ContinuationBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
                     </tr>
+                    }
 
                 </tbody>
             </table>

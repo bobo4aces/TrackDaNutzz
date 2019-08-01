@@ -49,11 +49,11 @@
                 .IsUnicode(false)
                 .IsRequired(false);
     
-            builder.Property(hp => hp.IsInPosition)
-                .HasColumnName("IsInPosition")
-                .HasColumnType("BIT")
-                .HasDefaultValue(0)
-                .IsRequired(true);
+            //builder.Property(hp => hp.IsInPosition)
+            //    .HasColumnName("IsInPosition")
+            //    .HasColumnType("BIT")
+            //    .HasDefaultValue(0)
+            //    .IsRequired(true);
     
             builder.Property(hp => hp.IsMuckCards)
                 .HasColumnName("IsMuckCards")

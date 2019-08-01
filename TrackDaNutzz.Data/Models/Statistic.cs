@@ -18,11 +18,13 @@ namespace TrackDaNutzz.Data.Models
 
         public bool FourBet { get; set; }
 
-        public decimal AggressionFactor { get; set; }
+        public int TotalCalls { get; set; }
+        public int TotalBets { get; set; }
+        public int TotalRaises { get; set; }
 
         public bool ContinuationBet { get; set; }
 
-        public double BigBlindsWon { get; set; }
+        public decimal BigBlindsWon { get; set; }
 
         public decimal MoneyWon { get; set; }
 

@@ -41,9 +41,20 @@
                 .HasDefaultValue(0)
                 .IsRequired(true);
 
-            builder.Property(s => s.AggressionFactor)
-                .HasColumnName("AggressionFactor")
-                .HasColumnType("DECIMAL(15,2)")
+            builder.Property(s => s.TotalCalls)
+                .HasColumnName("TotalCalls")
+                .HasColumnType("INT")
+                .HasDefaultValue(0)
+                .IsRequired(true);
+            builder.Property(s => s.TotalBets)
+                .HasColumnName("TotalBets")
+                .HasColumnType("INT")
+                .HasDefaultValue(0)
+                .IsRequired(true);
+            builder.Property(s => s.TotalRaises)
+                .HasColumnName("TotalRaises")
+                .HasColumnType("INT")
+                .HasDefaultValue(0)
                 .IsRequired(true);
 
             builder.Property(s => s.ContinuationBet)

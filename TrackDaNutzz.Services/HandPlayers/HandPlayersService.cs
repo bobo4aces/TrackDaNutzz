@@ -6,6 +6,7 @@ using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.Import;
 using TrackDaNutzz.Services.Dtos.Seats;
+using TrackDaNutzz.Services.Helpers;
 
 namespace TrackDaNutzz.Services.HandPlayers
 {
@@ -25,7 +26,7 @@ namespace TrackDaNutzz.Services.HandPlayers
             {
                 return false;
             }
-            decimal finalStack = this.CalculateFinalStack(handDto, seatInfoDto);
+            decimal finalStack = Stack.CalculateFinalStack(handDto, seatInfoDto);
             handPlayer = new HandPlayer()
             {
                 HandId = handId,
@@ -35,7 +36,6 @@ namespace TrackDaNutzz.Services.HandPlayers
                 FinalStack = finalStack,
                 IsAllIn = handDto.BettingActionsByRoundListDto.BettingActionsByRoundDtos
                 .Any(x => x.BettingActionDtos.Where(y => y.PlayerName == seatInfoDto.PlayerName).Any(z => z.IsAllIn.Value == true)),
-                //IsInPosition = ,
                 IsMuckCards = handDto.MuckHandListDto.MuckHandDtos.Any(x => x.PlayerName == seatInfoDto.PlayerName),
                 SeatNumber = seatInfoDto.SeatNumber,
                 StartingStack = seatInfoDto.Money,
