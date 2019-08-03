@@ -218,7 +218,7 @@ namespace TrackDaNutzz.Parsers
                 TableBindingModel = tableBindingModel,
                 UncalledBetsListBindingModel = uncalledBetsListBindingModel
             };
-            HandDto handDto = this.mapper.Map<HandDto>(handBindingModel);
+            ImportHandDto handDto = this.mapper.Map<ImportHandDto>(handBindingModel);
             this.importService.Add(handDto);
         }
 

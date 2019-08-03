@@ -12,11 +12,11 @@ namespace TrackDaNutzz.Services.Statistics
 {
     public interface IStatisticsService
     {
-        Dictionary<string, long> AddStatistics(HandDto handDto);
-        Statistic CreateStatistic(HandDto handDto, string playerName, List<BettingActionDto> playerPreflopBettingActions, List<BettingActionDto> playerFlopBettingActions, List<BettingActionDto> playerAllBettingActions, SeatInfoDto seatInfoDto);
+        Dictionary<string, long> AddStatistics(ImportHandDto handDto);
+        Statistic CreateStatistic(ImportHandDto handDto, string playerName, List<BettingActionDto> playerPreflopBettingActions, List<BettingActionDto> playerFlopBettingActions, List<BettingActionDto> playerAllBettingActions, SeatInfoDto seatInfoDto);
         bool GetContinuationBet(List<BettingActionDto> playerPreflopBettingActions, List<BettingActionDto> playerFlopBettingActions);
         decimal GetBigBlindsWon(decimal moneyWon, decimal bigBlind);
-        decimal GetMoneyWon(HandDto handDto, SeatInfoDto seatInfoDto);
+        decimal GetMoneyWon(ImportHandDto handDto, SeatInfoDto seatInfoDto);
         decimal GetAggressionFactor(int totalRaises, int totalBets, int totalCalls);
         bool GetFourBet(List<BettingActionDto> playerPreflopBettingActions, string playerName);
         bool GetThreeBet(List<BettingActionDto> playerPreflopBettingActions, string playerName);
@@ -24,5 +24,6 @@ namespace TrackDaNutzz.Services.Statistics
         bool GetVoluntaryPutMoneyInPot(List<BettingActionDto> playerPreflopBettingActions);
 
         //IQueryable<StatisticsAllDto> GetAllStatisticsById(params long[] statisticsIds);
+        IQueryable<StatisticsDto> GetStatisticsById(params long[] statisticsIds);
     }
 }

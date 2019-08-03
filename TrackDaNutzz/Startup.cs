@@ -28,7 +28,7 @@ using TrackDaNutzz.Services.Clients;
 using TrackDaNutzz.Services.HandPlayers;
 using TrackDaNutzz.Services.Hands;
 using TrackDaNutzz.Services.Players;
-using TrackDaNutzz.Services.StakesService;
+using TrackDaNutzz.Services.Stakes;
 using TrackDaNutzz.Services.Tables;
 using TrackDaNutzz.Services.Variant;
 

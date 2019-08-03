@@ -1,0 +1,85 @@
+﻿@using TrackDaNutzz.ViewModels.Tables;
+@model TableAllViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All Tables</h6>
+    </div>
+    <div class="card-body">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Table Name
+                            </th>
+                            <th>
+                                Client Name
+                            </th>
+                            <th>
+                                Table Size
+                            </th>
+                            <th>
+                                Currency
+                            </th>
+                            <th>
+                                Small Blind / Big Blind
+                            </th>
+                            <th>
+                                Variant Name
+                            </th>
+                            <th>
+                                Variant Limit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                Table Name
+                            </th>
+                            <th>
+                                Client Name
+                            </th>
+                            <th>
+                                Table Size
+                            </th>
+                            <th>
+                                Currency
+                            </th>
+                            <th>
+                                Small Blind / Big Blind
+                            </th>
+                            <th>
+                                Variant Name
+                            </th>
+                            <th>
+                                Variant Limit
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var table in Model.TableViewModels)
+                        {
+                            <tr>
+                                <td>@table.TableName</td>
+                                <td>@table.ClientName</td>
+                                <td>@table.Size</td>
+                                <td>@table.Currency</td>
+                                <td>@table.CurrencySymbol @table.SmallBlind.ToString("0.00") / @table.CurrencySymbol @table.BigBlind.ToString("0.00")</td>
+                                <td>@table.VariantName</td>
+                                <td>@table.VariantLimit</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+

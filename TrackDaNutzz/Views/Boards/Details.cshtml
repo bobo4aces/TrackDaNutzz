@@ -1,0 +1,32 @@
+﻿@model TrackDaNutzz.ViewModels.Boards.BoardViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Board Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Flop)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Flop)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Turn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Turn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.River)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.River)
+        </dd>
+    </dl>
+</div>

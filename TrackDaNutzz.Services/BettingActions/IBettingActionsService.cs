@@ -7,6 +7,6 @@ namespace TrackDaNutzz.Services.BettingActions
 {
     public interface IBettingActionsService
     {
-        List<long> AddBettingActions(HandDto handDto, long handId, Dictionary<string, int> playerIdsByName);
+        List<long> AddBettingActions(ImportHandDto handDto, long handId, Dictionary<string, int> playerIdsByName);
     }
 }

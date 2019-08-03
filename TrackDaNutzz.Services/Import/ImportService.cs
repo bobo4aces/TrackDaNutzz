@@ -18,7 +18,7 @@ using TrackDaNutzz.Services.Dtos.Summary;
 using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.Hands;
 using TrackDaNutzz.Services.Players;
-using TrackDaNutzz.Services.StakesService;
+using TrackDaNutzz.Services.Stakes;
 using TrackDaNutzz.Services.Statistics;
 using TrackDaNutzz.Services.Tables;
 using TrackDaNutzz.Services.Users;
@@ -62,7 +62,7 @@ namespace TrackDaNutzz.Services.Import
             this.bettingActionsService = bettingActionsService;
         }
 
-        public void Add(HandDto handDto)
+        public void Add(ImportHandDto handDto)
         {
             long? boardId = null;
             if (handDto.BoardSummaryDto.FirstCard != null)
@@ -72,7 +72,7 @@ namespace TrackDaNutzz.Services.Import
             int clientId = this.clientsService.AddClient(handDto.HandInfoDto);
             int stakeId = this.stakesService.AddStake(handDto.HandInfoDto);
             int variantId = this.variantsService.AddVariant(handDto.HandInfoDto);
-            int tableId = this.tablesService.AddTable(handDto.TableDto, clientId, stakeId,variantId);
+            int tableId = this.tablesService.AddTable(handDto.ImportTableDto, clientId, stakeId,variantId);
             long handId = this.handsService.AddHand(handDto, boardId, tableId);
             Dictionary<string, long> statisticsIdsByPlayerName = this.statisticsService.AddStatistics(handDto);
             string currentLoggedInUsername = this.usersService.GetCurrentlyLoggedUsername();

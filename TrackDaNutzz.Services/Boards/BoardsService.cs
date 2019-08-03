@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Services.Dtos.Boards;
 using TrackDaNutzz.Services.Dtos.Summary;
 
 namespace TrackDaNutzz.Services.Boards
@@ -34,6 +35,23 @@ namespace TrackDaNutzz.Services.Boards
             this.context.Boards.Add(board);
             this.context.SaveChanges();
             return board.Id;
+        }
+
+        public BoardDto GetBoardById(int boardId)
+        {
+            Board board = this.context.Boards.SingleOrDefault(b => b.Id == boardId);
+            if (board == null)
+            {
+                throw new ArgumentException($"Invalid board id - {boardId}");
+            }
+            BoardDto boardDto = new BoardDto()
+            {
+                Flop = board.Flop,
+                Id = board.Id,
+                River = board.River,
+                Turn = board.Turn,
+            };
+            return boardDto;
         }
     }
 }

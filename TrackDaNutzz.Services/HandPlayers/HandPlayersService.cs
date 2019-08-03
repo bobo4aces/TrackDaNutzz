@@ -19,7 +19,7 @@ namespace TrackDaNutzz.Services.HandPlayers
             this.context = context;
         }
 
-        public bool AddHandPlayer(HandDto handDto, long handId, Dictionary<string, long> statisticsIdsByPlayerName, SeatInfoDto seatInfoDto, Player player)
+        public bool AddHandPlayer(ImportHandDto handDto, long handId, Dictionary<string, long> statisticsIdsByPlayerName, SeatInfoDto seatInfoDto, Player player)
         {
             HandPlayer handPlayer = this.context.HandPlayers.SingleOrDefault(x => x.HandId == handId && x.PlayerId == player.Id);
             if (handPlayer != null)
@@ -60,7 +60,22 @@ namespace TrackDaNutzz.Services.HandPlayers
             return true;
         }
 
-        private decimal CalculateFinalStack(HandDto handDto, SeatInfoDto seatInfoDto)
+        public IQueryable<long> GetAllHandIdsByPlayer(int playerId)
+        {
+            IQueryable<long> handIds = this.context.HandPlayers.Where(x => x.PlayerId == playerId).Select(x => x.HandId);
+
+            return handIds;
+        }
+
+        public IQueryable<long> GetStatisticIdsByPlayerIdAndHandId(int playerId, params long[] handIds)
+        {
+            IQueryable<long> statisticsIds = this.context.HandPlayers
+                .Where(x => x.PlayerId == playerId && handIds.Contains(x.HandId))
+                .Select(x => x.StatisticId);
+            return statisticsIds;
+        }
+
+        private decimal CalculateFinalStack(ImportHandDto handDto, SeatInfoDto seatInfoDto)
         {
             decimal betMoney = handDto.BettingActionsByRoundListDto.BettingActionsByRoundDtos
                         .SelectMany(x => x.BettingActionDtos
@@ -75,7 +90,7 @@ namespace TrackDaNutzz.Services.HandPlayers
             return seatInfoDto.Money - betMoney + collectedMoney;
         }
 
-        private string GetHoleCards(HandDto handDto, SeatInfoDto seatInfoDto)
+        private string GetHoleCards(ImportHandDto handDto, SeatInfoDto seatInfoDto)
         {
             var cards = handDto.ShowCardsListDto.ShowCardsDtos
                                                 .Where(x => x.PlayerName == seatInfoDto.PlayerName)

@@ -11,10 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrackDaNutzz.Services", "Tr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleHands", "SampleHands", "{3CDFD55B-B601-4628-8619-5E195DDE5EB5}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Hatshepsut II - $0.01-$0.02 - USD No Limit Hold'em.txt = ..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Hatshepsut II - $0.01-$0.02 - USD No Limit Hold'em.txt
-		..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Minkar III - $0.02-$0.05 - USD No Limit Hold'em.txt = ..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Minkar III - $0.02-$0.05 - USD No Limit Hold'em.txt
-		..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Nerthus II - $0.01-$0.02 - USD No Limit Hold'em.txt = ..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Nerthus II - $0.01-$0.02 - USD No Limit Hold'em.txt
-		..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Sorga II - $0.01-$0.02 - USD No Limit Hold'em.txt = ..\..\..\AppData\Local\PokerStars.BG\HandHistory\poisonmanyo\HH20190727 Sorga II - $0.01-$0.02 - USD No Limit Hold'em.txt
+		E:\poisonmanyo\HH20190727 Hatshepsut II - $0.01-$0.02 - USD No Limit Hold'em.txt = E:\poisonmanyo\HH20190727 Hatshepsut II - $0.01-$0.02 - USD No Limit Hold'em.txt
+		E:\poisonmanyo\HH20190727 Minkar III - $0.02-$0.05 - USD No Limit Hold'em.txt = E:\poisonmanyo\HH20190727 Minkar III - $0.02-$0.05 - USD No Limit Hold'em.txt
+		E:\poisonmanyo\HH20190727 Nerthus II - $0.01-$0.02 - USD No Limit Hold'em.txt = E:\poisonmanyo\HH20190727 Nerthus II - $0.01-$0.02 - USD No Limit Hold'em.txt
+		E:\poisonmanyo\HH20190727 Sorga II - $0.01-$0.02 - USD No Limit Hold'em.txt = E:\poisonmanyo\HH20190727 Sorga II - $0.01-$0.02 - USD No Limit Hold'em.txt
 	EndProjectSection
 EndProject
 Global

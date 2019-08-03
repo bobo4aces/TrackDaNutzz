@@ -4,21 +4,33 @@ using System.Linq;
 using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Services.Clients;
 using TrackDaNutzz.Services.Common;
+using TrackDaNutzz.Services.Dtos.Stakes;
+using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Dtos.Tables;
+using TrackDaNutzz.Services.Dtos.Variants;
+using TrackDaNutzz.Services.Stakes;
+using TrackDaNutzz.Services.Variant;
 
 namespace TrackDaNutzz.Services.Tables
 {
     public class TablesService : ITablesService
     {
         private readonly TrackDaNutzzDbContext context;
+        private readonly IStakesService stakesService;
+        private readonly IVariantsService variantsService;
+        private readonly IClientsService clientsService;
 
-        public TablesService(TrackDaNutzzDbContext context)
+        public TablesService(TrackDaNutzzDbContext context, IStakesService stakesService, IVariantsService variantsService, IClientsService clientsService)
         {
             this.context = context;
+            this.stakesService = stakesService;
+            this.variantsService = variantsService;
+            this.clientsService = clientsService;
         }
 
-        public int AddTable(TableDto tableDto, int clientId, int stakeId, int variantId)
+        public int AddTable(ImportTableDto tableDto, int clientId, int stakeId, int variantId)
         {
             int tableSize = this.GetTableSize(tableDto);
 
@@ -52,8 +64,98 @@ namespace TrackDaNutzz.Services.Tables
             }
             return true;
         }
+        //TO DO: Check It
+        public IQueryable<int> GetAllTableIdsByHandIds(params long[] handIds)
+        {
+            IQueryable<int> tableIds = this.context.Tables.Where(t => handIds.Contains(t.Id)).Select(x => x.Id);
+            return tableIds;
+        }
+        //TO DO: Check It
+        public IQueryable<TableByHandIdDto> GetAllTablesByHandIds(params long[] handIds)
+        {
+            IQueryable<TableByHandIdDto> tables = this.context.Tables
+                .Where(t => handIds.Contains(t.Id))
+                .Select(x => new TableByHandIdDto()
+                {
+                    Stake = this.stakesService.GetStakeByStakeId(x.StakeId).FirstOrDefault(),
+                    TableId = x.Id
+                });
+            return tables;
+        }
+        public IQueryable<int> GetTablesIdsByStakeId(params int[] stakeIds)
+        {
+            IQueryable<int> tableIds = this.context.Tables
+                .Where(t => stakeIds.Contains(t.StakeId))
+                .Select(t => t.Id);
+            return tableIds;
+        }
 
-        private int GetTableSize(TableDto tableDto)
+        public TableDto GetTableById(long tableId)
+        {
+            Table table = this.context.Tables.FirstOrDefault(t => t.Id == tableId);
+            if (table == null)
+            {
+                throw new ArgumentException($"Invalid table id - {tableId}");
+            }
+            TableDto tableDto = new TableDto()
+            {
+                ClientName = this.clientsService.GetClientNameById(table.ClientId),
+                Id = table.Id,
+                Size = table.Size,
+                Stake = this.stakesService.GetStakeByStakeId(table.StakeId)
+                        .Select(s => new StakeDto()
+                        {
+                            BigBlind = s.BigBlind,
+                            Currency = s.Currency,
+                            CurrencySymbol = s.CurrencySymbol,
+                            Id = s.Id,
+                            SmallBlind = s.SmallBlind
+                        })
+                        .FirstOrDefault(),
+                StakeId = table.StakeId,
+                TableName = table.Name,
+                Variant = this.variantsService.GetVariantById(table.VariantId),
+            };
+            return tableDto;
+        }
+        //TO DO: don't use stakes context
+        public IEnumerable<TableDto> GetTableById(params int[] tableIds)
+        {
+            IEnumerable<TableDto> tables = this.context.Tables
+                .Where(t => tableIds.Contains(t.Id))
+                .Select(t => new TableDto()
+                {
+                    ClientName = t.Client.Name,
+                    Id = t.Id,
+                    Size = t.Size,
+                    Stake = this.context.Stakes
+                        .Where(x=>x.Id == t.StakeId)
+                        .Select(s => new StakeDto()
+                        {
+                            BigBlind = s.BigBlind,
+                            Currency = s.Currency,
+                            CurrencySymbol = s.CurrencySymbol,
+                            Id = s.Id,
+                            SmallBlind = s.SmallBlind
+                        })
+                        .FirstOrDefault(),
+                    StakeId = t.StakeId,
+                    TableName = t.Name,
+                    Variant = this.context.Variants
+                        .Where(x => x.Id == t.VariantId)
+                        .Select(v=>new VariantDto()
+                        {
+                            Id = v.Id,
+                            Limit = v.Limit,
+                            Name = v.Name
+                        })
+                        .FirstOrDefault(),
+                    VariantId = t.VariantId,
+                })
+                .ToList();
+            return tables;
+        }
+        private int GetTableSize(ImportTableDto tableDto)
         {
             int tableSize = 0;
             if (tableDto.TableSize.EndsWith(GlobalConstants.TableSizeEnding))

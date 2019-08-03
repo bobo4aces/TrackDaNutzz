@@ -24,7 +24,7 @@ namespace TrackDaNutzz.Services.Users
             TrackDaNutzzUser trackDaNutzzUser = this.context.TrackDaNutzzUsers.SingleOrDefault(u => u.UserName == username);
             if (trackDaNutzzUser == null)
             {
-                throw new ArgumentNullException($"Invalid username - {username}");
+                throw new ArgumentException($"Invalid username - {username}");
             }
             return trackDaNutzzUser.Id;
         }

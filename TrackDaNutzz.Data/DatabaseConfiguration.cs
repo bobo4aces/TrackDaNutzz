@@ -2,6 +2,6 @@
 {
     public class DatabaseConfiguration
     {
-        public const string ConnectionString = "Server=DESKTOP-5UU2UI4\\SQLEXPRESS;User Id=DESKTOP-5UU2UI4\\bdsr;Database=TrackDaNutzzDB;Integrated Security=True;Trusted_Connection=True;";
+        public const string ConnectionString = "Server=DESKTOP-FEQ2VCO\\SQLEXPRESS;Database=TrackDaNutzzDB;Integrated Security=True;Trusted_Connection=True;";
     }
 }

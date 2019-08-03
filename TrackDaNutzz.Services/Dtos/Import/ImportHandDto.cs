@@ -15,10 +15,10 @@ using TrackDaNutzz.Services.Dtos.UncalledBets;
 
 namespace TrackDaNutzz.Services.Dtos.Import
 {
-    public class HandDto
+    public class ImportHandDto
     {
         public HandInfoDto HandInfoDto { get; set; }
-        public TableDto TableDto { get; set; }
+        public ImportTableDto ImportTableDto { get; set; }
         public SeatInfoListDto SeatInfoListDto { get; set; }
         public BettingActionsByRoundListDto BettingActionsByRoundListDto { get; set; }
         public DealtCardsDto DealtCardsDto { get; set; }

@@ -5,19 +5,23 @@ using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.Import;
+using TrackDaNutzz.Services.HandPlayers;
 using TrackDaNutzz.Services.Tables;
+using TrackDaNutzz.Services.Dtos.Hands;
 
 namespace TrackDaNutzz.Services.Hands
 {
     public class HandsService : IHandsService
     {
         private readonly TrackDaNutzzDbContext context;
+        private readonly IHandPlayersService handPlayersService;
 
-        public HandsService(TrackDaNutzzDbContext context)
+        public HandsService(TrackDaNutzzDbContext context, IHandPlayersService handPlayersService)
         {
             this.context = context;
+            this.handPlayersService = handPlayersService;
         }
-        public long AddHand(HandDto handDto, long? boardId, int tableId)
+        public long AddHand(ImportHandDto handDto, long? boardId, int tableId)
         {
             Hand hand = this.context.Hands.SingleOrDefault(h => h.Number == handDto.HandInfoDto.HandNumber);
             if (hand != null)
@@ -32,7 +36,7 @@ namespace TrackDaNutzz.Services.Hands
                 Time = handDto.HandInfoDto.Time,
                 TimeZone = handDto.HandInfoDto.TimeZone,
                 BoardId = boardId,
-                Button = handDto.TableDto.ButtonSeat,
+                Button = handDto.ImportTableDto.ButtonSeat,
                 Pot = handDto.PotRakeSummaryDto.Pot,
                 Rake = handDto.PotRakeSummaryDto.Rake,
                 TableId = tableId
@@ -40,6 +44,37 @@ namespace TrackDaNutzz.Services.Hands
             this.context.Hands.Add(hand);
             this.context.SaveChanges();
             return hand.Id;
+        }
+
+        public IQueryable<long> GetHandIdsByTableId(params int[] tableIds)
+        {
+            IQueryable<long> handIds = this.context.Hands
+                .Where(h => tableIds.Contains(h.TableId))
+                .Select(h => h.Id);
+            return handIds;
+        }
+
+        public IQueryable<HandDto> GetAllHandsByPlayerId(int playerId)
+        {
+            HashSet<long> handIds = this.handPlayersService.GetAllHandIdsByPlayer(playerId).ToHashSet();
+            IQueryable<HandDto> handDtos = this.context.Hands
+                .Where(h => handIds.Contains(h.Id))
+                .Select(h => new HandDto
+                {
+                    BoardId = h.BoardId,
+                    Button = h.Button,
+                    Id = h.Id,
+                    LocalTime = h.LocalTime,
+                    LocalTimeZone = h.LocalTimeZone,
+                    Number = h.Number,
+                    Pot = h.Pot,
+                    Rake = h.Rake,
+                    TableId = h.TableId,
+                    Time = h.Time,
+                    TimeZone = h.TimeZone,
+
+                });
+            return handDtos;
         }
     }
 }

@@ -1,0 +1,112 @@
+﻿@using TrackDaNutzz.ViewModels
+@model HandAllViewModel
+@{
+    ViewData["Title"] = "All";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All Hands</h6>
+    </div>
+    <div class="card-body">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Hand Number
+                            </th>
+                            <th>
+                                Time (Zone)
+                            </th>
+                            <th>
+                                Local Time (Zone)
+                            </th>
+                            <th>
+                                Button Seat
+                            </th>
+                            <th>
+                                Pot
+                            </th>
+                            <th>
+                                Rake
+                            </th>
+                            <th>
+                                Table
+                            </th>
+                            <th>
+                                Board
+                            </th>
+                            <th>
+                                Hand
+                            </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                Hand Number
+                            </th>
+                            <th>
+                                Time (Zone)
+                            </th>
+                            <th>
+                                Local Time (Zone)
+                            </th>
+                            <th>
+                                Button Seat
+                            </th>
+                            <th>
+                                Pot
+                            </th>
+                            <th>
+                                Rake
+                            </th>
+                            <th>
+                                Table
+                            </th>
+                            <th>
+                                Board
+                            </th>
+                            <th>
+                                Details
+                            </th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var hand in Model.HandViewModels)
+                        {
+                            <tr>
+                                <td>@hand.Number</td>
+                                <td>@hand.Time (@hand.TimeZone)</td>
+                                <td>@hand.LocalTime (@hand.LocalTimeZone)</td>
+                                <td>@hand.Button</td>
+                                <td>@hand.Pot.ToString("0.00")</td>
+                                <td>@hand.Rake.ToString("0.00")</td>
+                                <td>
+                                    <a class="btn btn-primary" href="/Tables/Details?tableId=@hand.TableId">Details</a>
+                                </td>
+                                <td>
+                                    @if (@hand.BoardId == null)
+                                    {
+                                        <span>No Board</span>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary" href="/Boards/Details/?boardId=@hand.BoardId">Details</a>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="/Hands/Details/@hand.Id">Details</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

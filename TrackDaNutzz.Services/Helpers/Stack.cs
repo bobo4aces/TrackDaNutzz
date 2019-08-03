@@ -9,7 +9,7 @@ namespace TrackDaNutzz.Services.Helpers
 {
     public class Stack
     {
-        public static decimal CalculateFinalStack(HandDto handDto, SeatInfoDto seatInfoDto)
+        public static decimal CalculateFinalStack(ImportHandDto handDto, SeatInfoDto seatInfoDto)
         {
             decimal betMoney = handDto.BettingActionsByRoundListDto.BettingActionsByRoundDtos
                         .SelectMany(x => x.BettingActionDtos

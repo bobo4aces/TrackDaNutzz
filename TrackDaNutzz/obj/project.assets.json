@@ -13041,24 +13041,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bdsr\\.nuget\\packages\\": {},
+    "C:\\Users\\Boris Spasov\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
+      "projectUniqueName": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.csproj",
       "projectName": "TrackDaNutzz",
-      "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
-      "packagesPath": "C:\\Users\\bdsr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz\\obj\\",
+      "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.csproj",
+      "packagesPath": "C:\\Users\\Boris Spasov\\.nuget\\packages\\",
+      "outputPath": "D:\\Repos\\TrackDaNutzz\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\bdsr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Boris Spasov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
@@ -13070,11 +13073,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
-              "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
+            "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+              "projectPath": "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
             },
-            "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
-              "projectPath": "C:\\Users\\bdsr\\OneDrive\\Работен плот\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj"
+            "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
+              "projectPath": "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj"
             }
           }
         }

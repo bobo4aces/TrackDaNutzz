@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Services.Dtos.Hands;
+using TrackDaNutzz.Services.Dtos.Variants;
 
 namespace TrackDaNutzz.Services.Variant
 {
@@ -30,6 +31,22 @@ namespace TrackDaNutzz.Services.Variant
             this.context.Variants.Add(variant);
             this.context.SaveChanges();
             return variant.Id;
+        }
+
+        public VariantDto GetVariantById(int variantId)
+        {
+            Data.Models.Variant variant = this.context.Variants.SingleOrDefault(v => v.Id == variantId);
+            if (variant == null)
+            {
+                throw new ArgumentException($"Invalid variant id - {variantId}");
+            }
+            VariantDto variantDto = new VariantDto()
+            {
+                Id = variant.Id,
+                Limit = variant.Limit,
+                Name = variant.Name
+            };
+            return variantDto;
         }
     }
 }

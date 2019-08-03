@@ -1,4 +1,7 @@
-﻿<div class="col-xl-8 col-lg-7">
+﻿@using TrackDaNutzz.ViewModels
+@using TrackDaNutzz.Helpers
+@model StatisticsListByStakeViewModel
+<div class="col-xl-8 col-lg-7">
 
     <!-- Bar Chart -->
     <div class="card shadow mb-4">
@@ -90,19 +93,21 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr>
-                        <td>$0.05/$0.10</td>
-                        <td>100</td>
-                        <td>$2 / $0.20</td>
-                        <td>10 / 0.10</td>
-                        <td>13</td>
-                        <td>3</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>30%</td>
-                    </tr>
-
+                    @foreach (var item in Model.StatisticsByStakeViewModels)
+                    {
+                        <tr>
+                            <td>@(item.CurrencySymbol)@(item.SmallBlind.ToString("0.00"))/@(item.CurrencySymbol)@(item.BigBlind.ToString("0.00"))</td>
+                            <td>@item.HandsPlayed</td>
+                            <td>@(item.CurrencySymbol)@(item.MoneyWon.ToString("0.00"))/@(item.CurrencySymbol)@(MathOperations.Divide(item.MoneyWon, item.HandsPlayed).ToString("0.00"))</td>
+                            <td>@(item.BigBlindsWon)/@(MathOperations.Divide(item.BigBlindsWon, item.HandsPlayed).ToString("0.00"))</td>
+                            <td>@((MathOperations.Divide(item.VoluntaryPutMoneyInPot, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                            <td>@((MathOperations.Divide(item.PreFlopRaise, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                            <td>@((MathOperations.Divide(item.ThreeBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                            <td>@((MathOperations.Divide(item.FourBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                            <td>@(item.AggressionFactor.ToString("0.00"))</td>
+                            <td>@((MathOperations.Divide(item.ContinuationBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

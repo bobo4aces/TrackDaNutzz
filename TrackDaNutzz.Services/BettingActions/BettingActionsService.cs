@@ -22,7 +22,7 @@ namespace TrackDaNutzz.Services.BettingActions
         }
 
         //TODO: don't get handplayer from db
-        public List<long> AddBettingActions(HandDto handDto, long handId, Dictionary<string, int> playerIdsByName)
+        public List<long> AddBettingActions(ImportHandDto handDto, long handId, Dictionary<string, int> playerIdsByName)
         {
             List<long> bettingActionsIds = new List<long>();
             foreach (var bettingActionsByRoundDto in handDto.BettingActionsByRoundListDto.BettingActionsByRoundDtos)

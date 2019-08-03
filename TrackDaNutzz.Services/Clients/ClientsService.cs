@@ -32,5 +32,11 @@ namespace TrackDaNutzz.Services.Clients
             this.context.SaveChanges();
             return client.Id;
         }
+
+        public string GetClientNameById(int clientId)
+        {
+            string clientName = this.context.Clients.Where(c => c.Id == clientId).Select(c => c.Name).FirstOrDefault();
+            return clientName;
+        }
     }
 }

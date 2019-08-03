@@ -22,7 +22,7 @@ namespace TrackDaNutzz.Services.Statistics
             this.context = context;
         }
 
-        public Dictionary<string, long> AddStatistics(HandDto handDto)
+        public Dictionary<string, long> AddStatistics(ImportHandDto handDto)
         {
             Dictionary<string, long> statisticsIdsByPlayerName = new Dictionary<string, long>();
             List<BettingActionDto> allBettingActions = handDto.BettingActionsByRoundListDto.BettingActionsByRoundDtos
@@ -74,7 +74,7 @@ namespace TrackDaNutzz.Services.Statistics
             s.BigBlindsWon == statistic.BigBlindsWon);
         }
 
-        public Statistic CreateStatistic(HandDto handDto, string playerName, List<BettingActionDto> playerPreflopBettingActions, List<BettingActionDto> playerFlopBettingActions, List<BettingActionDto> playerAllBettingActions, SeatInfoDto seatInfoDto)
+        public Statistic CreateStatistic(ImportHandDto handDto, string playerName, List<BettingActionDto> playerPreflopBettingActions, List<BettingActionDto> playerFlopBettingActions, List<BettingActionDto> playerAllBettingActions, SeatInfoDto seatInfoDto)
         {
             bool voluntaryPutMoneyInPot = this.GetVoluntaryPutMoneyInPot(playerPreflopBettingActions);
             bool preflopRaise = this.GetPreFlopRaise(playerPreflopBettingActions);
@@ -129,7 +129,7 @@ namespace TrackDaNutzz.Services.Statistics
             return moneyWon / bigBlind;
         }
 
-        public decimal GetMoneyWon(HandDto handDto, SeatInfoDto seatInfoDto)
+        public decimal GetMoneyWon(ImportHandDto handDto, SeatInfoDto seatInfoDto)
         {
             decimal finalStack = Stack.CalculateFinalStack(handDto, seatInfoDto);
             decimal startingStack = seatInfoDto.Money;
@@ -199,25 +199,27 @@ namespace TrackDaNutzz.Services.Statistics
                                  a.Action == BettingActionNamesConstants.Raise);
         }
 
-        //public IQueryable<StatisticsAllDto> GetAllStatisticsById(params long[] statisticsIds)
-        //{
-        //    IQueryable<StatisticsAllDto> statisticsAllDtos = this.context.Statistics
-        //        .Where(s => statisticsIds.Contains(s.Id))
-        //        .Select(x=>new StatisticsAllDto()
-        //        {
-        //            AggressionFactor = x.AggressionFactor,
-        //            BigBlindsWon = x.BigBlindsWon,
-        //            ContinuationBet = x.ContinuationBet,
-        //            FourBet = x.FourBet,
-        //            Id = x.Id,
-        //            MoneyWon = x.MoneyWon,
-        //            PreFlopRaise = x.PreFlopRaise,
-        //            ThreeBet = x.ThreeBet,
-        //            VoluntaryPutMoneyInPot = x.VoluntaryPutMoneyInPot,
-        //        });
-        //    return statisticsAllDtos;
-        //}
+        public IQueryable<StatisticsDto> GetStatisticsById(params long[] statisticsIds)
+        {
+            IQueryable<StatisticsDto> statistics = this.context.Statistics
+                .Where(s => statisticsIds.Contains(s.Id))
+                .Select(s=>new StatisticsDto()
+                {
+                    BigBlindsWon = s.BigBlindsWon,
+                    ContinuationBet = s.ContinuationBet,
+                    FourBet = s.FourBet,
+                    Id = s.Id,
+                    MoneyWon = s.MoneyWon,
+                    PreFlopRaise = s.PreFlopRaise,
+                    ThreeBet = s.ThreeBet,
+                    TotalBets = s.TotalBets,
+                    TotalCalls = s.TotalCalls,
+                    TotalRaises = s.TotalRaises,
+                    VoluntaryPutMoneyInPot = s.VoluntaryPutMoneyInPot,
+                });
+            return statistics;
+        }
 
-        
+
     }
 }

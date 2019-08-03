@@ -212,12 +212,12 @@ namespace TrackDaNutzz.BindingModels
             this.CreateMap<ShowSummaryBindingModel, ShowSummaryDto>();
             this.CreateMap<ShowSummaryListBindingModel, ShowSummaryListDto>()
                 .ForMember(x => x.ShowSummaryDtos, y => y.MapFrom(z => z.ShowSummaryBindingModels));
-            this.CreateMap<TableBindingModel, TableDto>();
+            this.CreateMap<TableBindingModel, ImportTableDto>();
             this.CreateMap<UncalledBetsBindingModel, UncalledBetsDto>();
             this.CreateMap<UncalledBetsListBindingModel, UncalledBetsListDto>()
                 .ForMember(x => x.UncalledBetsDtos, y => y.MapFrom(z => z.UncalledBetsBindingModels));
 
-            this.CreateMap<HandBindingModel, HandDto>()
+            this.CreateMap<HandBindingModel, ImportHandDto>()
                 .ForMember(x => x.BettingActionsByRoundListDto, y => y.MapFrom(z => z.BettingActionsByRoundListBindingModel))
                 .ForMember(x => x.BoardSummaryDto, y => y.MapFrom(z => z.BoardSummaryBindingModel))
                 .ForMember(x => x.CollectMoneyListDto, y => y.MapFrom(z => z.CollectMoneyListBindingModel))
@@ -232,7 +232,7 @@ namespace TrackDaNutzz.BindingModels
                 .ForMember(x => x.SeatInfoListDto, y => y.MapFrom(z => z.SeatInfoListBindingModel))
                 .ForMember(x => x.ShowCardsListDto, y => y.MapFrom(z => z.ShowCardsListBindingModel))
                 .ForMember(x => x.ShowSummaryListDto, y => y.MapFrom(z => z.ShowSummaryListBindingModel))
-                .ForMember(x => x.TableDto, y => y.MapFrom(z => z.TableBindingModel))
+                .ForMember(x => x.ImportTableDto, y => y.MapFrom(z => z.TableBindingModel))
                 .ForMember(x => x.UncalledBetsListDto, y => y.MapFrom(z => z.UncalledBetsListBindingModel));
 
             //this.CreateMap<BoardSummaryDto, Board>()
