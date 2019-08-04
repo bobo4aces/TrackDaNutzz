@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +11,9 @@ using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Statistics;
 using TrackDaNutzz.Services.Users;
+using TrackDaNutzz.ViewComponents;
 using TrackDaNutzz.ViewModels;
+using TrackDaNutzz.ViewModels.Players;
 
 namespace TrackDaNutzz.Controllers
 {
@@ -30,30 +33,11 @@ namespace TrackDaNutzz.Controllers
         }
         public IActionResult Index()
         {
-            //Dictionary<string, List<decimal>> earningsByPlayerName = new Dictionary<string, List<decimal>>();
-            //DataSet dataSet = new DataSet();
-            //List<PlayerTotalEarningsDto> playerTotalEarnings = this.playersService
-            //    .GetTotalEarningsForAllPlayers()
-            //    .OrderBy(x=>x.PlayerName)
-            //    .ToList();
-            //var myChart = new Chart(width: 600, height: 400)
-            //    .AddTitle("Total Earnings By Player")
-            //    .AddSeries(
-            //        name: "Player",
-            //        xValue: playerTotalEarnings.Select(x => x.PlayerName).ToList(),
-            //        yValues: playerTotalEarnings.Select(x => x.TotalEarnings).ToList())
-            //    .Write();
-            //TotalEarningsForAllPlayersViewModel totalEarningsForAllPlayersViewModel = new TotalEarningsForAllPlayersViewModel()
-            //{
-            //    Chart = myChart
-            //};
-            //return View(totalEarningsForAllPlayersViewModel);
-            //IQueryable<StatisticsAllDto> statisticsAllDtos = this.statisticsService.GetAllStatisticsById();
             string currentUsername = this.usersService.GetCurrentlyLoggedUsername();
             string currentUserId = this.usersService.GetCurrentlyLoggedUserId(currentUsername);
-
+            int activePlayerId = this.playersService.GetActivePlayer(currentUserId).Id;
             int[] playerIds = this.playersService
-                .GetAllPlayerIds(currentUserId)
+                .GetAllPlayerIds(currentUserId, activePlayerId)
                 .ToArray();
             IEnumerable<StatisticsAllByPlayerNameViewModel> statisticsAllByPlayerNameViewModels = this.playersService
                 .GetAllStatisticsByPlayerId(playerIds)
@@ -76,6 +60,18 @@ namespace TrackDaNutzz.Controllers
                 StatisticsAllByPlayerNameViewModels = statisticsAllByPlayerNameViewModels
             };
             return View(statisticsAllViewModel);
+        }
+
+
+        [HttpPost]
+        public IActionResult ActivePlayer(int playerId)
+        {
+            string username = this.usersService.GetCurrentlyLoggedUsername();
+            string userId = this.usersService.GetCurrentlyLoggedUserId(username);
+            int oldPlayerId = this.playersService.GetActivePlayer(userId).Id;
+            this.playersService.ChangeActivePlayer(userId, oldPlayerId, playerId);
+            string path = Request.Headers["Referer"].ToString();
+            return this.Redirect(path);
         }
     }
 }

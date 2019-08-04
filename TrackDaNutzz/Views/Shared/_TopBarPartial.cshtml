@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+﻿@using TrackDaNutzz.ViewModels
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     @if (!this.User.Identity.IsAuthenticated)
     {
         <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
@@ -25,8 +26,10 @@
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
-
-           
+            <li>
+                <vc:active-player username="@this.User.Identity.Name">
+                </vc:active-player>
+            </li>
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

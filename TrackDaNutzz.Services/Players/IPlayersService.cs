@@ -14,7 +14,15 @@ namespace TrackDaNutzz.Services.Players
         IQueryable<PlayerTotalEarningsDto> GetTotalEarningsForAllPlayers();
         IQueryable<StatisticsAllByPlayerNameDto> GetAllStatisticsByPlayerId(params int[] playerIds);
 
-        IQueryable<int> GetAllPlayerIds(string userId);
+        IQueryable<int> GetAllPlayerIds(string userId, int activePlayerId);
         IEnumerable<StatisticsAllByImportStakeDto> GetPlayerStakeStatistics(int playerId);
+
+        IQueryable<PlayerDto> GetPlayersByUserId(string userId);
+
+        bool RemoveActivePlayer(int playerId, string userId);
+        bool RemoveActivePlayer(string userId);
+        bool ChangeActivePlayer(string userId, int oldPlayerId, int newPlayerId);
+        bool SetActivePlayer(int playerId, string userId);
+        PlayerDto GetActivePlayer(string userId);
     }
 }

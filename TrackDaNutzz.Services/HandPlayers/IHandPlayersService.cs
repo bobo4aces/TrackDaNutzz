@@ -15,5 +15,6 @@ namespace TrackDaNutzz.Services.HandPlayers
 
         IQueryable<long> GetAllHandIdsByPlayer(int playerId);
         IQueryable<long> GetStatisticIdsByPlayerIdAndHandId(int playerId, params long[] handIds);
+        IQueryable<int> GetAllPlayerIdsByHandId(params long[] handIds);
     }
 }

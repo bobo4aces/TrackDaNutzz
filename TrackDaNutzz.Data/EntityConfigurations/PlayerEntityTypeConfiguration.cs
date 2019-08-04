@@ -24,6 +24,12 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .IsUnicode(false)
                 .IsRequired(true);
 
+            builder.Property(p => p.IsActive)
+                .HasColumnName("IsActive")
+                .HasColumnType("BIT")
+                .HasDefaultValue(0)
+                .IsRequired(true);
+
             builder.Property(p => p.TrackDaNutzzUserId)
                 .HasColumnName("TrackDaNutzzUserId")
                 .HasColumnType("NVARCHAR(450)")

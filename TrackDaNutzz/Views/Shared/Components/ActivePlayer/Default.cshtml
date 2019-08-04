@@ -1,0 +1,17 @@
+﻿@model TrackDaNutzz.ViewComponents.ActivePlayerViewComponentViewModel
+
+<form asp-controller="Players" asp-action="ActivePlayer">
+    <select asp-for="PlayerId" asp-items="@(new SelectList(Model.UserPlayers,"PlayerId","PlayerName"))">
+        <option>Please select one</option>
+    </select>
+    <input type="submit" />
+</form>
+<script>
+    function val() {
+
+        let selectedOption = document.getElementById("userPlayersList").value;
+        //document.getElementById("activePlayerId").innerHTML = selectedOption;
+        console.log(selectedOption);
+    }
+</script>
+

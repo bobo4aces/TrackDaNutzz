@@ -28,8 +28,8 @@ namespace TrackDaNutzz.Services.Players
         private readonly IStakesService stakesService;
         private readonly IHandsService handsService;
 
-        public PlayersService(TrackDaNutzzDbContext context, IHandPlayersService handPlayersService, 
-            IUsersService usersService, IStatisticsService statisticsService, 
+        public PlayersService(TrackDaNutzzDbContext context, IHandPlayersService handPlayersService,
+            IUsersService usersService, IStatisticsService statisticsService,
             ITablesService tablesService, IStakesService stakesService,
             IHandsService handsService)
         {
@@ -126,10 +126,12 @@ namespace TrackDaNutzz.Services.Players
             return statisticsAllDtos;
         }
 
-        public IQueryable<int> GetAllPlayerIds(string userId)
+        public IQueryable<int> GetAllPlayerIds(string userId, int activePlayerId)
         {
+            long[] handIds = this.handPlayersService.GetAllHandIdsByPlayer(activePlayerId).ToArray();
+            int[] playerIdsForActivePlayer = this.handPlayersService.GetAllPlayerIdsByHandId(handIds).ToArray();
             IQueryable<int> playerIds = this.context.Players
-                .Where(p => p.TrackDaNutzzUserId == userId)
+                .Where(p => p.TrackDaNutzzUserId == userId && playerIdsForActivePlayer.Contains(p.Id))
                 .Select(p => p.Id);
             return playerIds;
         }
@@ -150,7 +152,7 @@ namespace TrackDaNutzz.Services.Players
                 List<StatisticsDto> currentStakeStatisticDtoList = new List<StatisticsDto>();
                 foreach (var currentStakeStatisticId in currentStakeStatisticIds)
                 {
-                    StatisticsDto currentStakeStatisticDto = currentStakeStatisticDtos.SingleOrDefault(s=>s.Id == currentStakeStatisticId);
+                    StatisticsDto currentStakeStatisticDto = currentStakeStatisticDtos.SingleOrDefault(s => s.Id == currentStakeStatisticId);
                     currentStakeStatisticDtoList.Add(currentStakeStatisticDto);
                 }
 
@@ -174,6 +176,103 @@ namespace TrackDaNutzz.Services.Players
                 statisticsByStakes.Add(statisticsByStake);
             }
             return statisticsByStakes;
+        }
+
+        public IQueryable<PlayerDto> GetPlayersByUserId(string userId)
+        {
+            IQueryable<PlayerDto> playerDtos = this.context.Players
+                .Where(p => p.TrackDaNutzzUserId == userId)
+                .Select(p => new PlayerDto()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    UserId = p.TrackDaNutzzUserId
+                });
+            return playerDtos;
+        }
+        public bool RemoveActivePlayer(int playerId, string userId)
+        {
+            Player player = this.context.Players.SingleOrDefault(p => p.Id == playerId && p.TrackDaNutzzUserId == userId);
+            if (player == null)
+            {
+                return false;
+            }
+            player.IsActive = false;
+            this.context.Players.Update(player);
+            int changes = this.context.SaveChanges();
+            if (changes == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool RemoveActivePlayer(string userId)
+        {
+            Player player = this.context.Players.SingleOrDefault(p => p.TrackDaNutzzUserId == userId && p.IsActive);
+            if (player == null)
+            {
+                return false;
+            }
+            player.IsActive = false;
+            this.context.Players.Update(player);
+            int changes = this.context.SaveChanges();
+            if (changes == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool ChangeActivePlayer(string userId, int oldPlayerId, int newPlayerId)
+        {
+            Player oldPlayer = this.context.Players.SingleOrDefault(p => p.Id == oldPlayerId && p.TrackDaNutzzUserId == userId);
+            Player newPlayer = this.context.Players.SingleOrDefault(p => p.Id == newPlayerId && p.TrackDaNutzzUserId == userId);
+            if (oldPlayer == null || newPlayer == null)
+            {
+                return false;
+            }
+            oldPlayer.IsActive = false;
+            newPlayer.IsActive = true;
+            this.context.Players.UpdateRange(oldPlayer, newPlayer);
+            int changes = this.context.SaveChanges();
+            if (changes == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool SetActivePlayer(int playerId, string userId)
+        {
+            Player player = this.context.Players.SingleOrDefault(p => p.Id == playerId && p.TrackDaNutzzUserId == userId);
+            if (player == null)
+            {
+                return false;
+            }
+            player.IsActive = true;
+            this.context.Players.Update(player);
+            int changes = this.context.SaveChanges();
+            if (changes == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public PlayerDto GetActivePlayer(string userId)
+        {
+            Player player = this.context.Players.SingleOrDefault(p => p.IsActive && p.TrackDaNutzzUserId == userId);
+            if (player == null)
+            {
+                throw new ArgumentException($"No active player or invalid user id - {userId}");
+            }
+            PlayerDto playerDto = new PlayerDto()
+            {
+                Id = player.Id,
+                IsActive = player.IsActive,
+                Name = player.Name,
+                UserId = player.TrackDaNutzzUserId,
+            };
+            return playerDto;
         }
     }
 }

@@ -75,6 +75,11 @@ namespace TrackDaNutzz.Services.HandPlayers
             return statisticsIds;
         }
 
+        public IQueryable<int> GetAllPlayerIdsByHandId(params long[] handIds)
+        {
+            IQueryable<int> playerIds = this.context.HandPlayers.Where(x => handIds.Contains(x.HandId)).Select(x => x.PlayerId);
+            return playerIds;
+        }
         private decimal CalculateFinalStack(ImportHandDto handDto, SeatInfoDto seatInfoDto)
         {
             decimal betMoney = handDto.BettingActionsByRoundListDto.BettingActionsByRoundDtos
