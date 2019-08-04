@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Services.Dtos.Hands;
 using TrackDaNutzz.Services.Dtos.Variants;
@@ -35,6 +33,7 @@ namespace TrackDaNutzz.Services.Variant
 
         public VariantDto GetVariantById(int variantId)
         {
+            //TODO: Use Automapper
             Data.Models.Variant variant = this.context.Variants.SingleOrDefault(v => v.Id == variantId);
             if (variant == null)
             {

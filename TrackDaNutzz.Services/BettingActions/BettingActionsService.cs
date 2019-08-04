@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Common;
@@ -22,8 +20,10 @@ namespace TrackDaNutzz.Services.BettingActions
         }
 
         //TODO: don't get handplayer from db
+        
         public List<long> AddBettingActions(ImportHandDto handDto, long handId, Dictionary<string, int> playerIdsByName)
         {
+            //TODO: Use Automapper
             List<long> bettingActionsIds = new List<long>();
             foreach (var bettingActionsByRoundDto in handDto.BettingActionsByRoundListDto.BettingActionsByRoundDtos)
             {

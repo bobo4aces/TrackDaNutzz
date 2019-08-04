@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.Hands;
@@ -19,6 +16,7 @@ namespace TrackDaNutzz.Services.Clients
 
         public int AddClient(HandInfoDto handInfoDto)
         {
+            //TODO: Use Automapper
             Client client = this.context.Clients.SingleOrDefault(c => c.Name == handInfoDto.ClientName);
             if (client != null)
             {

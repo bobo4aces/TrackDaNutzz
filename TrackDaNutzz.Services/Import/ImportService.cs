@@ -1,21 +1,9 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using TrackDaNutzz.Data;
-using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.BettingActions;
 using TrackDaNutzz.Services.Boards;
 using TrackDaNutzz.Services.Clients;
-using TrackDaNutzz.Services.Common;
-using TrackDaNutzz.Services.Dtos.BettingActions;
-using TrackDaNutzz.Services.Dtos.Hands;
 using TrackDaNutzz.Services.Dtos.Import;
-using TrackDaNutzz.Services.Dtos.Seats;
-using TrackDaNutzz.Services.Dtos.Summary;
-using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.Hands;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Stakes;
@@ -29,7 +17,6 @@ namespace TrackDaNutzz.Services.Import
     public class ImportService : IImportService
     {
         private readonly TrackDaNutzzDbContext context;
-        private readonly IMapper mapper;
         private readonly IStatisticsService statisticsService;
         private readonly IUsersService usersService;
         private readonly ITablesService tablesService;
@@ -41,7 +28,7 @@ namespace TrackDaNutzz.Services.Import
         private readonly IClientsService clientsService;
         private readonly IBettingActionsService bettingActionsService;
 
-        public ImportService(TrackDaNutzzDbContext context, IMapper mapper, 
+        public ImportService(TrackDaNutzzDbContext context,
             IStatisticsService statisticsService, IUsersService usersService,
             ITablesService tablesService, IPlayersService playersService,
             IVariantsService variantsService, IStakesService stakesService,
@@ -49,7 +36,6 @@ namespace TrackDaNutzz.Services.Import
             IClientsService clientsService, IBettingActionsService bettingActionsService)
         {
             this.context = context;
-            this.mapper = mapper;
             this.statisticsService = statisticsService;
             this.usersService = usersService;
             this.tablesService = tablesService;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TrackDaNutzz.Services.Dtos.Variants
+﻿namespace TrackDaNutzz.Services.Dtos.Variants
 {
     public class VariantDto
     {

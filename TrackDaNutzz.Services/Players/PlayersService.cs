@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.Import;
 using TrackDaNutzz.Services.Dtos.Players;
-using TrackDaNutzz.Services.Dtos.Seats;
 using TrackDaNutzz.Services.Dtos.Stakes;
 using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.HandPlayers;
@@ -84,6 +82,7 @@ namespace TrackDaNutzz.Services.Players
 
         public IQueryable<StatisticsAllByPlayerNameDto> GetAllStatisticsByPlayerId(int activePlayerId, params int[] playerIds)
         {
+            //TODO: Don't use HandPlayer Entity
             IQueryable<StatisticsAllByPlayerNameDto> statisticsAllDtos = this.context.Players
                 .Where(p => playerIds.Contains(p.Id))
                 .Select(x => new StatisticsAllByPlayerNameDto
@@ -138,6 +137,7 @@ namespace TrackDaNutzz.Services.Players
 
         public IEnumerable<StatisticsAllByImportStakeDto> GetPlayerStakeStatistics(int playerId)
         {
+            //TODO: Use Automapper
             long[] currentPlayerHandIds = this.handPlayersService.GetAllHandIdsByPlayer(playerId).ToArray();
             int[] currentPlayerTableIds = this.handsService.GetTableIdsByHandId(currentPlayerHandIds).ToArray();
             int[] stakeIds = this.tablesService.GetStakeIdsByTableId(currentPlayerTableIds).ToArray();

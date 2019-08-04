@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TrackDaNutzz.Services.Dtos.Hands;
+﻿using TrackDaNutzz.Services.Dtos.Hands;
 
 namespace TrackDaNutzz.Services.Clients
 {

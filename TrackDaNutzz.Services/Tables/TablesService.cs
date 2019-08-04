@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Clients;
 using TrackDaNutzz.Services.Common;
 using TrackDaNutzz.Services.Dtos.Stakes;
-using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.Dtos.Variants;
 using TrackDaNutzz.Services.Stakes;

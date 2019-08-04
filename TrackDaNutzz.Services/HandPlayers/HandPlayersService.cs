@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.Import;
@@ -21,6 +20,7 @@ namespace TrackDaNutzz.Services.HandPlayers
 
         public bool AddHandPlayer(ImportHandDto handDto, long handId, Dictionary<string, long> statisticsIdsByPlayerName, SeatInfoDto seatInfoDto, Player player)
         {
+            //TODO: Use Automapper
             HandPlayer handPlayer = this.context.HandPlayers.SingleOrDefault(x => x.HandId == handId && x.PlayerId == player.Id);
             if (handPlayer != null)
             {
@@ -79,20 +79,6 @@ namespace TrackDaNutzz.Services.HandPlayers
         {
             IQueryable<int> playerIds = this.context.HandPlayers.Where(x => handIds.Contains(x.HandId)).Select(x => x.PlayerId);
             return playerIds;
-        }
-        private decimal CalculateFinalStack(ImportHandDto handDto, SeatInfoDto seatInfoDto)
-        {
-            decimal betMoney = handDto.BettingActionsByRoundListDto.BettingActionsByRoundDtos
-                        .SelectMany(x => x.BettingActionDtos
-                                    .Where(y => y.PlayerName == seatInfoDto.PlayerName && y.Value.HasValue)
-                                    .Select(z => z.RaiseTo.HasValue ? z.RaiseTo.Value : z.Value.Value)
-                        .ToList())
-                        .ToList()
-                        .Sum();
-            decimal collectedMoney = handDto.CollectMoneyListDto.CollectMoneyDtos
-                        .Where(x => x.PlayerName == seatInfoDto.PlayerName)
-                        .Sum(x => x.Value);
-            return seatInfoDto.Money - betMoney + collectedMoney;
         }
 
         private string GetHoleCards(ImportHandDto handDto, SeatInfoDto seatInfoDto)

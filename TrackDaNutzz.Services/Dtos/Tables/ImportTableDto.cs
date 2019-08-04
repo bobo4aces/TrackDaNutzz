@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TrackDaNutzz.Services.Dtos.Tables
+﻿namespace TrackDaNutzz.Services.Dtos.Tables
 {
     public class ImportTableDto
     {

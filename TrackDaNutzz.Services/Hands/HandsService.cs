@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Services.Dtos.Hands;
 using TrackDaNutzz.Services.Dtos.Import;
 using TrackDaNutzz.Services.HandPlayers;
-using TrackDaNutzz.Services.Tables;
-using TrackDaNutzz.Services.Dtos.Hands;
 
 namespace TrackDaNutzz.Services.Hands
 {
@@ -23,6 +21,7 @@ namespace TrackDaNutzz.Services.Hands
         }
         public long AddHand(ImportHandDto handDto, long? boardId, int tableId)
         {
+            //TODO: Use Automapper
             Hand hand = this.context.Hands.SingleOrDefault(h => h.Number == handDto.HandInfoDto.HandNumber);
             if (hand != null)
             {
@@ -64,6 +63,7 @@ namespace TrackDaNutzz.Services.Hands
 
         public IQueryable<HandDto> GetAllHandsByPlayerId(int playerId)
         {
+            //TODO: Use Automapper
             HashSet<long> handIds = this.handPlayersService.GetAllHandIdsByPlayer(playerId).ToHashSet();
             IQueryable<HandDto> handDtos = this.context.Hands
                 .Where(h => handIds.Contains(h.Id))

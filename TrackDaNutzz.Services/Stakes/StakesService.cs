@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.Hands;
 using TrackDaNutzz.Services.Dtos.Stakes;
-using TrackDaNutzz.Services.Dtos.Statistics;
 
 namespace TrackDaNutzz.Services.Stakes
 {
@@ -54,23 +51,5 @@ namespace TrackDaNutzz.Services.Stakes
                 });
             return stakes;
         }
-
-
-        //public List<StatisticsAllByImportStakeDto> GetStakesByPlayerId(int playerId)
-        //{
-        //    var statisticsAllByImportStakeDtos = this.context.Stakes
-        //        .SelectMany(x => x.Tables
-        //            .SelectMany(y => y.Hands
-        //                .Select(z => z.HandPlayers
-        //                    .Where(xx => xx.PlayerId == playerId)
-        //                    .Select(xx => new StatisticsAllByImportStakeDto()
-        //                    {
-        //                        BigBlind = x.BigBlind,
-        //                        SmallBlind = x.SmallBlind,
-        //                        BigBlindsWon = z.HandPlayers.Sum(yy => yy.Statistic.BigBlindsWon),
-        //                    }).ToList())));
-        //    List<StatisticsAllByImportStakeDto> nwq = new List<StatisticsAllByImportStakeDto>();
-        //    return nwq;
-        //}
     }
 }

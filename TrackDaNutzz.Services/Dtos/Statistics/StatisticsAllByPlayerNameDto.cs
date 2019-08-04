@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TrackDaNutzz.Services.Helpers;
-using TrackDaNutzz.Services.Statistics;
+﻿using TrackDaNutzz.Services.Helpers;
 
 namespace TrackDaNutzz.Services.Dtos.Statistics
 {

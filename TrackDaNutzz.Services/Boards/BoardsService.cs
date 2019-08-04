@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.Boards;
@@ -20,6 +18,7 @@ namespace TrackDaNutzz.Services.Boards
 
         public long AddBoard(BoardSummaryDto boardSummaryDto)
         {
+            //TODO: Use Automapper
             Board board = new Board()
             {
                 Flop = boardSummaryDto.FirstCard == null ? null : $"{boardSummaryDto.FirstCard} {boardSummaryDto.SecondCard} {boardSummaryDto.ThirdCard}",
@@ -39,6 +38,7 @@ namespace TrackDaNutzz.Services.Boards
 
         public BoardDto GetBoardById(int boardId)
         {
+            //TODO: Use Automapper
             Board board = this.context.Boards.SingleOrDefault(b => b.Id == boardId);
             if (board == null)
             {
