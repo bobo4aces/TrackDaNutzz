@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Boards;
 using TrackDaNutzz.Services.Dtos.Boards;
@@ -17,8 +18,12 @@ namespace TrackDaNutzz.Controllers
         {
             this.boardsService = boardsService;
         }
+
+        [Authorize]
+        [HttpGet]
         public IActionResult Details(int boardId)
         {
+            //TODO: Use Automapper
             BoardDto boardDto = this.boardsService.GetBoardById(boardId);
             BoardViewModel boardViewModel = new BoardViewModel()
             {

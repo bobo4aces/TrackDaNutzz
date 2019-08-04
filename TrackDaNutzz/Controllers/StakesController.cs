@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Players;
@@ -24,8 +25,12 @@ namespace TrackDaNutzz.Controllers
             this.playersService = playersService;
             this.usersService = usersService;
         }
+
+        [Authorize]
+        [HttpGet]
         public IActionResult Index()
         {
+            //TODO: Use Automapper
             string username = this.usersService.GetCurrentlyLoggedUsername();
             string userId = this.usersService.GetCurrentlyLoggedUserId(username);
             int playerId = this.playersService.GetActivePlayer(userId).Id;

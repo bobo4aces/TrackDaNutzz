@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.HandPlayers;
@@ -29,8 +30,12 @@ namespace TrackDaNutzz.Controllers
             this.usersService = usersService;
             this.playersService = playersService;
         }
+
+        [Authorize]
+        [HttpGet]
         public IActionResult Index()
         {
+            //TODO: Use Automapper
             string username = this.usersService.GetCurrentlyLoggedUsername();
             string userId = this.usersService.GetCurrentlyLoggedUserId(username);
             int playerId = this.playersService.GetActivePlayer(userId).Id;
@@ -57,8 +62,12 @@ namespace TrackDaNutzz.Controllers
             };
             return View(tableAllViewModel);
         }
+
+        [Authorize]
+        [HttpGet]
         public IActionResult Details(long tableId)
         {
+            //TODO: Use Automapper
             TableDto tableDto = this.tablesService.GetTableById(tableId);
             TableViewModel tableViewModel = new TableViewModel()
             {

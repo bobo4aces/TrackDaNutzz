@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Dtos.Players;
 using TrackDaNutzz.Services.Dtos.Statistics;
@@ -31,8 +32,12 @@ namespace TrackDaNutzz.Controllers
             this.statisticsService = statisticsService;
             this.usersService = usersService;
         }
+
+        [Authorize]
+        [HttpGet]
         public IActionResult Index()
         {
+            //TODO: Use Automapper
             string currentUsername = this.usersService.GetCurrentlyLoggedUsername();
             string currentUserId = this.usersService.GetCurrentlyLoggedUserId(currentUsername);
             int activePlayerId = this.playersService.GetActivePlayer(currentUserId).Id;
@@ -62,8 +67,9 @@ namespace TrackDaNutzz.Controllers
             return View(statisticsAllViewModel);
         }
 
-
+        [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ActivePlayer(int playerId)
         {
             string username = this.usersService.GetCurrentlyLoggedUsername();

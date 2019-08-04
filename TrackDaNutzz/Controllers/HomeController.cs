@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Models;
 
@@ -19,11 +20,15 @@ namespace TrackDaNutzz.Controllers
             return View();
         }
 
+        [Authorize]
+        [HttpGet]
         public IActionResult Welcome()
         {
+            //TODO: Add yearly, monthly earnings
             return View();
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
