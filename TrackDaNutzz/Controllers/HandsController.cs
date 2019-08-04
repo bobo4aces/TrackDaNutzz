@@ -16,7 +16,7 @@ namespace TrackDaNutzz.Controllers
         {
             this.handsService = handsService;
         }
-        public IActionResult All()
+        public IActionResult Index()
         {
             int playerId = 1;
             IEnumerable<HandViewModel> handViewModels = this.handsService.GetAllHandsByPlayerId(playerId)

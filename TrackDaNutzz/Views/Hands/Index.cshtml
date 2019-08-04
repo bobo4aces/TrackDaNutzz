@@ -1,12 +1,12 @@
 ﻿@using TrackDaNutzz.ViewModels
 @model HandAllViewModel
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "Index";
 }
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">All Hands</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Hands</h6>
     </div>
     <div class="card-body">
         <div class="card-body">
@@ -38,9 +38,9 @@
                             <th>
                                 Board
                             </th>
-                            <th>
+                            <!--<th>
                                 Hand
-                            </th>
+                            </th>-->
                         </tr>
                     </thead>
                     <tfoot>
@@ -69,9 +69,9 @@
                             <th>
                                 Board
                             </th>
-                            <th>
+                            <!--<th>
                                 Details
-                            </th>
+                            </th>-->
                         </tr>
                     </tfoot>
                     <tbody>
@@ -85,7 +85,10 @@
                                 <td>@hand.Pot.ToString("0.00")</td>
                                 <td>@hand.Rake.ToString("0.00")</td>
                                 <td>
-                                    <a class="btn btn-primary" href="/Tables/Details?tableId=@hand.TableId">Details</a>
+                                    <a type="button" class="btn btn-primary" asp-controller="Tables" asp-action="Details" asp-route-tableId="@hand.TableId">
+                                        Details
+                                    </a>
+                                    <!--<a class="btn btn-primary" href="/Tables/Details?tableId=@hand.TableId">Details</a>-->
                                 </td>
                                 <td>
                                     @if (@hand.BoardId == null)
@@ -94,12 +97,14 @@
                                     }
                                     else
                                     {
-                                        <a class="btn btn-primary" href="/Boards/Details/?boardId=@hand.BoardId">Details</a>
+                                        <a type="button" class="btn btn-primary" asp-controller="Boards" asp-action="Details" asp-route-boardId="@hand.BoardId">
+                                            Details
+                                        </a>
                                     }
                                 </td>
-                                <td>
+                                <!--<td>
                                     <a class="btn btn-primary" href="/Hands/Details/@hand.Id">Details</a>
-                                </td>
+                                </td>-->
                             </tr>
                         }
 

@@ -1,25 +1,12 @@
 ﻿@using TrackDaNutzz.ViewModels
 @using TrackDaNutzz.Helpers
 @model StatisticsListByStakeViewModel
-<div class="col-xl-8 col-lg-7">
-
-    <!-- Bar Chart -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Stakes</h6>
-        </div>
-        <div class="card-body">
-            <div class="chart-bar">
-                <canvas id="myBarChart"></canvas>
-            </div>
-            <hr>
-            Styling for the bar chart can be found in the <code>/js/demo/chart-bar-demo.js</code> file.
-        </div>
-    </div>
-</div>
+@{
+    ViewData["Title"] = "Index";
+}
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Players</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Stakes</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
