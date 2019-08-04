@@ -54,6 +54,14 @@ namespace TrackDaNutzz.Services.Hands
             return handIds;
         }
 
+        public IQueryable<int> GetTableIdsByHandId(params long[] handIds)
+        {
+            IQueryable<int> tableIds = this.context.Hands
+                .Where(h => handIds.Contains(h.Id))
+                .Select(h => h.TableId);
+            return tableIds;
+        }
+
         public IQueryable<HandDto> GetAllHandsByPlayerId(int playerId)
         {
             HashSet<long> handIds = this.handPlayersService.GetAllHandIdsByPlayer(playerId).ToHashSet();

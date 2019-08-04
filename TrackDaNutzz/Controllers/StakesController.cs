@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Stakes;
+using TrackDaNutzz.Services.Users;
 using TrackDaNutzz.ViewModels;
 
 namespace TrackDaNutzz.Controllers
@@ -15,15 +16,19 @@ namespace TrackDaNutzz.Controllers
     {
         private readonly IStakesService stakesService;
         private readonly IPlayersService playersService;
+        private readonly IUsersService usersService;
 
-        public StakesController(IStakesService stakesService, IPlayersService playersService)
+        public StakesController(IStakesService stakesService, IPlayersService playersService, IUsersService usersService)
         {
             this.stakesService = stakesService;
             this.playersService = playersService;
+            this.usersService = usersService;
         }
         public IActionResult Index()
         {
-            int playerId = 1;
+            string username = this.usersService.GetCurrentlyLoggedUsername();
+            string userId = this.usersService.GetCurrentlyLoggedUserId(username);
+            int playerId = this.playersService.GetActivePlayer(userId).Id;
             IEnumerable<StatisticsByStakeViewModel> statisticsByStakeViewModels = this.playersService.GetPlayerStakeStatistics(playerId)
                 .Select(x => new StatisticsByStakeViewModel()
                 {

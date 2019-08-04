@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Hands;
+using TrackDaNutzz.Services.Players;
+using TrackDaNutzz.Services.Users;
 using TrackDaNutzz.ViewModels;
 
 namespace TrackDaNutzz.Controllers
@@ -11,14 +13,20 @@ namespace TrackDaNutzz.Controllers
     public class HandsController : Controller
     {
         private readonly IHandsService handsService;
+        private readonly IUsersService usersService;
+        private readonly IPlayersService playersService;
 
-        public HandsController(IHandsService handsService)
+        public HandsController(IHandsService handsService, IUsersService usersService, IPlayersService playersService)
         {
             this.handsService = handsService;
+            this.usersService = usersService;
+            this.playersService = playersService;
         }
         public IActionResult Index()
         {
-            int playerId = 1;
+            string username = this.usersService.GetCurrentlyLoggedUsername();
+            string userId = this.usersService.GetCurrentlyLoggedUserId(username);
+            int playerId = this.playersService.GetActivePlayer(userId).Id;
             IEnumerable<HandViewModel> handViewModels = this.handsService.GetAllHandsByPlayerId(playerId)
                 .Select( h=> new HandViewModel()
                 {

@@ -40,7 +40,7 @@ namespace TrackDaNutzz.Controllers
                 .GetAllPlayerIds(currentUserId, activePlayerId)
                 .ToArray();
             IEnumerable<StatisticsAllByPlayerNameViewModel> statisticsAllByPlayerNameViewModels = this.playersService
-                .GetAllStatisticsByPlayerId(playerIds)
+                .GetAllStatisticsByPlayerId(activePlayerId, playerIds)
                 .Select(x=>new StatisticsAllByPlayerNameViewModel
                 {
                     AggressionFactor = x.AggressionFactor,

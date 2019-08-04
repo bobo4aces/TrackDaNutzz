@@ -12,7 +12,7 @@ namespace TrackDaNutzz.Services.Players
     {
         Dictionary<string, int> AddPlayers(ImportHandDto handDto, long handId, Dictionary<string, long> statisticsIdsByPlayerName, string userId);
         IQueryable<PlayerTotalEarningsDto> GetTotalEarningsForAllPlayers();
-        IQueryable<StatisticsAllByPlayerNameDto> GetAllStatisticsByPlayerId(params int[] playerIds);
+        IQueryable<StatisticsAllByPlayerNameDto> GetAllStatisticsByPlayerId(int activePlayerId, params int[] playerIds);
 
         IQueryable<int> GetAllPlayerIds(string userId, int activePlayerId);
         IEnumerable<StatisticsAllByImportStakeDto> GetPlayerStakeStatistics(int playerId);

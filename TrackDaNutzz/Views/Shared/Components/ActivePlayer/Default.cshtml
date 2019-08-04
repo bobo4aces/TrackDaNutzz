@@ -1,17 +1,9 @@
 ﻿@model TrackDaNutzz.ViewComponents.ActivePlayerViewComponentViewModel
 
 <form asp-controller="Players" asp-action="ActivePlayer">
-    <select asp-for="PlayerId" asp-items="@(new SelectList(Model.UserPlayers,"PlayerId","PlayerName"))">
-        <option>Please select one</option>
+    <select class="form-control-sm" asp-for="PlayerId" asp-items="@(new SelectList(Model.UserPlayers,"PlayerId","PlayerName"))">
+        <option disabled>Please select player</option>
     </select>
-    <input type="submit" />
+    <input class="btn btn-primary" type="submit" value="Change Player"/>
 </form>
-<script>
-    function val() {
-
-        let selectedOption = document.getElementById("userPlayersList").value;
-        //document.getElementById("activePlayerId").innerHTML = selectedOption;
-        console.log(selectedOption);
-    }
-</script>
 

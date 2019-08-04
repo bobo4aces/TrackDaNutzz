@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.HandPlayers;
+using TrackDaNutzz.Services.Hands;
+using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Tables;
+using TrackDaNutzz.Services.Users;
 using TrackDaNutzz.ViewModels.Tables;
 
 namespace TrackDaNutzz.Controllers
@@ -14,17 +17,25 @@ namespace TrackDaNutzz.Controllers
     {
         private readonly IHandPlayersService handPlayersService;
         private readonly ITablesService tablesService;
+        private readonly IHandsService handsService;
+        private readonly IUsersService usersService;
+        private readonly IPlayersService playersService;
 
-        public TablesController(IHandPlayersService handPlayersService, ITablesService tablesService)
+        public TablesController(IHandPlayersService handPlayersService, ITablesService tablesService, IHandsService handsService, IUsersService usersService, IPlayersService playersService)
         {
             this.handPlayersService = handPlayersService;
             this.tablesService = tablesService;
+            this.handsService = handsService;
+            this.usersService = usersService;
+            this.playersService = playersService;
         }
         public IActionResult Index()
         {
-            int playerId = 1;
+            string username = this.usersService.GetCurrentlyLoggedUsername();
+            string userId = this.usersService.GetCurrentlyLoggedUserId(username);
+            int playerId = this.playersService.GetActivePlayer(userId).Id;
             long[] handIds = this.handPlayersService.GetAllHandIdsByPlayer(playerId).ToArray();
-            int[] tableIds = this.tablesService.GetAllTableIdsByHandIds(handIds).ToArray();
+            int[] tableIds = this.handsService.GetTableIdsByHandId(handIds).ToArray();
 
             IEnumerable<TableViewModel> tableViewModels = this.tablesService.GetTableById(tableIds)
                 .Select(t=> new TableViewModel()

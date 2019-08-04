@@ -10,10 +10,8 @@ namespace TrackDaNutzz.Services.Tables
     {
         int AddTable(ImportTableDto tableDto, int clientId, int stakeId, int variantId);
         bool IsExist(int tableId);
-
-        IQueryable<int> GetAllTableIdsByHandIds(params long[] handIds);
         IQueryable<int> GetTablesIdsByStakeId(params int[] stakeIds);
-
+        IQueryable<int> GetStakeIdsByTableId(params int[] tableIds);
         TableDto GetTableById(long tableId);
         IEnumerable<TableDto> GetTableById(params int[] tableIds);
     }

@@ -37,6 +37,7 @@ namespace TrackDaNutzz.ViewComponents
                                     IsActive = p.IsActive,
                                     UserId = p.UserId
                                 })
+                                .OrderBy(p=>p.PlayerName)
                                 .ToList()
             };
             return this.View(activePlayerViewComponentViewModel);

@@ -11,6 +11,7 @@ namespace TrackDaNutzz.Services.Hands
     {
         long AddHand(ImportHandDto handDto, long? boardId, int tableId);
         IQueryable<long> GetHandIdsByTableId(params int[] tableIds);
+        IQueryable<int> GetTableIdsByHandId(params long[] handIds);
         IQueryable<HandDto> GetAllHandsByPlayerId(int playerId);
     }
 }

@@ -82,7 +82,7 @@ namespace TrackDaNutzz.Services.Players
             return playerTotalEarningsDtos;
         }
 
-        public IQueryable<StatisticsAllByPlayerNameDto> GetAllStatisticsByPlayerId(params int[] playerIds)
+        public IQueryable<StatisticsAllByPlayerNameDto> GetAllStatisticsByPlayerId(int activePlayerId, params int[] playerIds)
         {
             IQueryable<StatisticsAllByPlayerNameDto> statisticsAllDtos = this.context.Players
                 .Where(p => playerIds.Contains(p.Id))
@@ -139,8 +139,9 @@ namespace TrackDaNutzz.Services.Players
         public IEnumerable<StatisticsAllByImportStakeDto> GetPlayerStakeStatistics(int playerId)
         {
             long[] currentPlayerHandIds = this.handPlayersService.GetAllHandIdsByPlayer(playerId).ToArray();
-            int[] currentPlayerTableIds = this.tablesService.GetAllTableIdsByHandIds(currentPlayerHandIds).ToArray();
-            StakeDto[] currentPlayerStakes = this.stakesService.GetStakeByStakeId(currentPlayerTableIds).ToArray();
+            int[] currentPlayerTableIds = this.handsService.GetTableIdsByHandId(currentPlayerHandIds).ToArray();
+            int[] stakeIds = this.tablesService.GetStakeIdsByTableId(currentPlayerTableIds).ToArray();
+            StakeDto[] currentPlayerStakes = this.stakesService.GetStakeByStakeId(stakeIds).ToArray();
             List<StatisticsAllByImportStakeDto> statisticsByStakes = new List<StatisticsAllByImportStakeDto>();
             foreach (var stake in currentPlayerStakes)
             {

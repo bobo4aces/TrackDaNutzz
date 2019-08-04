@@ -64,30 +64,20 @@ namespace TrackDaNutzz.Services.Tables
             }
             return true;
         }
-        //TO DO: Check It
-        public IQueryable<int> GetAllTableIdsByHandIds(params long[] handIds)
-        {
-            IQueryable<int> tableIds = this.context.Tables.Where(t => handIds.Contains(t.Id)).Select(x => x.Id);
-            return tableIds;
-        }
-        //TO DO: Check It
-        public IQueryable<TableByHandIdDto> GetAllTablesByHandIds(params long[] handIds)
-        {
-            IQueryable<TableByHandIdDto> tables = this.context.Tables
-                .Where(t => handIds.Contains(t.Id))
-                .Select(x => new TableByHandIdDto()
-                {
-                    Stake = this.stakesService.GetStakeByStakeId(x.StakeId).FirstOrDefault(),
-                    TableId = x.Id
-                });
-            return tables;
-        }
         public IQueryable<int> GetTablesIdsByStakeId(params int[] stakeIds)
         {
             IQueryable<int> tableIds = this.context.Tables
                 .Where(t => stakeIds.Contains(t.StakeId))
                 .Select(t => t.Id);
             return tableIds;
+        }
+
+        public IQueryable<int> GetStakeIdsByTableId(params int[] tableIds)
+        {
+            IQueryable<int> stakeIds = this.context.Tables
+                .Where(t => tableIds.Contains(t.Id))
+                .Select(t => t.StakeId);
+            return stakeIds;
         }
 
         public TableDto GetTableById(long tableId)
