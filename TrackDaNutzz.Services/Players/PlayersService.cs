@@ -52,6 +52,7 @@ namespace TrackDaNutzz.Services.Players
                     player = new Player()
                     {
                         Name = seatInfoDto.PlayerName,
+                        IsActive = false,
                         TrackDaNutzzUserId = userId
                     };
                     this.context.Players.Add(player);
@@ -59,6 +60,20 @@ namespace TrackDaNutzz.Services.Players
                 }
                 this.handPlayersService.AddHandPlayer(handDto, handId, statisticsIdsByPlayerName, seatInfoDto, player);
                 playersIdsByName.Add(player.Name, player.Id);
+            }
+            bool hasActivePlayer = this.context.Players
+                .Any(p => p.Name == seatInfoDto.PlayerName && p.TrackDaNutzzUserId == userId && p.IsActive == true);
+            if(!hasActivePlayer)
+            {
+                Player firstPlayer = this.context.Players
+                    .FirstOrDefault(p => p.TrackDaNutzzUserId == userId);
+                if(firstPlayer == null)
+                {
+                    throw new ArgumentException("No players at database");
+                }
+                firstPlayer.IsActive = true;
+                this.context.Players.Update(firstPlayer);
+                this.context.SaveChanges();
             }
             return playersIdsByName;
         }
