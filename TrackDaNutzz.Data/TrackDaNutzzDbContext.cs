@@ -41,20 +41,12 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<HandPlayer>()
-            //    .HasKey(x => new { x.HandId, x.PlayerId });
-            //modelBuilder.Entity<Hand>()
-            //    .HasOne(x => x.Table)
-            //    .WithMany(x => x.Hands)
-            //    .HasForeignKey(x => x.TableId)
-            //    .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.ApplyConfiguration(new BettingActionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new BoardEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ClientEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new HandEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new HandPlayerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PlayerEntityTypeConfiguration());
-            //modelBuilder.ApplyConfiguration(new PositionEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new StakeEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new StatisticEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new TableEntityTypeConfiguration());

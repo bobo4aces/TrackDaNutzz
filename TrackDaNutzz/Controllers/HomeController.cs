@@ -11,6 +11,7 @@ namespace TrackDaNutzz.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public IActionResult Index()
         {
             if (!this.User.Identity.IsAuthenticated)
@@ -20,7 +21,7 @@ namespace TrackDaNutzz.Controllers
             return View();
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Welcome()
         {
@@ -28,6 +29,7 @@ namespace TrackDaNutzz.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Privacy()
         {

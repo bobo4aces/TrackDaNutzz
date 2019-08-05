@@ -9,7 +9,6 @@ namespace TrackDaNutzz.Services.Players
     public interface IPlayersService
     {
         Dictionary<string, int> AddPlayers(ImportHandDto handDto, long handId, Dictionary<string, long> statisticsIdsByPlayerName, string userId);
-        IQueryable<PlayerTotalEarningsDto> GetTotalEarningsForAllPlayers();
         IQueryable<StatisticsAllByPlayerNameDto> GetAllStatisticsByPlayerId(int activePlayerId, params int[] playerIds);
 
         IQueryable<int> GetAllPlayerIds(string userId, int activePlayerId);

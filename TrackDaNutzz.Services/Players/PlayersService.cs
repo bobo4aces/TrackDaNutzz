@@ -63,23 +63,6 @@ namespace TrackDaNutzz.Services.Players
             return playersIdsByName;
         }
 
-        public IQueryable<PlayerTotalEarningsDto> GetTotalEarningsForAllPlayers()
-        {
-            string currentUsername = this.usersService.GetCurrentlyLoggedUsername();
-            string currentUserId = this.usersService.GetCurrentlyLoggedUserId(currentUsername);
-            IQueryable<PlayerTotalEarningsDto> playerTotalEarningsDtos = this.context.Players
-                .Where(x => x.TrackDaNutzzUserId == currentUserId)
-                .Select(x => new PlayerTotalEarningsDto
-                {
-                    PlayerName = x.Name,
-                    TotalEarnings = x.HandPlayers
-                            .Where(y => y.PlayerId == x.Id)
-                            .Sum(y => y.StackDifference)
-                });
-
-            return playerTotalEarningsDtos;
-        }
-
         public IQueryable<StatisticsAllByPlayerNameDto> GetAllStatisticsByPlayerId(int activePlayerId, params int[] playerIds)
         {
             //TODO: Don't use HandPlayer Entity

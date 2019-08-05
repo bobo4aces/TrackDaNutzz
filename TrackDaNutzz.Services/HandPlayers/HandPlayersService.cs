@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Services.Common.Enums;
 using TrackDaNutzz.Services.Dtos.Import;
 using TrackDaNutzz.Services.Dtos.Seats;
+using TrackDaNutzz.Services.Extensions;
 using TrackDaNutzz.Services.Helpers;
 
 namespace TrackDaNutzz.Services.HandPlayers
@@ -81,6 +83,33 @@ namespace TrackDaNutzz.Services.HandPlayers
             return playerIds;
         }
 
+        public decimal GetWinnings(int playerId, WinningsType winningsType, TotalAverage totalOrAverage, TimePeriod timePeriod, int timePeriodCount)
+        {
+            //TODO: Don't use Statistic and Hand
+            DateTime fromDate = DateTime.UtcNow.Before(timePeriod, timePeriodCount);
+            decimal winnings = 0;
+            if (winningsType == WinningsType.BigBlinds)
+            {
+                winnings = this.context.HandPlayers
+                    .Where(x => x.PlayerId == playerId && x.Hand.Time.CompareTo(fromDate) == 1)
+                    .Sum(x => x.Statistic.BigBlindsWon);
+            }
+            else if (winningsType == WinningsType.Money)
+            {
+                winnings = this.context.HandPlayers
+                    .Where(x => x.PlayerId == playerId && x.Hand.Time.CompareTo(fromDate) == 1)
+                    .Sum(x => x.Statistic.MoneyWon);
+            }
+            if (totalOrAverage == TotalAverage.Average)
+            {
+                long handsCount = this.context.HandPlayers
+                .Where(x => x.PlayerId == playerId && x.Hand.Time.CompareTo(fromDate) == -1)
+                .Count();
+                winnings = MathOperations.Divide(winnings, handsCount);
+            }
+
+            return winnings;
+        }
         private string GetHoleCards(ImportHandDto handDto, SeatInfoDto seatInfoDto)
         {
             var cards = handDto.ShowCardsListDto.ShowCardsDtos
