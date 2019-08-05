@@ -25,6 +25,18 @@ namespace TrackDaNutzz.ViewComponents
         {
             string userId = this.usersService.GetCurrentlyLoggedUserId(username);
             PlayerDto playerDto = this.playersService.GetActivePlayer(userId);
+            if (playerDto == null)
+            {
+                WinningsViewComponentViewModel winningsViewComponentViewModelBlank = new WinningsViewComponentViewModel()
+                {
+                    Winnings = 0,
+                    WinningsType = Enum.GetName(typeof(WinningsType), winningsType),
+                    TimePeriodCount = timePeriodCount,
+                    TimePeriod = Enum.GetName(typeof(TimePeriod), timePeriod),
+                    TotalOrAverage = Enum.GetName(typeof(TotalAverage), totalOrAverage),
+                };
+                return this.View(winningsViewComponentViewModelBlank);
+            }
             decimal winnings = this.handPlayersService.GetWinnings(playerDto.Id, winningsType, totalOrAverage, timePeriod, timePeriodCount);
             WinningsViewComponentViewModel winningsViewComponentViewModel = new WinningsViewComponentViewModel()
             {

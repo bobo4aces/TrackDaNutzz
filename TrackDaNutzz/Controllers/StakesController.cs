@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TrackDaNutzz.Services.Dtos.Players;
 using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Stakes;
@@ -33,7 +34,12 @@ namespace TrackDaNutzz.Controllers
             //TODO: Use Automapper
             string username = this.usersService.GetCurrentlyLoggedUsername();
             string userId = this.usersService.GetCurrentlyLoggedUserId(username);
-            int playerId = this.playersService.GetActivePlayer(userId).Id;
+            PlayerDto activePlayer = this.playersService.GetActivePlayer(userId);
+            if (activePlayer == null)
+            {
+                return this.View();
+            }
+            int playerId = activePlayer.Id;
             IEnumerable<StatisticsByStakeViewModel> statisticsByStakeViewModels = this.playersService.GetPlayerStakeStatistics(playerId)
                 .Select(x => new StatisticsByStakeViewModel()
                 {

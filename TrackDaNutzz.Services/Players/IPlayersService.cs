@@ -21,5 +21,7 @@ namespace TrackDaNutzz.Services.Players
         bool ChangeActivePlayer(string userId, int oldPlayerId, int newPlayerId);
         bool SetActivePlayer(int playerId, string userId);
         PlayerDto GetActivePlayer(string userId);
+
+        bool HasActivePlayer();
     }
 }

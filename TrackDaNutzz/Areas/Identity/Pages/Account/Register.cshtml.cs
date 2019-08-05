@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Services.Helpers;
+using TrackDaNutzz.ValidationAttributes;
 
 namespace TrackDaNutzz.Areas.Identity.Pages.Account
 {
@@ -44,18 +47,22 @@ namespace TrackDaNutzz.Areas.Identity.Pages.Account
             //TODO: Add validations
             [Required]
             [Display(Name = "Username")]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             public string Username { get; set; }
 
             [Required]
             [Display(Name = "First Name")]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             public string FirstName { get; set; }
 
             [Required]
             [Display(Name = "Last Name")]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             public string LastName { get; set; }
 
             [Required]
             [Display(Name = "Birthday")]
+            [YearValidation(18, 100, "Users must be at least 18 years old and not older than 100 years")]
             public DateTime Birthday { get; set; }
 
             [Required]
@@ -101,14 +108,7 @@ namespace TrackDaNutzz.Areas.Identity.Pages.Account
                     Password = Input.Password
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                //if (_userManager.Users.Count() == 1)
-                //{
-                //    await _userManager.AddToRoleAsync(user, "Admin");
-                //}
-                //else
-                //{
-                //    await _userManager.AddToRoleAsync(user, "User");
-                //}
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

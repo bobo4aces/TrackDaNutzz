@@ -1,5 +1,6 @@
 ﻿@using TrackDaNutzz.ViewModels.Tables;
 @model TableAllViewModel
+@inject TrackDaNutzz.Services.Players.IPlayersService PlayersService
 @{
     ViewData["Title"] = "Index";
 }
@@ -63,17 +64,21 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var table in Model.TableViewModels)
+                        @if (this.PlayersService.HasActivePlayer())
                         {
-                            <tr>
-                                <td>@table.TableName</td>
-                                <td>@table.ClientName</td>
-                                <td>@table.Size</td>
-                                <td>@table.Currency</td>
-                                <td>@table.CurrencySymbol @table.SmallBlind.ToString("0.00") / @table.CurrencySymbol @table.BigBlind.ToString("0.00")</td>
-                                <td>@table.VariantName</td>
-                                <td>@table.VariantLimit</td>
-                            </tr>
+                            @foreach (var table in Model.TableViewModels)
+                            {
+                                <tr>
+                                    <td>@table.TableName</td>
+                                    <td>@table.ClientName</td>
+                                    <td>@table.Size</td>
+                                    <td>@table.Currency</td>
+                                    <td>@table.CurrencySymbol @table.SmallBlind.ToString("0.00") / @table.CurrencySymbol @table.BigBlind.ToString("0.00")</td>
+                                    <td>@table.VariantName</td>
+                                    <td>@table.VariantLimit</td>
+                                </tr>
+                            }
+
                         }
                     </tbody>
                 </table>

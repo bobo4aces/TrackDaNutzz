@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TrackDaNutzz.Services.Dtos.Players;
 using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.HandPlayers;
 using TrackDaNutzz.Services.Hands;
@@ -38,7 +39,12 @@ namespace TrackDaNutzz.Controllers
             //TODO: Use Automapper
             string username = this.usersService.GetCurrentlyLoggedUsername();
             string userId = this.usersService.GetCurrentlyLoggedUserId(username);
-            int playerId = this.playersService.GetActivePlayer(userId).Id;
+            PlayerDto activePlayer = this.playersService.GetActivePlayer(userId);
+            if (activePlayer == null)
+            {
+                return this.View();
+            }
+            int playerId = activePlayer.Id;
             long[] handIds = this.handPlayersService.GetAllHandIdsByPlayer(playerId).ToArray();
             int[] tableIds = this.handsService.GetTableIdsByHandId(handIds).ToArray();
 

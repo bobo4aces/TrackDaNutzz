@@ -1,74 +1,84 @@
-﻿<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-</div>
+﻿@inject TrackDaNutzz.Services.Players.IPlayersService PlayersService
 
-<!-- Content Row -->
-<div class="row">
+@if (!this.PlayersService.HasActivePlayer())
+{
+    <h1>You don't have any hands</h1>
+    <h3>Start importing your hands now</h3>
+    <a href="/HandHistory/Import"> Click here to import your hands</a>
+}
+else
+{
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+    </div>
+    <!-- Content Row -->
+    <div class="row">
 
-    <!-- Earnings (Yearly) Card Example -->
-    <vc:winnings time-period="Year" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
+        <!-- Earnings (Yearly) Card Example -->
+        <vc:winnings time-period="Year" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
 
-    <!-- Earnings (Monthly) Card Example -->
-    <vc:winnings time-period="Month" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
+        <!-- Earnings (Monthly) Card Example -->
+        <vc:winnings time-period="Month" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
 
-    <!-- Earnings (Weekly) Card Example -->
-    <vc:winnings time-period="Day" time-period-count="-7" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
+        <!-- Earnings (Weekly) Card Example -->
+        <vc:winnings time-period="Day" time-period-count="-7" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
 
-    <!-- Earnings (Daily) Card Example -->
-    <vc:winnings time-period="Day" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
-</div>
+        <!-- Earnings (Daily) Card Example -->
+        <vc:winnings time-period="Day" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
+    </div>
 
-<!-- Content Row -->
-<div class="row">
+    <!-- Content Row -->
+    <div class="row">
 
-    <!-- Average Earnings (Yearly) Card Example -->
-    <vc:winnings time-period="Year" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
+        <!-- Average Earnings (Yearly) Card Example -->
+        <vc:winnings time-period="Year" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
 
-    <!-- Average Earnings (Monthly) Card Example -->
-    <vc:winnings time-period="Month" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
+        <!-- Average Earnings (Monthly) Card Example -->
+        <vc:winnings time-period="Month" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
 
-    <!-- Average Earnings (Weekly) Card Example -->
-    <vc:winnings time-period="Day" time-period-count="-7" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
+        <!-- Average Earnings (Weekly) Card Example -->
+        <vc:winnings time-period="Day" time-period-count="-7" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
 
-    <!-- Average Earnings (Daily) Card Example -->
-    <vc:winnings time-period="Day" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
-</div>
+        <!-- Average Earnings (Daily) Card Example -->
+        <vc:winnings time-period="Day" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="Money"></vc:winnings>
+    </div>
 
-<hr />
+    <hr />
 
-<!-- Content Row -->
-<div class="row">
+    <!-- Content Row -->
+    <div class="row">
 
-    <!-- Big Blinds (Yearly) Card Example -->
-    <vc:winnings time-period="Year" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
+        <!-- Big Blinds (Yearly) Card Example -->
+        <vc:winnings time-period="Year" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
 
-    <!-- Big Blinds (Monthly) Card Example -->
-    <vc:winnings time-period="Month" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
+        <!-- Big Blinds (Monthly) Card Example -->
+        <vc:winnings time-period="Month" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
 
-    <!-- Big Blinds (Weekly) Card Example -->
-    <vc:winnings time-period="Day" time-period-count="-7" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
+        <!-- Big Blinds (Weekly) Card Example -->
+        <vc:winnings time-period="Day" time-period-count="-7" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
 
-    <!-- Big Blinds (Daily) Card Example -->
-    <vc:winnings time-period="Day" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
-</div>
+        <!-- Big Blinds (Daily) Card Example -->
+        <vc:winnings time-period="Day" time-period-count="-1" total-or-average="Total" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
+    </div>
 
-<!-- Content Row -->
-<div class="row">
+    <!-- Content Row -->
+    <div class="row">
 
-    <!-- Average Big Blinds (Yearly) Card Example -->
-    <vc:winnings time-period="Year" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
+        <!-- Average Big Blinds (Yearly) Card Example -->
+        <vc:winnings time-period="Year" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
 
-    <!-- Average Big Blinds (Monthly) Card Example -->
-    <vc:winnings time-period="Month" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
+        <!-- Average Big Blinds (Monthly) Card Example -->
+        <vc:winnings time-period="Month" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
 
-    <!-- Average Big Blinds (Weekly) Card Example -->
-    <vc:winnings time-period="Day" time-period-count="-7" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
+        <!-- Average Big Blinds (Weekly) Card Example -->
+        <vc:winnings time-period="Day" time-period-count="-7" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
 
-    <!-- Average Big Blinds (Daily) Card Example -->
-    <vc:winnings time-period="Day" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
-</div>
+        <!-- Average Big Blinds (Daily) Card Example -->
+        <vc:winnings time-period="Day" time-period-count="-1" total-or-average="Average" username="@this.User.Identity.Name" winnings-type="BigBlinds"></vc:winnings>
+    </div>
+}
 
 <!-- Content Row -->
 <!-- <div class="row">

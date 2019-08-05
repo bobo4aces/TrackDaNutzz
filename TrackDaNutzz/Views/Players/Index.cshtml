@@ -1,6 +1,7 @@
 ﻿@using TrackDaNutzz.ViewModels
 @using TrackDaNutzz.Helpers
 @model StatisticsAllViewModel
+@inject TrackDaNutzz.Services.Players.IPlayersService PlayersService
 @{
     ViewData["Title"] = "Index";
 }
@@ -80,22 +81,24 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach (var item in Model.StatisticsAllByPlayerNameViewModels)
+                    @if (this.PlayersService.HasActivePlayer())
                     {
-                        <tr>
-                            <td>@item.PlayerName</td>
-                            <td>@item.HandsPlayed</td>
-                            <td>$@item.MoneyWon.ToString("0.00") / $@(MathOperations.Divide(item.MoneyWon, item.HandsPlayed).ToString("0.00"))</td>
-                            <td>@item.BigBlindsWon.ToString("0.00") / @(MathOperations.Divide(item.BigBlindsWon, item.HandsPlayed).ToString("0.00"))</td>
-                            <td>@((MathOperations.Divide(item.VoluntaryPutMoneyInPot, item.HandsPlayed) * 100).ToString("0.00"))</td>
-                            <td>@((MathOperations.Divide(item.PreFlopRaise, item.HandsPlayed) * 100).ToString("0.00"))</td>
-                            <td>@((MathOperations.Divide(item.ThreeBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
-                            <td>@((MathOperations.Divide(item.FourBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
-                            <td>@(item.AggressionFactor.ToString("0.00"))</td>
-                            <td>@((MathOperations.Divide(item.ContinuationBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
-                        </tr>
+                        @foreach (var item in Model.StatisticsAllByPlayerNameViewModels)
+                        {
+                            <tr>
+                                <td>@item.PlayerName</td>
+                                <td>@item.HandsPlayed</td>
+                                <td>$@item.MoneyWon.ToString("0.00") / $@(MathOperations.Divide(item.MoneyWon, item.HandsPlayed).ToString("0.00"))</td>
+                                <td>@item.BigBlindsWon.ToString("0.00") / @(MathOperations.Divide(item.BigBlindsWon, item.HandsPlayed).ToString("0.00"))</td>
+                                <td>@((MathOperations.Divide(item.VoluntaryPutMoneyInPot, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                                <td>@((MathOperations.Divide(item.PreFlopRaise, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                                <td>@((MathOperations.Divide(item.ThreeBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                                <td>@((MathOperations.Divide(item.FourBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                                <td>@(item.AggressionFactor.ToString("0.00"))</td>
+                                <td>@((MathOperations.Divide(item.ContinuationBet, item.HandsPlayed) * 100).ToString("0.00"))</td>
+                            </tr>
+                        }
                     }
-
                 </tbody>
             </table>
         </div>

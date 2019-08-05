@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -40,10 +41,17 @@ namespace TrackDaNutzz.Controllers
             //TODO: Use Automapper
             string currentUsername = this.usersService.GetCurrentlyLoggedUsername();
             string currentUserId = this.usersService.GetCurrentlyLoggedUserId(currentUsername);
-            int activePlayerId = this.playersService.GetActivePlayer(currentUserId).Id;
+            PlayerDto activePlayer = this.playersService.GetActivePlayer(currentUserId);
+            if (activePlayer == null)
+            {
+                return this.View();
+            }
+            int activePlayerId = activePlayer.Id;
             int[] playerIds = this.playersService
                 .GetAllPlayerIds(currentUserId, activePlayerId)
                 .ToArray();
+
+            //string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             IEnumerable<StatisticsAllByPlayerNameViewModel> statisticsAllByPlayerNameViewModels = this.playersService
                 .GetAllStatisticsByPlayerId(activePlayerId, playerIds)
                 .Select(x=>new StatisticsAllByPlayerNameViewModel

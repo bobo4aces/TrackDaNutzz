@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Services.Helpers;
 
 namespace TrackDaNutzz.Areas.Identity.Pages.Account
 {

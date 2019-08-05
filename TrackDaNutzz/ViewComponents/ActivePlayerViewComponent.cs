@@ -25,6 +25,25 @@ namespace TrackDaNutzz.ViewComponents
         {
             string userId = this.usersService.GetCurrentlyLoggedUserId(username);
             PlayerDto playerDto = this.playersService.GetActivePlayer(userId);
+            if (playerDto == null)
+            {
+                ActivePlayerViewComponentViewModel activePlayerViewComponentViewModelBlank = new ActivePlayerViewComponentViewModel()
+                {
+                    PlayerId = 0,
+                    PlayerName = "",
+                    UserPlayers = this.playersService.GetPlayersByUserId(userId)
+                                .Select(p => new ActivePlayerViewModel()
+                                {
+                                    PlayerId = p.Id,
+                                    PlayerName = p.Name,
+                                    IsActive = p.IsActive,
+                                    UserId = p.UserId
+                                })
+                                .OrderBy(p => p.PlayerName)
+                                .ToList()
+                };
+                return this.View(activePlayerViewComponentViewModelBlank);
+            }
             ActivePlayerViewComponentViewModel activePlayerViewComponentViewModel = new ActivePlayerViewComponentViewModel()
             {
                 PlayerId = playerDto.Id,

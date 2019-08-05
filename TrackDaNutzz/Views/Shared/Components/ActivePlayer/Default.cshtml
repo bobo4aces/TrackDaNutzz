@@ -1,9 +1,13 @@
 ﻿@model TrackDaNutzz.ViewComponents.ActivePlayerViewComponentViewModel
+@inject TrackDaNutzz.Services.Players.IPlayersService PlayersService
 
-<form asp-controller="Players" asp-action="ActivePlayer">
-    <select class="form-control-sm" asp-for="PlayerId" asp-items="@(new SelectList(Model.UserPlayers,"PlayerId","PlayerName"))">
-        <option disabled>Please select player</option>
-    </select>
-    <input class="btn btn-primary" type="submit" value="Change Player"/>
-</form>
+@if (this.PlayersService.HasActivePlayer())
+{
+    <form asp-controller="Players" asp-action="ActivePlayer">
+        <select class="form-control-sm" asp-for="PlayerId" asp-items="@(new SelectList(Model.UserPlayers,"PlayerId","PlayerName"))">
+            <option disabled>Please select player</option>
+        </select>
+        <input class="btn btn-primary" type="submit" value="Change Player" />
+    </form>
+}
 

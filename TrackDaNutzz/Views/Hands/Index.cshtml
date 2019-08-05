@@ -1,5 +1,6 @@
 ﻿@using TrackDaNutzz.ViewModels
 @model HandAllViewModel
+@inject TrackDaNutzz.Services.Players.IPlayersService PlayersService
 @{
     ViewData["Title"] = "Index";
 }
@@ -75,37 +76,40 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach (var hand in Model.HandViewModels)
+                        @if (this.PlayersService.HasActivePlayer())
                         {
-                            <tr>
-                                <td>@hand.Number</td>
-                                <td>@hand.Time (@hand.TimeZone)</td>
-                                <td>@hand.LocalTime (@hand.LocalTimeZone)</td>
-                                <td>@hand.Button</td>
-                                <td>@hand.Pot.ToString("0.00")</td>
-                                <td>@hand.Rake.ToString("0.00")</td>
-                                <td>
-                                    <a type="button" class="btn btn-primary" asp-controller="Tables" asp-action="Details" asp-route-tableId="@hand.TableId">
-                                        Details
-                                    </a>
-                                    <!--<a class="btn btn-primary" href="/Tables/Details?tableId=@hand.TableId">Details</a>-->
-                                </td>
-                                <td>
-                                    @if (@hand.BoardId == null)
-                                    {
-                                        <span>No Board</span>
-                                    }
-                                    else
-                                    {
-                                        <a type="button" class="btn btn-primary" asp-controller="Boards" asp-action="Details" asp-route-boardId="@hand.BoardId">
+                            @foreach (var hand in Model.HandViewModels)
+                            {
+                                <tr>
+                                    <td>@hand.Number</td>
+                                    <td>@hand.Time (@hand.TimeZone)</td>
+                                    <td>@hand.LocalTime (@hand.LocalTimeZone)</td>
+                                    <td>@hand.Button</td>
+                                    <td>@hand.Pot.ToString("0.00")</td>
+                                    <td>@hand.Rake.ToString("0.00")</td>
+                                    <td>
+                                        <a type="button" class="btn btn-primary" asp-controller="Tables" asp-action="Details" asp-route-tableId="@hand.TableId">
                                             Details
                                         </a>
-                                    }
-                                </td>
-                                <!--<td>
-                                    <a class="btn btn-primary" href="/Hands/Details/@hand.Id">Details</a>
-                                </td>-->
-                            </tr>
+                                        <!--<a class="btn btn-primary" href="/Tables/Details?tableId=@hand.TableId">Details</a>-->
+                                    </td>
+                                    <td>
+                                        @if (@hand.BoardId == null)
+                                        {
+                                            <span>No Board</span>
+                                        }
+                                        else
+                                        {
+                                            <a type="button" class="btn btn-primary" asp-controller="Boards" asp-action="Details" asp-route-boardId="@hand.BoardId">
+                                                Details
+                                            </a>
+                                        }
+                                    </td>
+                                    <!--<td>
+                                        <a class="btn btn-primary" href="/Hands/Details/@hand.Id">Details</a>
+                                    </td>-->
+                                </tr>
+                            }
                         }
 
                     </tbody>

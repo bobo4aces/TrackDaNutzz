@@ -62,7 +62,7 @@ namespace TrackDaNutzz.Services.Players
                 playersIdsByName.Add(player.Name, player.Id);
             }
             bool hasActivePlayer = this.context.Players
-                .Any(p => p.Name == seatInfoDto.PlayerName && p.TrackDaNutzzUserId == userId && p.IsActive == true);
+                .Any(p => p.TrackDaNutzzUserId == userId && p.IsActive == true);
             if(!hasActivePlayer)
             {
                 Player firstPlayer = this.context.Players
@@ -262,7 +262,8 @@ namespace TrackDaNutzz.Services.Players
             Player player = this.context.Players.SingleOrDefault(p => p.IsActive && p.TrackDaNutzzUserId == userId);
             if (player == null)
             {
-                throw new ArgumentException($"No active player or invalid user id - {userId}");
+                //throw new ArgumentException($"No active player or invalid user id - {userId}");
+                return null;
             }
             PlayerDto playerDto = new PlayerDto()
             {
@@ -272,6 +273,13 @@ namespace TrackDaNutzz.Services.Players
                 UserId = player.TrackDaNutzzUserId,
             };
             return playerDto;
+        }
+
+        public bool HasActivePlayer()
+        {
+            string username = this.usersService.GetCurrentlyLoggedUsername();
+            string userId = this.usersService.GetCurrentlyLoggedUserId(username);
+            return this.context.Players.Any(p => p.IsActive && p.TrackDaNutzzUserId == userId);
         }
     }
 }
