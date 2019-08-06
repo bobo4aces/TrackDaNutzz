@@ -40,6 +40,7 @@ namespace TrackDaNutzz.Areas.Identity.Pages.Account
         {
             [Required]
             [Display(Name = "Username")]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
             public string Username { get; set; }
 
             [Required]
