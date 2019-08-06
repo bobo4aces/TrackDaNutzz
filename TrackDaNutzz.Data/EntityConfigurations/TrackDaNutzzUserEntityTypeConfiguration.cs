@@ -51,13 +51,6 @@ namespace TrackDaNutzz.Data.EntityConfigurations
                 .IsUnicode(true)
                 .IsRequired(true);
 
-            builder.Property(p => p.Password)
-                .HasColumnName("Password")
-                .HasColumnType("NVARCHAR(450)")
-                .HasMaxLength(450)
-                .IsUnicode(true)
-                .IsRequired(true);
-
             builder
                 .HasMany(t => t.Players)
                 .WithOne(t => t.TrackDaNutzzUser)

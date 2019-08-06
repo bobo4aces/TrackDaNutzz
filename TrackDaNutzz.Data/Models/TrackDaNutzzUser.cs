@@ -17,8 +17,6 @@ namespace TrackDaNutzz.Data.Models
 
         public DateTime Birthday { get; set; }
 
-        public string Password { get; set; }
-
         public ICollection<Player> Players { get; set; }
     }
 }

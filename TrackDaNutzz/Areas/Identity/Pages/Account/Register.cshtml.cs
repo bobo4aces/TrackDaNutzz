@@ -104,8 +104,7 @@ namespace TrackDaNutzz.Areas.Identity.Pages.Account
                     Birthday = Input.Birthday,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    PhoneNumber = Input.PhoneNumber,
-                    Password = Input.Password
+                    PhoneNumber = Input.PhoneNumber
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
