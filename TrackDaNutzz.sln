@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleHands", "SampleHands"
 		E:\poisonmanyo\HH20190727 Sorga II - $0.01-$0.02 - USD No Limit Hold'em.txt = E:\poisonmanyo\HH20190727 Sorga II - $0.01-$0.02 - USD No Limit Hold'em.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackDaNutzz.Tests", "TrackDaNutzz.Tests\TrackDaNutzz.Tests.csproj", "{B7D5801B-5545-4005-9B2C-A6C108841D06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{D93B5B47-A8D9-4189-8008-3EA568B3199D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D93B5B47-A8D9-4189-8008-3EA568B3199D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D93B5B47-A8D9-4189-8008-3EA568B3199D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7D5801B-5545-4005-9B2C-A6C108841D06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D5801B-5545-4005-9B2C-A6C108841D06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D5801B-5545-4005-9B2C-A6C108841D06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D5801B-5545-4005-9B2C-A6C108841D06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
