@@ -5,7 +5,7 @@ using Xunit;
 
 namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 {
-    public class Extensions
+    public class ExtensionsTests
     {
         //DateTime Before(this DateTime date, TimePeriod timePeriod, int timePeriodCount)
         [Fact]

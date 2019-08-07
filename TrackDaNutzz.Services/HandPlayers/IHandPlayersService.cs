@@ -10,7 +10,7 @@ namespace TrackDaNutzz.Services.HandPlayers
     public interface IHandPlayersService
     {
         bool AddHandPlayer(ImportHandDto handDto, long handId, Dictionary<string, long> statisticsIdsByPlayerName, SeatInfoDto seatInfoDto, Player player);
-        bool AddBettingAction(long bettingActionId, long handId, int playerId);
+        bool AddBettingActionIdSplitByPipe(long bettingActionId, long handId, int playerId);
 
         IQueryable<long> GetAllHandIdsByPlayer(int playerId);
         IQueryable<long> GetStatisticIdsByPlayerIdAndHandId(int playerId, params long[] handIds);

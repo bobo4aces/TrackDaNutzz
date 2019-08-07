@@ -50,7 +50,7 @@ namespace TrackDaNutzz.Services.HandPlayers
             return true;
         }
 
-        public bool AddBettingAction(long bettingActionId, long handId, int playerId)
+        public bool AddBettingActionIdSplitByPipe(long bettingActionId, long handId, int playerId)
         {
             HandPlayer handPlayer = this.context.HandPlayers
                         .FirstOrDefault(x => x.HandId == handId && x.PlayerId == playerId);

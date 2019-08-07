@@ -55,7 +55,7 @@ namespace TrackDaNutzz.Services.BettingActions
                     {
                         bettingActionId = bettingActionFromDb.Id;
                     }
-                    this.handPlayersService.AddBettingAction(bettingActionId, handId, playerIdsByName[playerName]);
+                    this.handPlayersService.AddBettingActionIdSplitByPipe(bettingActionId, handId, playerIdsByName[playerName]);
                     
                     bettingActionsIds.Add(bettingActionId);
                     this.context.SaveChanges();
