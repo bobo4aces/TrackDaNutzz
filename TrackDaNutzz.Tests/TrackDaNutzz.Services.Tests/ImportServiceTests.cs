@@ -10,13 +10,16 @@ using TrackDaNutzz.Services.Boards;
 using TrackDaNutzz.Services.Clients;
 using TrackDaNutzz.Services.Dtos.BettingActions;
 using TrackDaNutzz.Services.Dtos.CollectMoney;
+using TrackDaNutzz.Services.Dtos.DealtCards;
 using TrackDaNutzz.Services.Dtos.Hands;
 using TrackDaNutzz.Services.Dtos.Import;
 using TrackDaNutzz.Services.Dtos.MuckHands;
+using TrackDaNutzz.Services.Dtos.Rounds;
 using TrackDaNutzz.Services.Dtos.Seats;
 using TrackDaNutzz.Services.Dtos.ShowCards;
 using TrackDaNutzz.Services.Dtos.Summary;
 using TrackDaNutzz.Services.Dtos.Tables;
+using TrackDaNutzz.Services.Dtos.UncalledBets;
 using TrackDaNutzz.Services.HandPlayers;
 using TrackDaNutzz.Services.Hands;
 using TrackDaNutzz.Services.Import;
@@ -33,33 +36,33 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
     public class ImportServiceTests
     {
         //void Add(ImportHandDto handDto);
-        [Fact]
-        public void TestAdd_WithOneHand_ShouldReturnCorrectResult()
-        {
-            //DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
-            //    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-            //    .Options;
-            //TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
-            //StatisticsService statisticsService = new StatisticsService(context);
-            //UsersService usersService = new UsersService(context, null);
-            //StakesService stakesService = new StakesService(context);
-            //VariantsService variantsService = new VariantsService(context);
-            //ClientsService clientsService = new ClientsService(context);
-            //TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
-            //HandPlayersService handPlayersService = new HandPlayersService(context);
-            //HandsService handsService = new HandsService(context, handPlayersService);
-            //BoardsService boardsService = new BoardsService(context);
-            //BettingActionsService bettingActionsService = new BettingActionsService(context, handPlayersService);
-            //PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService,handsService);
-            //ImportService importService = new ImportService(context, statisticsService, usersService, tablesService, playersService,variantsService,stakesService,handsService,boardsService,clientsService, bettingActionsService);
-            //ImportHandDto importHand = this.GetTestImportHand();
-            //importService.Add(importHand);
-            //int clientsCount = context.Clients.Count();
-            //int expected = 1;
-            //int actual = clientsCount;
-            //
-            //Assert.Equal(expected, actual);
-        }
+        //[Fact]
+        //public void TestAdd_WithOneHand_ShouldReturnCorrectResult()
+        //{
+        //    DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+        //        .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+        //        .Options;
+        //    TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+        //    StatisticsService statisticsService = new StatisticsService(context);
+        //    UsersService usersService = new UsersService(context, null);
+        //    StakesService stakesService = new StakesService(context);
+        //    VariantsService variantsService = new VariantsService(context);
+        //    ClientsService clientsService = new ClientsService(context);
+        //    TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+        //    HandPlayersService handPlayersService = new HandPlayersService(context);
+        //    HandsService handsService = new HandsService(context, handPlayersService);
+        //    BoardsService boardsService = new BoardsService(context);
+        //    BettingActionsService bettingActionsService = new BettingActionsService(context, handPlayersService);
+        //    PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService,handsService);
+        //    ImportService importService = new ImportService(context, statisticsService, usersService, tablesService, playersService,variantsService,stakesService,handsService,boardsService,clientsService, bettingActionsService);
+        //    ImportHandDto importHand = this.GetTestImportHand();
+        //    importService.Add(importHand);
+        //    int clientsCount = context.Clients.Count();
+        //    int expected = 1;
+        //    int actual = clientsCount;
+        //    
+        //    Assert.Equal(expected, actual);
+        //}
 
         private ImportHandDto GetTestImportHand()
         {
@@ -163,6 +166,96 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
                     CurrencySymbol = "$",
                     Pot = 0.10m,
                     Rake = 0.01m
+                },
+                BoardSummaryDto = new BoardSummaryDto()
+                {
+                    FifthCard = "2s",
+                    FirstCard = "2d",
+                    FourthCard = "3s",
+                    SecondCard = "3d",
+                    ThirdCard = "4s",
+                },
+                CollectSummaryListDto = new CollectSummaryListDto()
+                {
+                    CollectSummaryDtos = new List<CollectSummaryDto>()
+                    {
+                        new CollectSummaryDto()
+                        {
+                            CurrencySymbol = "$",
+                            PlayerName = "Sigtip",
+                            Position = "big blind",
+                            SeatNumber = 3,
+                            Value = 0.10m,
+                        }
+                    }
+                },
+                DealtCardsDto = new DealtCardsDto()
+                {
+                    FirstCard = "10s",
+                    PlayerName = "Sigtip",
+                    SecondCard = "8s",
+                },
+                FoldSummaryListDto = new FoldSummaryListDto()
+                {
+                    FoldSummaryDtos = new List<FoldSummaryDto>()
+                    {
+                        new FoldSummaryDto()
+                        {
+                            DidNotBet = false,
+                            IsBeforeRound = false,
+                            PlayerName = "poisonmanyo",
+                            Position = "small blind",
+                            Round = "PREFLOP",
+                            SeatNumber = 1,
+                        }
+                    }
+                },
+                MuckSummaryListDto = new MuckSummaryListDto()
+                {
+                    MuckSummaryDtos = new List<MuckSummaryDto>()
+                    {
+                        new MuckSummaryDto()
+                        {
+                            FirstCard = "7d",
+                            PlayerName = "gosho",
+                            Position = "button",
+                            SeatNumber = 6,
+                            SecondCard = "7s",
+                        }
+                    }
+                },
+                RoundListDto = new RoundListDto()
+                {
+                    RoundDtos = new List<RoundDto>()
+                    {
+                        new RoundDto()
+                        {
+                            SecondCard = "6s",
+                            FirstCard = "6d",
+                            ThirdCard = "6c",
+                            RoundName = "FLOP",
+                        }
+                    }
+                },
+                ShowSummaryListDto = new ShowSummaryListDto()
+                {
+                    ShowSummaryDtos = new List<ShowSummaryDto>()
+                    {
+                        new ShowSummaryDto()
+                        {
+
+                        }
+                    }
+                },
+                UncalledBetsListDto = new UncalledBetsListDto()
+                {
+                    UncalledBetsDtos = new List<UncalledBetsDto>()
+                    {
+                        new UncalledBetsDto()
+                        {
+                            
+                        }
+                    }
                 },
             };
 

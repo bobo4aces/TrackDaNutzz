@@ -27,6 +27,16 @@ using TrackDaNutzz.Services.Tables;
 using TrackDaNutzz.Services.Users;
 using TrackDaNutzz.Services.Variant;
 using Xunit;
+using Moq;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
+using TrackDaNutzz.Services.Dtos.Statistics;
+using TrackDaNutzz.Services.Dtos.Players;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 {
@@ -47,12 +57,356 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
         [Fact]
         public void TestAddPlayers_WithOnePlayer_ShouldReturnCorrectPlayer()
         {
-            //DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
-            //    .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-            //    .Options;
-            //TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+
+            long expected = 5;
+            long actual = playerIds["Sigtip"];
+
+            Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void TestGetAllStatisticsByPlayerId_WithOnePlayer_ShouldReturnCorrectMoneyWon()
+        {
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+            int activePlayerId = playerIds["Sigtip"];
+            StatisticsAllByPlayerNameDto statisticsAllByPlayerNameDto = playersService.GetAllStatisticsByPlayerId(activePlayerId, playerIds["Sigtip"]).FirstOrDefault();
+
+            decimal expected = 1.99m;
+            decimal actual = statisticsAllByPlayerNameDto.MoneyWon;
+
+            Assert.Equal(expected, actual);
+        }
+
+
+        [Fact]
+        public void TestGetAllPlayerIds_WithOnePlayer_ShouldReturnCorrectPlayerId()
+        {
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+            int activePlayerId = playerIds["Sigtip"];
+            int playerId = playersService.GetAllPlayerIds(userId, activePlayerId).FirstOrDefault();
+
+            decimal expected = 1;
+            decimal actual = playerId;
+
+            Assert.Equal(expected, actual);
+        }
+
+        //GetPlayerStakeStatistics(int playerId);
+
+        //[Fact]
+        //public void TestGetPlayerStakeStatistics_WithOnePlayerId_ShouldReturnCorrectStatisticsAllByImportStakeDto()
+        //{
+        //    DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+        //        .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+        //        .Options;
+        //    TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+        //
+        //    HandPlayersService handPlayersService = new HandPlayersService(context);
+        //    UsersService usersService = new UsersService(context, new FakeSignInManager());
+        //    StatisticsService statisticsService = new StatisticsService(context);
+        //    StakesService stakesService = new StakesService(context);
+        //    VariantsService variantsService = new VariantsService(context);
+        //    ClientsService clientsService = new ClientsService(context);
+        //    HandsService handsService = new HandsService(context, handPlayersService);
+        //    TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+        //    PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+        //
+        //    ImportHandDto importHandDto = this.GetTestImportHand();
+        //    long handId = 1;
+        //    Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+        //    string userId = Guid.NewGuid().ToString();
+        //    Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+        //    int activePlayerId = playerIds["Sigtip"];
+        //    StatisticsAllByImportStakeDto statisticsAllByImportStakeDto = playersService.GetPlayerStakeStatistics(activePlayerId).FirstOrDefault();
+        //
+        //    decimal expected = 0.02m;
+        //    decimal actual = statisticsAllByImportStakeDto.BigBlind;
+        //
+        //    Assert.Equal(expected, actual);
+        //}
+
+        [Fact]
+        public void TestGetPlayersByUserId_WithOnePlayer_ShouldReturnCorrectCount()
+        {
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+            int activePlayerId = playerIds["Sigtip"];
+            List<PlayerDto> players = playersService.GetPlayersByUserId(userId).ToList();
+
+            int expected = 1;
+            int actual = players.Count;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TestSetActivePlayer_WithOnePlayer_ShouldReturnTrue()
+        {
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+            int playerId = playerIds["Sigtip"];
+            bool activePlayer = playersService.SetActivePlayer(playerId, userId);
+
+            bool expected = true;
+            bool actual = activePlayer;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TestRemoveActivePlayer_WithOnePlayer_ShouldReturnTrue()
+        {
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+            int playerId = playerIds["Sigtip"];
+            bool activePlayer = playersService.SetActivePlayer(playerId, userId);
+            bool removedActivePlayer = playersService.RemoveActivePlayer(playerId, userId);
+            bool expected = true;
+            bool actual = removedActivePlayer;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TestRemoveActivePlayer_WithUserIdOnly_ShouldReturnTrue()
+        {
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+            int playerId = playerIds["Sigtip"];
+            bool activePlayer = playersService.SetActivePlayer(playerId, userId);
+            bool removedActivePlayer = playersService.RemoveActivePlayer(userId);
+            bool expected = true;
+            bool actual = removedActivePlayer;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TestChangeActivePlayer_WithInvalidPlayerId_ShouldReturnFalse()
+        {
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+            int playerId = playerIds["Sigtip"];
+            bool activePlayer = playersService.SetActivePlayer(playerId, userId);
+            int newPlayerId = 2;
+            bool changedActivePlayer = playersService.ChangeActivePlayer(userId, playerId, newPlayerId);
+            bool expected = false;
+            bool actual = changedActivePlayer;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void TestGetActivePlayer_WithOnePlayer_ShouldReturnCorrectName()
+        {
+            DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .Options;
+            TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+
+            HandPlayersService handPlayersService = new HandPlayersService(context);
+            UsersService usersService = new UsersService(context, new FakeSignInManager());
+            StatisticsService statisticsService = new StatisticsService(context);
+            StakesService stakesService = new StakesService(context);
+            VariantsService variantsService = new VariantsService(context);
+            ClientsService clientsService = new ClientsService(context);
+            HandsService handsService = new HandsService(context, handPlayersService);
+            TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+            PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+
+            ImportHandDto importHandDto = this.GetTestImportHand();
+            long handId = 1;
+            Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+            string userId = Guid.NewGuid().ToString();
+            Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+            int playerId = playerIds["Sigtip"];
+            bool activePlayer = playersService.SetActivePlayer(playerId, userId);
+            PlayerDto player = playersService.GetActivePlayer(userId);
+            string expected = "Sigtip";
+            string actual = player.Name;
+
+            Assert.Equal(expected, actual);
+        }
+
+        //[Fact]
+        //public void TestHasActivePlayer_WithActivePlayer_ShouldReturnTrue()
+        //{
+        //    DbContextOptions<TrackDaNutzzDbContext> options = new DbContextOptionsBuilder<TrackDaNutzzDbContext>()
+        //        .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+        //        .Options;
+        //    TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
+        //
+        //    HandPlayersService handPlayersService = new HandPlayersService(context);
+        //    UsersService usersService = new UsersService(context, new FakeSignInManager());
+        //    StatisticsService statisticsService = new StatisticsService(context);
+        //    StakesService stakesService = new StakesService(context);
+        //    VariantsService variantsService = new VariantsService(context);
+        //    ClientsService clientsService = new ClientsService(context);
+        //    HandsService handsService = new HandsService(context, handPlayersService);
+        //    TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
+        //    PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
+        //
+        //    ImportHandDto importHandDto = this.GetTestImportHand();
+        //    long handId = 1;
+        //    Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
+        //    string userId = Guid.NewGuid().ToString();
+        //    Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
+        //    int playerId = playerIds["Sigtip"];
+        //    bool activePlayer = playersService.SetActivePlayer(playerId, userId);
+        //    bool hasActivePlayer = playersService.HasActivePlayer();
+        //    bool expected = true;
+        //    bool actual = hasActivePlayer;
+        //
+        //    Assert.Equal(expected, actual);
+        //}
         private ImportHandDto GetTestImportHand()
         {
             ImportHandDto importHandDto = new ImportHandDto()
@@ -113,7 +467,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
                             Money = 2m,
                             PlayerName = "Sigtip",
                             SeatNumber = 4,
-                        }
+                        },
                     }
                 },
                 CollectMoneyListDto = new CollectMoneyListDto()
@@ -160,5 +514,40 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 
             return importHandDto;
         }
+
+        private Dictionary<string, long> GetTestStatisticsIdsByPlayerName()
+        {
+            Dictionary<string, long> statisticsIdsByPlayerName = new Dictionary<string, long>();
+            statisticsIdsByPlayerName.Add("Sigtip", 1);
+            return statisticsIdsByPlayerName;
+        }
+
     }
+
+    public class FakeSignInManager : SignInManager<TrackDaNutzzUser>
+    {
+        public FakeSignInManager()
+            : base(new FakeUserManager(),
+            new Mock<IHttpContextAccessor>().Object,
+            new Mock<IUserClaimsPrincipalFactory<TrackDaNutzzUser>>().Object,
+            new Mock<IOptions<IdentityOptions>>().Object,
+            new Mock<ILogger<SignInManager<TrackDaNutzzUser>>>().Object,
+            new Mock<IAuthenticationSchemeProvider>().Object)
+        { }
+    }
+    public class FakeUserManager : UserManager<TrackDaNutzzUser>
+    {
+        public FakeUserManager()
+            : base(new Mock<IUserStore<TrackDaNutzzUser>>().Object,
+                  new Mock<IOptions<IdentityOptions>>().Object,
+                  new Mock<IPasswordHasher<TrackDaNutzzUser>>().Object,
+                  new IUserValidator<TrackDaNutzzUser>[0],
+                  new IPasswordValidator<TrackDaNutzzUser>[0],
+                  new Mock<ILookupNormalizer>().Object,
+                  new Mock<IdentityErrorDescriber>().Object,
+                  new Mock<IServiceProvider>().Object,
+                  new Mock<ILogger<UserManager<TrackDaNutzzUser>>>().Object)
+        { }
+    }
+
 }
