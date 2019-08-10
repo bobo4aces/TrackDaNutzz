@@ -1,8 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.BettingActions;
@@ -44,7 +51,9 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
         //        .Options;
         //    TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
         //    StatisticsService statisticsService = new StatisticsService(context);
-        //    UsersService usersService = new UsersService(context, null);
+        //    FakeSignInManager fakeSignInManager = new FakeSignInManager();
+        //    
+        //    UsersService usersService = new UsersService(context, fakeSignInManager);
         //    StakesService stakesService = new StakesService(context);
         //    VariantsService variantsService = new VariantsService(context);
         //    ClientsService clientsService = new ClientsService(context);
@@ -54,6 +63,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
         //    BoardsService boardsService = new BoardsService(context);
         //    BettingActionsService bettingActionsService = new BettingActionsService(context, handPlayersService);
         //    PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService,handsService);
+        //
         //    ImportService importService = new ImportService(context, statisticsService, usersService, tablesService, playersService,variantsService,stakesService,handsService,boardsService,clientsService, bettingActionsService);
         //    ImportHandDto importHand = this.GetTestImportHand();
         //    importService.Add(importHand);
@@ -63,6 +73,22 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
         //    
         //    Assert.Equal(expected, actual);
         //}
+
+        private static Mock<UserManager<TUser>> MockUserManager<TUser>() where TUser : class
+
+        {
+
+            var store = new Mock<IUserStore<TUser>>();
+
+            var mgr = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
+
+            mgr.Object.UserValidators.Add(new UserValidator<TUser>());
+
+            mgr.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
+
+            return mgr;
+
+        }
 
         private ImportHandDto GetTestImportHand()
         {

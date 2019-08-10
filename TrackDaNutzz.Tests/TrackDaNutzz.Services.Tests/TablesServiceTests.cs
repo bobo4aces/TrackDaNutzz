@@ -57,10 +57,10 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 
             int tableId = tablesService.AddTable(importTable, clientId, stakeId, variantId);
 
-            int expected = 7;
+            int expected = 0;
             int actual = tableId;
 
-            Assert.Equal(expected, actual);
+            Assert.NotEqual(expected, actual);
         }
 
         [Fact]
@@ -109,10 +109,10 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 
             int tableId = tablesService.AddTable(importTable, clientId, stakeId, variantId);
             int stakeTableId = tablesService.GetTablesIdsByStakeId(stakeId).FirstOrDefault();
-            int expected = 8;
+            int expected = 0;
             int actual = stakeTableId;
 
-            Assert.Equal(expected, actual);
+            Assert.NotEqual(expected, actual);
         }
 
         [Fact]
@@ -155,15 +155,15 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
 
             ImportTableDto importTable = this.GetTestImportTable();
-            int clientId = 1;
-            int stakeId = 1;
-            int variantId = 1;
+            HandInfoDto handInfoDto = this.GetTestHandInfoDtos()[0];
+            int clientId = clientsService.AddClient(handInfoDto);
+            int stakeId = stakesService.AddStake(handInfoDto);
+            int variantId = variantsService.AddVariant(handInfoDto);
 
-            ImportTableDto tableDto = this.GetTestImportTable();
-            int tableId = tablesService.AddTable(tableDto, clientId, stakeId, variantId);
-            List<TableDto> tables = tablesService.GetTableById(tableId).ToList();
+            int tableId = tablesService.AddTable(importTable, clientId, stakeId, variantId);
+            IEnumerable<TableDto> tables = tablesService.GetTableById(tableId).ToList();
             int expected = 1;
-            int actual = tables.Count;
+            int actual = tables.Count();
 
             Assert.Equal(expected, actual);
         }
@@ -182,9 +182,10 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
 
             ImportTableDto[] importTable = this.GetTestImportTables();
-            int clientId = 1;
-            int stakeId = 1;
-            int variantId = 1;
+            HandInfoDto[] handInfoDto = this.GetTestHandInfoDtos();
+            int clientId = clientsService.AddClient(handInfoDto[0]);
+            int stakeId = stakesService.AddStake(handInfoDto[0]);
+            int variantId = variantsService.AddVariant(handInfoDto[0]);
 
             int firstTableId = tablesService.AddTable(importTable[0], clientId, stakeId, variantId);
             int secondTableId = tablesService.AddTable(importTable[1], clientId, stakeId, variantId);
@@ -328,6 +329,43 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
                 }
             };
             return tables;
+        }
+        private HandInfoDto[] GetTestHandInfoDtos()
+        {
+            HandInfoDto[] handInfoDto = new HandInfoDto[]
+            {
+                new HandInfoDto()
+                {
+                    BigBlind = 0.02m,
+                    ClientName = "PokerStars",
+                    Currency = "USD",
+                    CurrencySymbol = '$',
+                    HandNumber = 202717426423,
+                    Limit = "No Limit",
+                    LocalTime = DateTime.Parse("2019-07-27 07:42:05.0000000"),
+                    LocalTimeZone = "ET",
+                    SmallBlind = 0.01m,
+                    Time = DateTime.Parse("2019-07-27 14:42:05.0000000"),
+                    TimeZone = "EET",
+                    VariantName = "Hold'em",
+                },
+                new HandInfoDto()
+                {
+                    BigBlind = 0.05m,
+                    ClientName = "PokerStars",
+                    Currency = "USD",
+                    CurrencySymbol = '$',
+                    HandNumber = 202717479782,
+                    Limit = "No Limit",
+                    LocalTime = DateTime.Parse("2019-07-27 07:44:42.0000000"),
+                    LocalTimeZone = "ET",
+                    SmallBlind = 0.02m,
+                    Time = DateTime.Parse("2019-07-27 14:44:42.0000000"),
+                    TimeZone = "EET",
+                    VariantName = "Hold'em",
+                },
+            };
+            return handInfoDto;
         }
     }
 }

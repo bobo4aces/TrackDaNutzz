@@ -27,7 +27,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             HandInfoDto handInfoDto = this.GetTestHandInfoDto();
             int stakeId = stakesService.AddStake(handInfoDto);
 
-            int expected = 2;
+            int expected = 3;
             int actual = stakeId;
 
             Assert.Equal(expected, actual);

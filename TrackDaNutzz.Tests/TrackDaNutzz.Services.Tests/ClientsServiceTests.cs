@@ -18,16 +18,15 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
             TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
-
             ClientsService clientsService = new ClientsService(context);
 
             HandInfoDto[] handInfoDtos = GetTestHandInfoDtos();
             int firstClientId = clientsService.AddClient(handInfoDtos[0]);
             int secondClientId = clientsService.AddClient(handInfoDtos[1]);
 
-            int expected = 1;
+            int expected = 0;
             int actual = secondClientId;
-            Assert.Equal(expected, actual);
+            Assert.NotEqual(expected,actual);
 
         }
 
@@ -45,7 +44,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             int firstClientId = clientsService.AddClient(handInfoDtos[0]);
             int secondClientId = clientsService.AddClient(handInfoDtos[1]);
 
-            string clientName = clientsService.GetClientNameById(2);
+            string clientName = clientsService.GetClientNameById(3);
 
             string expected = "PokerStars";
             string actual = clientName;

@@ -47,7 +47,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             int variantId = variantService.AddVariant(handInfoDto);
 
             VariantDto variantDto = variantService.GetVariantById(variantId);
-            int expected = 2;
+            int expected = 3;
             int actual = variantDto.Id;
 
             Assert.Equal(expected, actual);
