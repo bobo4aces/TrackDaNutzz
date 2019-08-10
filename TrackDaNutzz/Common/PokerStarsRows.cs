@@ -16,10 +16,10 @@ namespace TrackDaNutzz.Common
                 $@"({GlobalConstants.CurrencySymbolPattern})?" +
                 $@"(?'BigBlind'{GlobalConstants.MoneyPattern}) ?" +
                 $@"(?'Currency'{GlobalConstants.CurrencyPattern})?\) - " +
-                $@"(?'Time'{GlobalConstants.TimePattern}) " +
-                $@"(?'TimeZone'{GlobalConstants.TimeZonePattern}) \[" +
                 $@"(?'LocalTime'{GlobalConstants.TimePattern}) " +
-                $@"(?'LocalTimeZone'{GlobalConstants.TimeZonePattern})\]$";
+                $@"(?'LocalTimeZone'{GlobalConstants.TimeZonePattern}) \[" +
+                $@"(?'Time'{GlobalConstants.TimePattern}) " +
+                $@"(?'TimeZone'{GlobalConstants.TimeZonePattern})\]$";
 
         public static string TableRow = $@"^Table '" +
                 $@"(?'TableName'{GlobalConstants.TableNamePattern})' " +
