@@ -1,4 +1,7 @@
 ﻿@inject TrackDaNutzz.Services.Players.IPlayersService PlayersService
+@{
+    ViewData["Title"] = "Index";
+}
 
 @if (!this.PlayersService.HasActivePlayer())
 {
