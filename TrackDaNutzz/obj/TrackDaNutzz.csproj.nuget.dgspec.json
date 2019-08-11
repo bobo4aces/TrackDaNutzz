@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.csproj": {}
+    "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj": {}
   },
   "projects": {
-    "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+    "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
+        "projectUniqueName": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
         "projectName": "TrackDaNutzz.Data",
-        "projectPath": "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
+        "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj",
         "packagesPath": "C:\\Users\\Boris Spasov\\.nuget\\packages\\",
-        "outputPath": "D:\\Repos\\TrackDaNutzz.Data\\obj\\",
+        "outputPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -76,14 +76,14 @@
         }
       }
     },
-    "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
+    "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj",
+        "projectUniqueName": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj",
         "projectName": "TrackDaNutzz.Services",
-        "projectPath": "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj",
+        "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj",
         "packagesPath": "C:\\Users\\Boris Spasov\\.nuget\\packages\\",
-        "outputPath": "D:\\Repos\\TrackDaNutzz.Services\\obj\\",
+        "outputPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -104,8 +104,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
-                "projectPath": "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
+              "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+                "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
               }
             }
           }
@@ -142,14 +142,14 @@
         }
       }
     },
-    "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.csproj": {
+    "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.csproj",
+        "projectUniqueName": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
         "projectName": "TrackDaNutzz",
-        "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.csproj",
+        "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
         "packagesPath": "C:\\Users\\Boris Spasov\\.nuget\\packages\\",
-        "outputPath": "D:\\Repos\\TrackDaNutzz\\obj\\",
+        "outputPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -170,11 +170,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
-                "projectPath": "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
+              "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+                "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
               },
-              "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
-                "projectPath": "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj"
+              "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
+                "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj"
               }
             }
           }

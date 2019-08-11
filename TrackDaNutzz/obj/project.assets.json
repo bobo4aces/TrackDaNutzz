@@ -13048,11 +13048,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.csproj",
+      "projectUniqueName": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
       "projectName": "TrackDaNutzz",
-      "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.csproj",
+      "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz\\TrackDaNutzz.csproj",
       "packagesPath": "C:\\Users\\Boris Spasov\\.nuget\\packages\\",
-      "outputPath": "D:\\Repos\\TrackDaNutzz\\obj\\",
+      "outputPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -13073,11 +13073,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
-              "projectPath": "D:\\Repos\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
+            "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj": {
+              "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Data\\TrackDaNutzz.Data.csproj"
             },
-            "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
-              "projectPath": "D:\\Repos\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj"
+            "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj": {
+              "projectPath": "D:\\Repos\\TrackDaNutzz\\TrackDaNutzz.Services\\TrackDaNutzz.Services.csproj"
             }
           }
         }
