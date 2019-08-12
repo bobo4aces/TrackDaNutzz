@@ -1,5 +1,3 @@
-using System;
-
 namespace TrackDaNutzz.Models
 {
     public class ErrorViewModel

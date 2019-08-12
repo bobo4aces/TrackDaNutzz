@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TrackDaNutzz.Extensions
 {
@@ -17,7 +16,7 @@ namespace TrackDaNutzz.Extensions
                 throw new ArgumentException($"Invalid regex pattern - string: \"{input}\" does not match pattern: {pattern}");
             }
             string[] groupNames = regex.GetGroupNames()
-                .Where(n=>n.Length > 1)
+                .Where(n => n.Length > 1)
                 .ToArray();
             Dictionary<string, string> result = new Dictionary<string, string>();
             foreach (var groupName in groupNames)

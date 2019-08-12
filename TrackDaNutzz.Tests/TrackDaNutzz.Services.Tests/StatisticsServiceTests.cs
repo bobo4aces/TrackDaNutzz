@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TrackDaNutzz.Data;
-using TrackDaNutzz.Services.Statistics;
-using TrackDaNutzz.Services.BettingActions;
-using TrackDaNutzz.Services.Boards;
-using TrackDaNutzz.Services.Clients;
+using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.BettingActions;
 using TrackDaNutzz.Services.Dtos.CollectMoney;
 using TrackDaNutzz.Services.Dtos.Hands;
@@ -13,20 +11,11 @@ using TrackDaNutzz.Services.Dtos.Import;
 using TrackDaNutzz.Services.Dtos.MuckHands;
 using TrackDaNutzz.Services.Dtos.Seats;
 using TrackDaNutzz.Services.Dtos.ShowCards;
+using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Dtos.Summary;
 using TrackDaNutzz.Services.Dtos.Tables;
-using TrackDaNutzz.Services.HandPlayers;
-using TrackDaNutzz.Services.Hands;
-using TrackDaNutzz.Services.Import;
-using TrackDaNutzz.Services.Players;
-using TrackDaNutzz.Services.Stakes;
-using TrackDaNutzz.Services.Tables;
-using TrackDaNutzz.Services.Users;
-using TrackDaNutzz.Services.Variant;
+using TrackDaNutzz.Services.Statistics;
 using Xunit;
-using TrackDaNutzz.Data.Models;
-using System.Linq;
-using TrackDaNutzz.Services.Dtos.Statistics;
 
 namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 {
@@ -56,7 +45,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 
             ImportHandDto handDto = this.GetTestImportHand();
 
-            Dictionary<string,long> statisticsIdsByPlayerName = statisticsService.AddStatistics(handDto);
+            Dictionary<string, long> statisticsIdsByPlayerName = statisticsService.AddStatistics(handDto);
 
             int expected = 1;
             int actual = statisticsIdsByPlayerName.Count;
@@ -155,7 +144,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             ImportHandDto handDto = this.GetTestImportHand();
 
             SeatInfoDto seatInfoDto = this.GetTestImportHand().SeatInfoListDto.SeatInfoDtos.FirstOrDefault();
-            
+
             decimal moneyWon = statisticsService.GetMoneyWon(handDto, seatInfoDto);
 
             decimal expected = 1.99m;

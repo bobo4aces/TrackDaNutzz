@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Dtos.Players;
-using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Stakes;
 using TrackDaNutzz.Services.Users;

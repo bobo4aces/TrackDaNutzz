@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using TrackDaNutzz.Common;
 
 namespace TrackDaNutzz.BindingModels.Summary
@@ -17,13 +13,13 @@ namespace TrackDaNutzz.BindingModels.Summary
 
         [RegularExpression(GlobalConstants.CardPattern)]
         public string SecondCard { get; set; }
-        
+
         [RegularExpression(GlobalConstants.CardPattern)]
         public string ThirdCard { get; set; }
-        
+
         [RegularExpression(GlobalConstants.CardPattern)]
         public string FourthCard { get; set; }
-        
+
         [RegularExpression(GlobalConstants.CardPattern)]
         public string FifthCard { get; set; }
     }

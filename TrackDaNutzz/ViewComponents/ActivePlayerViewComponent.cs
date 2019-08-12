@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TrackDaNutzz.Services.Dtos.Players;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Users;
@@ -56,7 +54,7 @@ namespace TrackDaNutzz.ViewComponents
                                     IsActive = p.IsActive,
                                     UserId = p.UserId
                                 })
-                                .OrderBy(p=>p.PlayerName)
+                                .OrderBy(p => p.PlayerName)
                                 .ToList()
             };
             return this.View(activePlayerViewComponentViewModel);

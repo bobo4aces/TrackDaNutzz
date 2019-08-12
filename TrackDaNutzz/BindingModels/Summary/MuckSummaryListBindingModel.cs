@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TrackDaNutzz.BindingModels.Summary;
+﻿using System.Collections.Generic;
 
 namespace TrackDaNutzz.BindingModels.Summary
 {

@@ -1,25 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using TrackDaNutzz.Data;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
-using TrackDaNutzz.Services.BettingActions;
-using TrackDaNutzz.Services.Boards;
 using TrackDaNutzz.Services.Clients;
 using TrackDaNutzz.Services.Dtos.BettingActions;
 using TrackDaNutzz.Services.Dtos.CollectMoney;
 using TrackDaNutzz.Services.Dtos.Hands;
 using TrackDaNutzz.Services.Dtos.Import;
 using TrackDaNutzz.Services.Dtos.MuckHands;
+using TrackDaNutzz.Services.Dtos.Players;
 using TrackDaNutzz.Services.Dtos.Seats;
 using TrackDaNutzz.Services.Dtos.ShowCards;
+using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Dtos.Summary;
 using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.HandPlayers;
 using TrackDaNutzz.Services.Hands;
-using TrackDaNutzz.Services.Import;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Stakes;
 using TrackDaNutzz.Services.Statistics;
@@ -27,16 +31,6 @@ using TrackDaNutzz.Services.Tables;
 using TrackDaNutzz.Services.Users;
 using TrackDaNutzz.Services.Variant;
 using Xunit;
-using Moq;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication;
-using TrackDaNutzz.Services.Dtos.Statistics;
-using TrackDaNutzz.Services.Dtos.Players;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 {
@@ -158,7 +152,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
             TrackDaNutzzDbContext context = new TrackDaNutzzDbContext(options);
-        
+
             HandPlayersService handPlayersService = new HandPlayersService(context);
             UsersService usersService = new UsersService(context, new FakeSignInManager());
             StatisticsService statisticsService = new StatisticsService(context);
@@ -168,22 +162,22 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             HandsService handsService = new HandsService(context, handPlayersService);
             TablesService tablesService = new TablesService(context, stakesService, variantsService, clientsService);
             PlayersService playersService = new PlayersService(context, handPlayersService, usersService, statisticsService, tablesService, stakesService, handsService);
-        
+
             ImportHandDto importHandDto = this.GetTestImportHand();
             int clientId = clientsService.AddClient(importHandDto.HandInfoDto);
             int stakeId = stakesService.AddStake(importHandDto.HandInfoDto);
             int variantId = variantsService.AddVariant(importHandDto.HandInfoDto);
             int tableId = tablesService.AddTable(importHandDto.ImportTableDto, clientId, stakeId, variantId);
-            long handId = handsService.AddHand(importHandDto,null, tableId);
+            long handId = handsService.AddHand(importHandDto, null, tableId);
             Dictionary<string, long> statisticsIdsByPlayerName = statisticsService.AddStatistics(importHandDto);
             string userId = Guid.NewGuid().ToString();
             Dictionary<string, int> playerIds = playersService.AddPlayers(importHandDto, handId, statisticsIdsByPlayerName, userId);
             int activePlayerId = playersService.GetActivePlayer(userId).Id;
             StatisticsAllByImportStakeDto statisticsAllByImportStakeDto = playersService.GetPlayerStakeStatistics(activePlayerId).FirstOrDefault();
-        
+
             decimal expected = 0.02m;
             decimal actual = statisticsAllByImportStakeDto.BigBlind;
-        
+
             Assert.Equal(expected, actual);
         }
 

@@ -1,9 +1,7 @@
 ﻿namespace TrackDaNutzz.Data.Models
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public class HandPlayer
     {

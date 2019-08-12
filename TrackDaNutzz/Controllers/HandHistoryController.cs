@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TrackDaNutzz.BindingModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TrackDaNutzz.Parsers;
 using TrackDaNutzz.Readers;
 using TrackDaNutzz.ViewModels;
@@ -37,7 +34,7 @@ namespace TrackDaNutzz.Controllers
         public async Task<IActionResult> Import(IList<IFormFile> files)
         {
             //TODO: Create better validation
-            if (files == null || files.Count == 0 || files.Any(e=>!e.FileName.EndsWith(".txt")))
+            if (files == null || files.Count == 0 || files.Any(e => !e.FileName.EndsWith(".txt")))
             {
                 return this.View(files);
             }

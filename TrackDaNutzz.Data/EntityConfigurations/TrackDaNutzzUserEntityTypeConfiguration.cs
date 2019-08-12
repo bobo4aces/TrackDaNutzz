@@ -1,6 +1,5 @@
 namespace TrackDaNutzz.Data.EntityConfigurations
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using TrackDaNutzz.Data.Models;

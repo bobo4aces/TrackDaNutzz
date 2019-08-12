@@ -117,7 +117,7 @@ namespace TrackDaNutzz.Services.Tables
                     Id = t.Id,
                     Size = t.Size,
                     Stake = this.context.Stakes
-                        .Where(x=>x.Id == t.StakeId)
+                        .Where(x => x.Id == t.StakeId)
                         .Select(s => new StakeDto()
                         {
                             BigBlind = s.BigBlind,
@@ -131,7 +131,7 @@ namespace TrackDaNutzz.Services.Tables
                     TableName = t.Name,
                     Variant = this.context.Variants
                         .Where(x => x.Id == t.VariantId)
-                        .Select(v=>new VariantDto()
+                        .Select(v => new VariantDto()
                         {
                             Id = v.Id,
                             Limit = v.Limit,

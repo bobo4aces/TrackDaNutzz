@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using TrackDaNutzz.Services.Dtos.Players;
-using TrackDaNutzz.Services.Dtos.Statistics;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Statistics;
 using TrackDaNutzz.Services.Users;
-using TrackDaNutzz.ViewComponents;
 using TrackDaNutzz.ViewModels;
-using TrackDaNutzz.ViewModels.Players;
 
 namespace TrackDaNutzz.Controllers
 {
@@ -54,7 +46,7 @@ namespace TrackDaNutzz.Controllers
             //string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             IEnumerable<StatisticsAllByPlayerNameViewModel> statisticsAllByPlayerNameViewModels = this.playersService
                 .GetAllStatisticsByPlayerId(activePlayerId, playerIds)
-                .Select(x=>new StatisticsAllByPlayerNameViewModel
+                .Select(x => new StatisticsAllByPlayerNameViewModel
                 {
                     AggressionFactor = x.AggressionFactor,
                     BigBlindsWon = x.BigBlindsWon,

@@ -4,6 +4,6 @@
     {
         public const string TableSizeEnding = "-max";
         public const string HeadsUp = "Heads-Up";
-        
+
     }
 }

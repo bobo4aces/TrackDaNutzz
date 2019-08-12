@@ -63,11 +63,11 @@ namespace TrackDaNutzz.Services.Players
             }
             bool hasActivePlayer = this.context.Players
                 .Any(p => p.TrackDaNutzzUserId == userId && p.IsActive == true);
-            if(!hasActivePlayer)
+            if (!hasActivePlayer)
             {
                 Player firstPlayer = this.context.Players
                     .FirstOrDefault(p => p.TrackDaNutzzUserId == userId);
-                if(firstPlayer == null)
+                if (firstPlayer == null)
                 {
                     throw new ArgumentException("No players at database");
                 }

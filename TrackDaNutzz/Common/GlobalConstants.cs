@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TrackDaNutzz.Common
+﻿namespace TrackDaNutzz.Common
 {
     public class GlobalConstants
     {
@@ -80,6 +75,6 @@ namespace TrackDaNutzz.Common
         public const string HeadsUp = "Heads-Up";
         public const string PreflopRound = "PREFLOP";
 
-        
+
     }
 }

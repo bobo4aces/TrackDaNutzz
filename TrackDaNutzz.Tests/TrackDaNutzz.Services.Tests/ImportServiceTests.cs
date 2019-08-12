@@ -1,20 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Identity;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using TrackDaNutzz.Data;
-using TrackDaNutzz.Data.Models;
-using TrackDaNutzz.Services.BettingActions;
-using TrackDaNutzz.Services.Boards;
-using TrackDaNutzz.Services.Clients;
 using TrackDaNutzz.Services.Dtos.BettingActions;
 using TrackDaNutzz.Services.Dtos.CollectMoney;
 using TrackDaNutzz.Services.Dtos.DealtCards;
@@ -27,16 +14,6 @@ using TrackDaNutzz.Services.Dtos.ShowCards;
 using TrackDaNutzz.Services.Dtos.Summary;
 using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.Dtos.UncalledBets;
-using TrackDaNutzz.Services.HandPlayers;
-using TrackDaNutzz.Services.Hands;
-using TrackDaNutzz.Services.Import;
-using TrackDaNutzz.Services.Players;
-using TrackDaNutzz.Services.Stakes;
-using TrackDaNutzz.Services.Statistics;
-using TrackDaNutzz.Services.Tables;
-using TrackDaNutzz.Services.Users;
-using TrackDaNutzz.Services.Variant;
-using Xunit;
 
 namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 {
@@ -279,7 +256,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
                     {
                         new UncalledBetsDto()
                         {
-                            
+
                         }
                     }
                 },

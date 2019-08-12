@@ -88,7 +88,7 @@ namespace TrackDaNutzz.Services.Statistics
             int totalCalls = playerAllBettingActions
                                 .Where(a => a.Action == BettingActionNamesConstants.Call)
                                 .Count();
-            decimal moneyWon = this.GetMoneyWon(handDto,seatInfoDto);
+            decimal moneyWon = this.GetMoneyWon(handDto, seatInfoDto);
             decimal bigBlindsWon = this.GetBigBlindsWon(moneyWon, handDto.HandInfoDto.BigBlind);
             bool continuationBet = this.GetContinuationBet(playerPreflopBettingActions, playerFlopBettingActions);
             Statistic statistics = new Statistic()
@@ -202,7 +202,7 @@ namespace TrackDaNutzz.Services.Statistics
         {
             IQueryable<StatisticsDto> statistics = this.context.Statistics
                 .Where(s => statisticsIds.Contains(s.Id))
-                .Select(s=>new StatisticsDto()
+                .Select(s => new StatisticsDto()
                 {
                     BigBlindsWon = s.BigBlindsWon,
                     ContinuationBet = s.ContinuationBet,

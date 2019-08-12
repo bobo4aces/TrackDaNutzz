@@ -13,17 +13,17 @@ namespace TrackDaNutzz.Data.Models
         public string Name { get; set; }
 
         public int ClientId { get; set; }
-        
+
         public Client Client { get; set; }
 
         public int Size { get; set; }
 
         public int VariantId { get; set; }
-        
+
         public Variant Variant { get; set; }
-        
+
         public int StakeId { get; set; }
-        
+
         public Stake Stake { get; set; }
 
         public ICollection<Hand> Hands { get; set; }

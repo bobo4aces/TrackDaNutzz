@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using TrackDaNutzz.Attributes;
 using TrackDaNutzz.Common;
 
 namespace TrackDaNutzz.BindingModels
@@ -12,7 +7,7 @@ namespace TrackDaNutzz.BindingModels
     public class HandInfoBindingModel
     {
         //public string FirstRow => $@"^({GlobalConstants.ClientNamePattern}) Hand #({GlobalConstants.HandNumberPattern}):\s\s({GlobalConstants.VariantNamePattern}) ({GlobalConstants.LimitPattern}) \(({GlobalConstants.CurrencySymbolPattern})?({GlobalConstants.MoneyPattern})\/({GlobalConstants.CurrencySymbolPattern})?({GlobalConstants.MoneyPattern}) ?({GlobalConstants.CurrencyPattern})?\) - ({GlobalConstants.TimePattern}) \[({GlobalConstants.TimePattern})\]$";
-        
+
         [RegularExpression(GlobalConstants.ClientNamePattern)]
         public string ClientName { get; set; }
         [RegularExpression(GlobalConstants.HandNumberPattern)]

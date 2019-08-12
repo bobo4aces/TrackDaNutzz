@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using TrackDaNutzz.Data;
-using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Users;
 using Xunit;
 
@@ -22,9 +20,9 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
 
             string username = "";
 
-            Assert.Throws(typeof(ArgumentException), ()=> usersService.GetCurrentlyLoggedUserId(username));
+            Assert.Throws(typeof(ArgumentException), () => usersService.GetCurrentlyLoggedUserId(username));
         }
 
-        
+
     }
 }

@@ -13,7 +13,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
         {
             DateTime date = new DateTime(2019, 8, 3);
 
-            DateTime dayBeforeDate = date.Before(TimePeriod.Day,-1);
+            DateTime dayBeforeDate = date.Before(TimePeriod.Day, -1);
 
             DateTime expected = new DateTime(2019, 8, 2);
             DateTime actual = dayBeforeDate;

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TrackDaNutzz.Data;
 using TrackDaNutzz.Data.Models;
-using TrackDaNutzz.Services.Common.Enums;
 using TrackDaNutzz.Services.Dtos.BettingActions;
 using TrackDaNutzz.Services.Dtos.CollectMoney;
 using TrackDaNutzz.Services.Dtos.Import;
@@ -12,7 +11,6 @@ using TrackDaNutzz.Services.Dtos.MuckHands;
 using TrackDaNutzz.Services.Dtos.Seats;
 using TrackDaNutzz.Services.Dtos.ShowCards;
 using TrackDaNutzz.Services.HandPlayers;
-using TrackDaNutzz.Services.Statistics;
 using Xunit;
 
 namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
@@ -40,7 +38,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             Dictionary<string, long> statisticsIdsByPlayerName = this.GetTestStatisticsIdsByPlayerName();
             SeatInfoDto seatInfoDto = importHandDto.SeatInfoListDto.SeatInfoDtos.FirstOrDefault();
             Player player = this.GetTestPlayer();
-            bool isAdded = handPlayersService.AddHandPlayer(importHandDto, 1,statisticsIdsByPlayerName,seatInfoDto, player);
+            bool isAdded = handPlayersService.AddHandPlayer(importHandDto, 1, statisticsIdsByPlayerName, seatInfoDto, player);
 
             bool expected = true;
             bool actual = isAdded;
@@ -90,7 +88,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
             long handId = 1;
             int playerId = 1;
             bool isAddedBettingAction = handPlayersService.AddBettingActionIdSplitByPipe(bettingActionId, handId, playerId);
-           
+
             bool expected = true;
             bool actual = isAddedBettingAction;
 
@@ -301,7 +299,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
                             Round = "PREFLOP"
                         }
                     },
-                    
+
                 },
                 ShowCardsListDto = new ShowCardsListDto()
                 {
@@ -351,7 +349,7 @@ namespace TrackDaNutzz.Tests.TrackDaNutzz.Services.Tests
                         }
                     }
                 },
-                
+
             };
 
             return importHandDto;

@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TrackDaNutzz.BindingModels.Summary;
-using TrackDaNutzz.Data.Models;
 using TrackDaNutzz.Services.Dtos.BettingActions;
 using TrackDaNutzz.Services.Dtos.CollectMoney;
 using TrackDaNutzz.Services.Dtos.DealtCards;
@@ -39,7 +36,7 @@ namespace TrackDaNutzz.BindingModels
                 .ForMember(x => x.TimeZone, y => y.MapFrom(z => z["TimeZone"]))
                 .ForMember(x => x.LocalTime, y => y.MapFrom(z => DateTime.Parse(z["LocalTime"])))
                 .ForMember(x => x.LocalTimeZone, y => y.MapFrom(z => z["LocalTimeZone"]));
-                
+
             this.CreateMap<Dictionary<string, string>, TableBindingModel>()
                 .ForMember(x => x.TableName, y => y.MapFrom(z => z["TableName"]))
                 .ForMember(x => x.TableSize, y => y.MapFrom(z => z["TableSize"]))

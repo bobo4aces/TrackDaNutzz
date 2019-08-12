@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
 using TrackDaNutzz.BindingModels;
 using TrackDaNutzz.BindingModels.Summary;
 using TrackDaNutzz.Common;
 using TrackDaNutzz.Extensions;
-using TrackDaNutzz.Services.Dtos.Hands;
 using TrackDaNutzz.Services.Dtos.Import;
 using TrackDaNutzz.Services.Import;
 
@@ -138,7 +132,7 @@ namespace TrackDaNutzz.Parsers
                 }
             }
             ShowCardsListBindingModel showCardsListBindingModel = this.mapper.Map<ShowCardsListBindingModel>(showCardsBindingModels);
-            
+
             UncalledBetsListBindingModel uncalledBetsListBindingModel = this.mapper.Map<UncalledBetsListBindingModel>(uncalledBetsBindingModels);
 
             CollectMoneyListBindingModel collectMoneyListBindingModel = this.mapper.Map<CollectMoneyListBindingModel>(collectMoneyBindingModels);

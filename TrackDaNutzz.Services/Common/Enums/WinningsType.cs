@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TrackDaNutzz.Services.Common.Enums
+﻿namespace TrackDaNutzz.Services.Common.Enums
 {
     public enum WinningsType
     {

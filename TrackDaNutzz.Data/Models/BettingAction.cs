@@ -1,7 +1,5 @@
 namespace TrackDaNutzz.Data.Models
 {
-    using System.Collections.Generic;
-
     public class BettingAction
     {
         public long Id { get; set; }

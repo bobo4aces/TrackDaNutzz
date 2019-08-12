@@ -5,7 +5,7 @@ namespace TrackDaNutzz.ViewModels
     public class ImportSuccessViewModel
     {
         [Required]
-        [Range(0,int.MaxValue)]
+        [Range(0, int.MaxValue)]
         [Display(Name = "Total Files")]
         public int FilesCount { get; set; }
         [Required]

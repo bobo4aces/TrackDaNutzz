@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Dtos.Players;
 using TrackDaNutzz.Services.Dtos.Tables;
 using TrackDaNutzz.Services.HandPlayers;
@@ -49,7 +47,7 @@ namespace TrackDaNutzz.Controllers
             int[] tableIds = this.handsService.GetTableIdsByHandId(handIds).ToArray();
 
             IEnumerable<TableViewModel> tableViewModels = this.tablesService.GetTableById(tableIds)
-                .Select(t=> new TableViewModel()
+                .Select(t => new TableViewModel()
                 {
                     BigBlind = t.Stake.BigBlind,
                     ClientName = t.ClientName,

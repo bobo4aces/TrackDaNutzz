@@ -12,14 +12,14 @@ namespace TrackDaNutzz.Services.Dtos.Statistics
         public int TotalBets { get; set; }
         public int TotalCalls { get; set; }
         public double VoluntaryPutMoneyInPot { get; set; }
-        
+
         public double PreFlopRaise { get; set; }
-        
+
         public double ThreeBet { get; set; }
-        
+
         public double FourBet { get; set; }
         public decimal AggressionFactor => MathOperations.Divide(this.TotalRaises + this.TotalBets, this.TotalCalls);
-        
+
         public double ContinuationBet { get; set; }
 
         public decimal BigBlindsWon { get; set; }

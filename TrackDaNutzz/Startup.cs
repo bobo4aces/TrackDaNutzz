@@ -1,35 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TrackDaNutzz.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TrackDaNutzz.Data.Models;
-using TrackDaNutzz.Readers;
-using TrackDaNutzz.Services;
-using TrackDaNutzz.Parsers;
-using AutoMapper;
+using System;
+using System.Linq;
 using TrackDaNutzz.BindingModels;
-using TrackDaNutzz.Services.Import;
-using TrackDaNutzz.Services.Statistics;
-using TrackDaNutzz.Services.Users;
+using TrackDaNutzz.Data;
+using TrackDaNutzz.Data.Models;
+using TrackDaNutzz.Parsers;
+using TrackDaNutzz.Readers;
 using TrackDaNutzz.Services.BettingActions;
 using TrackDaNutzz.Services.Boards;
 using TrackDaNutzz.Services.Clients;
 using TrackDaNutzz.Services.HandPlayers;
 using TrackDaNutzz.Services.Hands;
+using TrackDaNutzz.Services.Import;
 using TrackDaNutzz.Services.Players;
 using TrackDaNutzz.Services.Stakes;
+using TrackDaNutzz.Services.Statistics;
 using TrackDaNutzz.Services.Tables;
+using TrackDaNutzz.Services.Users;
 using TrackDaNutzz.Services.Variant;
 
 namespace TrackDaNutzz
@@ -57,7 +51,7 @@ namespace TrackDaNutzz
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<TrackDaNutzzUser, TrackDaNutzzRole>()
                 .AddEntityFrameworkStores<TrackDaNutzzDbContext>();
-            services.AddAutoMapper(cfg => cfg.AddProfile<HandProfile>(),AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(cfg => cfg.AddProfile<HandProfile>(), AppDomain.CurrentDomain.GetAssemblies());
             #region CustomServices
             services.AddTransient<IHandHistoryReader, HandHistoryReader>();
             services.AddTransient<IParser, PokerStarsParser>();
@@ -110,6 +104,8 @@ namespace TrackDaNutzz
             }
             else
             {
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();

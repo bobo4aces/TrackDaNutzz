@@ -58,7 +58,7 @@ namespace TrackDaNutzz.Services.Import
             int clientId = this.clientsService.AddClient(handDto.HandInfoDto);
             int stakeId = this.stakesService.AddStake(handDto.HandInfoDto);
             int variantId = this.variantsService.AddVariant(handDto.HandInfoDto);
-            int tableId = this.tablesService.AddTable(handDto.ImportTableDto, clientId, stakeId,variantId);
+            int tableId = this.tablesService.AddTable(handDto.ImportTableDto, clientId, stakeId, variantId);
             long handId = this.handsService.AddHand(handDto, boardId, tableId);
             Dictionary<string, long> statisticsIdsByPlayerName = this.statisticsService.AddStatistics(handDto);
             string currentLoggedInUsername = this.usersService.GetCurrentlyLoggedUsername();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace TrackDaNutzz.ViewModels.Players
+﻿namespace TrackDaNutzz.ViewModels.Players
 {
     public class ActivePlayerBindingModel
     {

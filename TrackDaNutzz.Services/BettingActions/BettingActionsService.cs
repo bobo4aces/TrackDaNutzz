@@ -20,7 +20,7 @@ namespace TrackDaNutzz.Services.BettingActions
         }
 
         //TODO: don't get handplayer from db
-        
+
         public List<long> AddBettingActions(ImportHandDto handDto, long handId, Dictionary<string, int> playerIdsByName)
         {
             //TODO: Use Automapper
@@ -56,7 +56,7 @@ namespace TrackDaNutzz.Services.BettingActions
                         bettingActionId = bettingActionFromDb.Id;
                     }
                     this.handPlayersService.AddBettingActionIdSplitByPipe(bettingActionId, handId, playerIdsByName[playerName]);
-                    
+
                     bettingActionsIds.Add(bettingActionId);
                     this.context.SaveChanges();
                 }

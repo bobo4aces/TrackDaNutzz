@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using TrackDaNutzz.Services.Dtos.Players;
 using TrackDaNutzz.Services.Hands;
 using TrackDaNutzz.Services.Players;
@@ -39,7 +37,7 @@ namespace TrackDaNutzz.Controllers
             }
             int playerId = activePlayer.Id;
             IEnumerable<HandViewModel> handViewModels = this.handsService.GetAllHandsByPlayerId(playerId)
-                .Select( h=> new HandViewModel()
+                .Select(h => new HandViewModel()
                 {
                     BoardId = h.BoardId,
                     Button = h.Button,

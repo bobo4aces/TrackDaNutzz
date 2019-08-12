@@ -41,7 +41,7 @@ namespace TrackDaNutzz.Services.Stakes
         {
             IQueryable<StakeDto> stakes = this.context.Stakes
                 .Where(s => stakeIds.Contains(s.Id))
-                .Select(x=>new StakeDto
+                .Select(x => new StakeDto
                 {
                     Id = x.Id,
                     BigBlind = x.BigBlind,

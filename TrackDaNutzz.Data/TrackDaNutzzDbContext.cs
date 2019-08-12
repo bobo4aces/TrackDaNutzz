@@ -21,7 +21,7 @@
         public DbSet<TrackDaNutzzUser> TrackDaNutzzUsers { get; set; }
         public DbSet<Variant> Variants { get; set; }
 
-        public TrackDaNutzzDbContext(DbContextOptions<TrackDaNutzzDbContext> options) 
+        public TrackDaNutzzDbContext(DbContextOptions<TrackDaNutzzDbContext> options)
             : base(options)
         {
         }
