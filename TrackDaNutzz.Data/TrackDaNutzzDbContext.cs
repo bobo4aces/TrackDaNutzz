@@ -13,7 +13,7 @@
         public DbSet<Hand> Hands { get; set; }
         public DbSet<HandPlayer> HandPlayers { get; set; }
         public DbSet<Player> Players { get; set; }
-        //public DbSet<Position> Positions { get; set; }
+        //public DbSet<Position> Positions { get; sset; }
         public DbSet<Stake> Stakes { get; set; }
         public DbSet<Statistic> Statistics { get; set; }
         public DbSet<Table> Tables { get; set; }
