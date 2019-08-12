@@ -11,7 +11,6 @@
 *.sln.docstates
 bin
 obj
-DatabaseConfiguration.cs
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -350,3 +349,5 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+TrackDaNutzz.Data/DatabaseConfiguration.cs
+TrackDaNutzz/appsettings.json
